@@ -1,0 +1,1428 @@
+<!DOCTYPE html>
+<html class="js gr__link_springer_com" lang="en-gb"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.5,user-scalable=yes">
+    <meta name="citation_publisher" content="Springer, Cham">
+    <meta name="citation_title" content="Exploring Coclustering for Serendipity Improvement in Content-Based Recommendation">
+    <meta name="citation_doi" content="10.1007/978-3-030-03493-1_34">
+    <meta name="citation_language" content="en">
+    <meta name="citation_abstract_html_url" content="https://link.springer.com/chapter/10.1007/978-3-030-03493-1_34">
+    <meta name="citation_fulltext_html_url" content="https://link.springer.com/chapter/10.1007/978-3-030-03493-1_34">
+    <meta name="citation_pdf_url" content="https://link.springer.com/content/pdf/10.1007%2F978-3-030-03493-1_34.pdf">
+    <meta name="citation_springer_api_url" content="http://api.springer.com/metadata/pam?q=doi:10.1007/978-3-030-03493-1_34&amp;api_key=">
+    <meta name="citation_firstpage" content="317">
+    <meta name="citation_lastpage" content="327">
+    <meta name="citation_author" content="Andrei Martins Silva">
+    <meta name="citation_author_institution" content="University of São Paulo">
+    <meta name="citation_author" content="Fernando Henrique da Silva Costa">
+    <meta name="citation_author_institution" content="University of São Paulo">
+    <meta name="citation_author" content="Alexandra Katiuska Ramos Diaz">
+    <meta name="citation_author_institution" content="University of São Paulo">
+    <meta name="citation_author" content="Sarajane Marques Peres">
+    <meta name="citation_author_institution" content="University of São Paulo">
+    <meta name="citation_author_email" content="sarajane@usp.br">
+    <meta name="dc.identifier" content="10.1007/978-3-030-03493-1_34">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="Content-based recommender systems are widely used in different domains. However, they are usually inefficient to produce serendipitous recommendations. A recommendation is serendipitous if it is both...">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Exploring Coclustering for Serendipity Improvement in Content-Based Re">
+    <meta name="twitter:image" content="https://static-content.springer.com/cover/book/978-3-030-03493-1.jpg">
+    <meta name="twitter:image:alt" content="Content cover image">
+    <meta name="twitter:site" content="SpringerLink">
+    <meta name="twitter:description" content="Content-based recommender systems are widely used in different domains. However, they are usually inefficient to produce serendipitous recommendations. A recommendation is serendipitous if it is both...">
+    <meta name="citation_inbook_title" content="Intelligent Data Engineering and Automated Learning – IDEAL 2018">
+    <meta name="citation_publication_date" content="2018/11/21">
+    <meta name="citation_conference_series_id" content="springer/ideal">
+    <meta name="citation_conference_title" content="International Conference on Intelligent Data Engineering and Automated Learning">
+    <meta name="citation_conference_sequence_num" content="19">
+    <meta name="citation_conference_abbrev" content="IDEAL">
+    <meta property="og:title" content="Exploring Coclustering for Serendipity Improvement in Content-Based Recommendation">
+    <meta property="og:type" content="Paper">
+    <meta property="og:url" content="https://link.springer.com/chapter/10.1007/978-3-030-03493-1_34">
+    <meta property="og:image" content="https://static-content.springer.com/cover/book/978-3-030-03493-1.jpg">
+    <meta property="og:site_name" content="SpringerLink">
+    <meta property="og:description" content="Content-based recommender systems are widely used in different domains. However, they are usually inefficient to produce serendipitous recommendations. A recommendation is serendipitous if it is both...">
+
+        <title>Exploring Coclustering for Serendipity Improvement in Content-Based Recommendation | SpringerLink</title>
+        <link rel="canonical" href="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/978-3-030-03493-1_34.html">
+        <link rel="shortcut icon" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/favicon.ico">
+<link rel="icon" sizes="16x16 32x32 48x48" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/favicon.ico">
+<link rel="icon" sizes="16x16" type="image/png" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/favicon-16x16.png">
+<link rel="icon" sizes="32x32" type="image/png" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/favicon-32x32.png">
+<link rel="icon" sizes="48x48" type="image/png" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/favicon-48x48.png">
+<link rel="apple-touch-icon" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/app-icon-iphone@3x.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/ic_launcher_hdpi.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/app-icon-ipad.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/app-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/app-icon-iphone@2x.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/ic_launcher_xxhdpi.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/app-icon-ipad@2x.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://link.springer.com/springerlink-static/1716009814/images/favicon/app-icon-iphone@3x.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/springerlink-static/1716009814/images/favicon/ic_launcher_xxhdpi.png">
+        <link rel="dns-prefetch" href="https://fonts.gstatic.com/">
+<link rel="dns-prefetch" href="https://fonts.googleapis.com/">
+<link rel="dns-prefetch" href="https://google-analytics.com/">
+<link rel="dns-prefetch" href="https://www.google-analytics.com/">
+<link rel="dns-prefetch" href="https://www.googletagservices.com/">
+<link rel="dns-prefetch" href="https://www.googletagmanager.com/">
+<link rel="dns-prefetch" href="https://static-content.springer.com/">
+        <link rel="stylesheet" href="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/basic.css" media="screen">
+<link rel="stylesheet" href="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/styles.css" class="js-ctm" media="only screen and (-webkit-min-device-pixel-ratio:0) and (min-color-index:0), (-ms-high-contrast: none), only all and (min--moz-device-pixel-ratio:0) and (min-resolution: 3e1dpcm)">
+<link rel="stylesheet" href="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/print.css" media="print">
+
+
+            <script type="text/javascript" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/get"></script><script type="text/javascript" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/optout_check"></script><script src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/osd.js"></script><script src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/pubads_impl_rendering_301.js"></script><script type="text/javascript" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/bd339c69-af54-4a21-b4f1-654bcfcd83ca"></script><script async="" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/controltag.js"></script><script type="text/javascript" async="" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/KDqyaFZ_.js"></script><script type="text/javascript" async="" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/analytics.js"></script><script type="text/javascript" async="" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/MathJax.js"></script><script src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/mathJax.js"></script><script async="" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/gtm.js"></script><script type="text/javascript">
+        window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
+        var dataLayer = [{
+                'GA Key':"UA-26408784-1",
+                'Features':["leaderboardadverts","eventtracker"],
+                'Event Category':"Conference Paper",
+                'Open Access':"N",
+                'Labs':"Y",
+                'DOI':"10.1007/978-3-030-03493-1_34",
+                'VG Wort Identifier':"pw-vgzm.415900-10.1007-978-3-030-03493-1_34",
+                'hasAccess':"N",
+                'Full HTML':"N",
+                'Has Body':"Y",
+                'Static Hash':"1716009814",
+                'Has Preview':"N",
+                'user':{"license":{"businessPartnerID":[],"businessPartnerIDString":""}},
+                'content':{"serial":{"eissn":"1611-3349","pissn":"0302-9743"},"book":{"seriesTitle":"Lecture Notes in Computer Science","eisbn":"978-3-030-03493-1","pisbn":"978-3-030-03492-4","bookProductType":"Proceedings","seriesId":"558","title":"Intelligent Data Engineering and Automated Learning – IDEAL 2018","doi":"10.1007/978-3-030-03493-1"},"chapter":{"doi":"10.1007/978-3-030-03493-1_34"},"category":{"pmc":{"primarySubject":"Computer Science","primarySubjectCode":"I","secondarySubjects":{"1":"Data Mining and Knowledge Discovery","2":"Artificial Intelligence","3":"Computer Imaging, Vision, Pattern Recognition and Graphics","4":"Theory of Computation"},"secondarySubjectCodes":{"1":"I18030","2":"I21000","3":"I22005","4":"I16005"}},"sucode":"SUCO11645"},"type":"ConferencePaper"},
+                'Access Type':"noaccess",
+                'Page':"chapter",
+                'Bpids':"",
+                'Bpnames':"",
+                'SubjectCodes':"SCI, SCI18030, SCI21000, SCI22005, SCI16005",
+                'session':{"authentication":{"loginStatus":"N"},"attributes":{"edition":"academic"}},
+                'eventTrackerBaseUrl':"https://event-tracker.springernature.com",
+                'Keywords':"Content-based recommender systems, Serendipity, Coclustering, Nonnegative Matrix Factorization, Jaccard similarity",
+                'Country':"IE",
+                'ConferenceSeriesId':"ideal",
+
+                    'doi': "10.1007-978-3-030-03493-1_34",
+                    'kwrd': ["Content-based_recommender_systems","Serendipity","Coclustering","Nonnegative_Matrix_Factorization","Jaccard_similarity"],
+                    'pmc': ["I","I18030","I21000","I22005","I16005"],
+                    'BPID': ["1"],
+                    'ksg': Krux.segments,
+                    'kuid': Krux.uid,
+
+        }];
+    </script>
+
+<script type="text/javascript" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/jquery-3.js"></script>
+
+        <script type="text/javascript" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/6b2ec9cd-5ace-4387-96d2-963e596401c6.js" charset="UTF-8"></script><link type="text/css" href="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/optanon.css" rel="stylesheet"><style>#optanon ul#optanon-menu li { background-color: #F7FBFE !important }#optanon ul#optanon-menu li.menu-item-selected { background-color: #FFFFFF !important }#optanon #optanon-popup-wrapper .optanon-white-button-middle { background-color: #3365A4 !important }.optanon-alert-box-wrapper .optanon-alert-box-button-middle { background-color: #3365A4 !important; border-color: #3365A4 !important; }#optanon #optanon-popup-wrapper .optanon-white-button-middle a { color: #ffffff !important }.optanon-alert-box-wrapper .optanon-alert-box-button-middle a { color: #ffffff !important }#optanon #optanon-popup-bottom { background-color: #F7FBFE !important }#optanon.modern #optanon-popup-top, #optanon.modern #optanon-popup-body-left-shading { background-color: #F7FBFE !important }.optanon-alert-box-wrapper { background-color:#F7FBFE !important }.optanon-alert-box-wrapper .optanon-alert-box-bg p { color:#333333 !important }</style>
+
+<script type="text/javascript">
+    function OptanonWrapper() {
+        dataLayer.push({
+            'event' : 'onetrustActive'
+        });
+    }
+</script>
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WCF9Z9');</script>
+
+    <style>@font-face{font-family:'Source Sans Pro';font-weight:400;src:url(data:application/font-woff;base64,d09GRgABAAAAAERcABEAAAAAiPgAAQABAAAAAAAAAAAAAAAAAAAAAAAAAABHREVGAAABgAAAADYAAABAA0QDckdQT1MAAAG4AAAHPAAAGXDUveN5R1NVQgAACPQAAACJAAAA4PFn1ldPUy8yAAAJgAAAAFcAAABgWrSUW2NtYXAAAAnYAAABRQAAAebzMPm1Y3Z0IAAACyAAAAAoAAAAKA2ZAPpmcGdtAAALSAAAAQIAAAFzBlmcN2dhc3AAAAxMAAAACAAAAAj//wADZ2x5ZgAADFQAADCcAABd7CMplIhoZWFkAAA88AAAADYAAAA2/hSz4mhoZWEAAD0oAAAAHwAAACQHowOhaG10eAAAPUgAAAHlAAADxKaoJjpsb2NhAAA/MAAAAd4AAAHkOIhQ1G1heHAAAEEQAAAAIAAAACADCwJAbmFtZQAAQTAAAADXAAABxiK6PDBwb3N0AABCCAAAAgUAAAM5bFBIb3ByZXAAAEQQAAAASwAAAEuWBPrreAENwbEBQDAQAMADgH10RmAMHSUyaqbJ36mwAmqj1qayx8rhVLli5faofLHyS2o5VgWBWga3AAB4AdxWVXDkRhB9ZqjyYZiZmfknzJzvMDMz/YThJ8x4zMzMzGz2eu8sr9ebs867UeqlqzM1JU2dDOHkaaHV06Se7mkhD0A5TsAFyL/goituQI/7b3n8QeyFQghIXbe0XPn33fHog+jx2y+g63kikQ/ItzzvErk7TDV64CLcj1fxPSZiMWqRzsvPK83rk3dA3lF5p4hUD5ShL/bE3jgZp+ImPIy38A6+RD8MwExZ21Os7M0kTqaHU5nAHeiDO3EIvmQG/TgJw7ALilTiVGaE2y7cMcLdD6Wis0O4rbgN5aJ3hOidLBJtIrFCJE4VvZOZFglfuOsxiL5wS8XfngxExhNOu3COFbk9mRUfIqfcVuEehgKRmYsBqjlTtNQWioWTwDBuQZ5oVSNffueK7lqR35MJoRLi0RP+nShBGnuqxCKcrLyXmMMr8s3f5W2xiF0qdzsGZ+I4gI0cxDr5HYcDcalIVOAvhMT9p4JprgIk8j8ZnK6/cyO8pFwb/wTbsrNy9QNwtuXN5BaAq7lFqKY/wYePPS29HiZ+gDUcLitl9NBtcD1bAWaUDpjhAsNvp68eFcLP8VuRTYonheoUMsHFnKvaDmxsgbHtM2NtBVYiDfXBWiAcPXMMrLSPnYApih1m6UVsJ4Wus9my2lyMHlYzoLUNMCG/DtRm4PD03gXr9a80lJPOa1tioj630B5TMPFzm65nAWhUGsVKWHA7wCxFQ75p1tJ3PfJ11nE+RzMAWMnNHAmggGKXCc3FdpXy6PNuDuf3/N5qjgZYzX4cyc0AF7JypznJRSuMvvKdijS6xXZPfLYALpiN2nZ3mj71nvplCgrD0b10dYTeyFpDZRzbWUSg6w6tO9GOQnQTzHCc5rsK4Idczw1cyCTHMcWpfFUrdaU5fXZhv2hcAKtEfjhXcCXncIzm0MJ5vjRT9GFrkSsc2RqbOd/Jclz1/mSpSoA5vdJ6Pw1hHM66neoH6kkr2Y2Ys7UbMyjjD8JLa0VPAbiOn6tUJaD1faBwo1Whq5zKBVwv0iu4io2hqshRd5dpE2mOtfS1Izw2sUq1t5oIdrF6uciJU8nKmLMqGZKLARe6Ha29GQtbg0nNTLFcbg81ObW5i1ubqlcaf74zAXRWuVyGboIf0mOlnhJ7cZvQHzvr7TBnIJ90Vsbr79cczC0dzAafCc1JEYroh08CQyvFSnoMnHxrnYhW1mYz/PTH6fc42z0HcWl4LwwXbAVwnnAuZ8acKafhQOyFI3AQKuzkMv840WYayjlUJ4lbCZlIT7WjB06ABTdHu9HK9wDsBGijT9/46hGpkxRUw3RAInKq2RpkwNUmyiytBJMmwk7h9oZ6znaoMc/0spmuuqsxE5GJsDU2M6DErbO8BcW2W12UscrqDLHvKGuYsfwIuIjPWT+dgr6+IfdllvPYbJ64UfnqSVHBNM5zc4OD0Fc721NpP1rfkenY1tW+pB+RLgdc2Lq0/kJ1kgrVd87EcBB6RHbAUkxFLdgOrEWnYNKNqmsabAtFuI5B6KkD1oZPFhym/7YHXbAFcOd8yPaW6PucM1uPZcbaDjp+OiaMnOYzKs2tIY++iX1PuFAtpvH3o1CfxcxLjucmejoxK7XrnrTTu0PQ06sW/x/E1/GGP2aJPmst530upc+RANfoOfEgugA2mvPEw98CW7lNAHdwB8Bp+s7WTJ/bALZyHH/p/FQQ+SZ63M5GNlueF3lDT+uZXKDzq4U+5Z4/a3X6MTYD1QAbmDE29N7BNXF1i98JNqrvqd23yAQT7qkVD83JfPekiJ3VyucULkcMuF4zuwrdhGplO35KrnRmooK1dorEVgibmInrtzgN/IXgO1zQRcmgaxXAKks9z7mGqmRa+TFgNu5dIH6m6fQMYmZaJ36YdONla3R2q2WffmS2dla/yUhe8lHxa1vzrLaJAQBh9Py2jc/WGnHapIlt21a5jG3bubVcQqaLds7z1mNUGVUNBe2o6LpD1b2ecaPnvOBBJ7zjEe/73Eu+iuO+iRO+i5N+iFN+itOGjPrWuAmTZjW1TGnr6Jo2ox2zemnOvAWLBpbssWzFqoI1bNqybRfsYDcKUVVSVlF1VM1Z6hrG/6ZpMkV0IuTtb5oWIyyb1bf6N5vWUgRAVZ7/ZtN+1Qj1oGBLxZm3EesxZNghow5H0REJHHBQsi/CCNj7d8YMu8hozBqPBdOxYC5WLMeC1ViwHnM2YthmjNiKku0YtRNluzGmEPOKsaisalktltRjXDNWtWJCV09bP5YNom1PLNsbbfuiY3+sORDrDkbdoZh0OBqOxJSj0XWW8826MBZc7FILLnOlEVfFmKtjyLVutugWd1h2p3usutd92u73qGWPe8q6pz1jyvNesOSEk2acclrfy7HrlSh4NSpei6LXvaHqzah5K6a9HTXvxLT3o+WD6PkwWj6Kno99punz2PJ1DHwbA9/HwA+x46fY9Ets+CO2/RmrfwE9c0UteAFjYGRgYOBiSGCYx8Dk4uYTwsCXk1iSxyDFwMIABP//g+XFGJgdo1wVGOScg0IUGDRCgrwVGIygsoxgmgkIWaEsZgY2KIuFgZ2BIyczPZHBCCeZn5zDYIFMMjBATAVjJqBZUlAeBxCzMZwCy6oxsMDFpEA0WCUPQyWQVmaoApKGYHXKAFZmI2wAAAB4AS2HNwGDYBSEv3svPVMc/BpiIH2KgUwRxEL1hAVGFOCADtcPV6mELVhkP+C7tP5cFcDOW/eNm23GswfEisf7+eEOXW9NvwOvdAkoB1BtBRDwATBlDPMAeAFdywOMHQsAAMB5iD9qY3Oxatu2bdu2bdt2G9W2fd7YdeNe7YkxiCKGbGIiyCYeeYgKAnH58K/CyqqinS7GmeSce9K99DFSNNI8ejWaFE0JsgV5ggJBQlAuqBGMCA4kZEnI/vEj+FegiHKqaq+r8bY4777Qq8+72fedNcgV5Pu8y/6xIx/fowEfL/HxDHwcw8fRfCxFRraM+IeP4VwIJ4Ydw2lh1TBX2qm0YyKgDFqgE3oZgD24jBBAkjR/i5lnsaMuuG68RbbaZr/bZltnlt3mmOuB+x5a4Ijt9trhsS2e22mPXZ54ab4rLjrvkn0OSHHIKWs8td5hqc555LgTEj1z0CbpjjltrRtuumWhluqoq576GmjorkaaaKqZ5lpoZYjR+uirn/4GGOieQYYaZrgRRhpjlMYGW2KpFZZZbuUn89p7YwAAAAAUAEQAUgBWAAAADP8zAAwB5gAMAgYADAI+AAwCfgAMApAADALIAAx4AV1QRVoDMRROvT0BUsv7cKjs2WCZwd3ycLcz4E7tLI9d2M3BsFeXkfz6xYwQiVkjQkv60+UqoHH9vRihol8iJDz7e0kjXAkprUtFrgMW7gQbg8DMk5A2eXrsFd2FMiMz0ycZacuLwxPy9pSQg9MMpiWJVX3J45oGGsVwjZ4iDvM83uI83tI8GeQZriozMLLFE/xwyZeYleTpXdLLmu5VmEYVhgGkRc6SJkeFAZFb/tpOGW8u2yt7DiQ4GmQSLM+yqmk0TAIzmbLqArrPZMKZLqxqI5wWwyVajdGKYUTR4ZuwjOt+iSOGLggXjS7oAgwDKl47lJhd1ZYKA2DyHyTqa+QAAAAAAAH//wACeAGlvAd8G8eVODyzAAGwAURddOxi0TuxKKwAOymxSGIRSRValuTIiuz02BfX5Cy3FLfUixOlfne+L7Yv5VxkpRenJ7p+5zi5Oxel5+78pccCvzezgyWIgI7+99dP2Bk+7M689+a1eW8WqA2tI8QVuXcgDdKhdmRCdnQCPY7Q5Bpcsp6zCKGeyjoDcATAIW1l/QnUBh1ktvQ/gXRqT6/2DKx3FnUg/MsnUDf7GwbqOYssAMv1WkWzaI2aRbPemsWSCVurWArgdfx0LfT5m/HaTYu7CtrS7tO9Yz8dy3PvuHgVXv5RLY+/86PahdMnTpzGuzauvXYD0IORNXDxcfcA/ma0XMfeSJA1NmDfRQBdSKsCzARgZuTAN0aKeifpUVQ7s2dRO0UVRzM4KhmxCfOSXrLKVgm/OmARerQmwRJ46r+qKz/Y+ME67jxevrq//+ry8fGvcfdcfBXBTYMOAG4hwM2KvCiMDu7IWysBWBVkJPjGSlGQsk8AByVkU3nnAYQADj0v7VmhF1b4Kef9nN2m09v92G4zcklszZeKhUgS29XOgS/llwbFvoGZvaGxQ+W/+9uVXfPzV7xmZePQ6mu4eyyR4WTvHpO2c2EiN5Nz4j8bKJey/1z7RnV8uP+3CGFU2Pwl5+Heh0TUX6ejjaDd1kCHjwB8CpfbALcuiqUPeg4Fy0KFk/MOXp/BUtAI+Prhz1KZN8KfGa6QWjhVHTrgy7qriexcye8rzGZz00I2erRaOTmfxDN7blrL9gpFrxiePDpcOTYViUhyOp9ZvRnYTHldAF53ACOLO3K6gwA6CIZnUSfBjvLVXOehQ+FdmbHMfOCj7zkTW3jN7gfOvBb+zXL3PPD+hetX0hNvvvHG0xeBLQiTefEPYN5ONL/jrJ0E0En5QufTUL3Qwz2ddG31WeAjxaYTvjUwDbGLdtku2aE9gK+r/dvvfod7azdw90x9Z/oX00id+x+p7I/vOHc7AbS3mrt929xbM5olOt/vf78Ek/1gqvYUqq9/BNY/jOZ3XH+RAMTm9Rfp+pNZfXC3SGf1wayel5KJolSUzUwu0vteMTZx0Jd1jebze/sCvvK+olS1veVfhJNjo1ctpBTBkP1Ft1QXDLvlY5O1n4lJkA3GJy5P12jXJazRE6hdXZl2wFPD5ORxpD0P90GrP0+kBayXbJbgKh1Ywr3Ly7XvAsNqP8fWi6/Cxdo3lXnRQzCvBoV3nFdDABoyLx0TxlpiBgSjwOYv8Z3wfA9K1p/Xk9v16vOqqaMSraEcLfsxcLAIyIEwS8HoQUefVCws25OTuesHbo9Ko7P4q7XexGyfcJLxpgpzdL2EfdISgPalzKmBAAwK9zh4touaUxA7ZIAepUzGst4qafR2IFGDzRvf/vnhL7+acOwxvOv3tZfjlVvP12X6W4BPG0ruiA8TPEozx3TXTPRkCQdqdwH7HptG9XW/EcZyoVfuOJaOAHQNABcBuJC2hQY9oXhKSptR7Znhbh3t2WBkF6PXystlsp7mQqks6TWSJiqBaYb1PXpzTpu56egevVZbvCl7c0GrMcwDFz542234CEjOydTLU/fV/hqv3ged2rtVOtLUj+y8RmwFWjmVFhKuhY6B0UH8jYpzBhPB2cJ2/8+ntRr9nv2/mNZq9XsAz+N35E8V8BJg+v7b8ycKtb9GHLUNV4BtsKKoanuZqVURUlGmq2ajOtUBlsFP168N9LxILYGfIzY4mq/A3xmubhLwXOXE7nh894lK5cRsPD57opKalr1eeTrF2q7c+s179ty4msmu3riw5+b13K7I9LHK8NGJcHiC2ITpCPMRduCjEfGtLWaTRj0BMo5YQNAFlsDELIHqz+rogquQrKrT+HrpQFWSRtZL1yx9bv/S8spV3D229O5SYS7vqr2IZ0anpsu1PyDKt0PcaynfCmi2jk+ITB9qwMdNAG6CzznUizDgrk0CtKfuM0I9DDOAPY4yxDZRI7rFQUwMaSSa0TSyWE/NRPnNKhNZi39syvsOXucrrVWDdYaLw/sL/HLJIRrxbPWKmUhk5ooq4+3FZ9s6Vif0pbVrZ+rsn379ark9ldBp635ZAJ4bkPPS4zNV6SjRGGHUQYk2Mvf4BOIJjIktYzzWSKBu9UDI+tAr5hcX51+B7WeuXfp2fmU4uHf8L/F6dWS0cPFT2F77KXePNTUlzx8y154hOpYAW/tfsBbylo9wEBwcDVjmCCC3ZWtJwOhAOSofDkDNR2FhuMUBMNUSwypkscJ81dPpiFQHsF9DloIsziHpMnl0xuyL8Rt8LuIMlGfTg8eltH9XpjxuFSK2w958yB4YWCxMXpO8O5wezLkkl60z3uGNlUPhkaw7HSr5RDntFF1WQ6wrEC+HohOyr5AmtHnh8iKsgR6o2xbOq7SpjoWuAAe0ICpRbUSapKJIooJnnsT/8eQyt3tq6uKjSvyxCnqfofZ1aEdt6iaA7gaAjQBsChP1dePNBFZ1WmANVpec8T5B7Es494aq+/P51WoIzM+Ng3tzdntu7yC+pXbznqvGfb7xq/YALnQzoAFcutHIn4r+mpGr7wIQ6qbLZpatfszLFQwGXCOtn7R4rFqL13xy5fzlgMGZweMDA8cH8VFw0lQbEfd7mFdE11z6vIwHrSMnCuAJgN/CTKTG2gQP8bTnRaIq/yq22/DWKNsWcD38/sl2W7u209l5cO5gl7NL227pmNx7x/Fj7SaD1mA2XH4MyLq/dGWpdLKIr6jdX3i50gMb/5bIrgj8r72errcJLi/Q9Vb9ECZ44j+Ko17Kn5oIwKSQpoNnXZQgK4A6FYI0Mq/QUcWyxiqp+y/pO588tN7Nm7RGe9fq2qc+d+hIt6dHa3R3XbaGl/DwA3zS50vyD9Q+V/vEJ5yy3y87P0HldHMTLt8HvE1o5NLxbkbTpKj0NuTs0pe/sr7S4zdrzUHT8upXlmv4vrOhqXB4KnS29ooa4RlRwP+hMfow2h7yNftuRSV0io85D7f1AIaqFpaxCGqIIcpJ4/Xak/jDtb/Eh2tDec451XvxR9N0LzwANuwx/ALyoChI43Y6DDsvCJNGFuCY6IIQLOFZ1d7a4QYThbsAFqBo2aEXpD2CqqQEnxDuUK+j00crmOyozFJUov6nbHPQyN6oGbj7fe18xJ/c5RODRwfX907oOWlfurJvX29IqkrDy7Ljpr0rZj4VtAu2fkf86oO1fx7wxWdmEiFRuN3g8EeB1kWg9Q/c15ADRdAtTZpnaY7utojvIYAelXjVyKvRXQ+Txh4a0yl7bJ4S2QM9N+3poBdSCY8wI2bXE4L9XN2iQ7aAOADVD+sXFzlxIZ6d6XUFB+YSwV2CRj+2KFSdfjlsNwZ6g4PT3Ne+uOaDCP1gX+XohBTw5a7y8p7emXRsLOseU2xuBuj+OH6hxT7ccMn78PJL7sMzkZGVbG7SFXdkfWJfjHdE+0Sp3xEW96Vyy8PSC8OXjQUlvmh1evKTicREr8dnK/mCwdHLqAxmAb9/g3WxIQndsiOGzCJuLZSFACxI29I0G+CbNhattiELXRcLUOOkdBnVzIhBzYwQqgPbaI0W5T+SRIX8rASrkagI2qUJvcY3mzx09crUSHDIH+j3++SI44XBy8ZCfvfSuYt9/d746evXjorBGlmWCUIvXY9vUJ0LoX3N9LY0513wDc9iSvgGMO3ZhjPAmXwx7KlM6UU/blikcCFCcNdnwsMLicyuXrem9njb6pQ06PEJC/nelWoIL1f73dmIS/vC0GVjkjC0XPBY9hyym0s2vzS6cfnsHnu0P6zIlB8uVe4fQcn370gBWyBLq8QCXQxOJcJAe53nyV+wPGC8MCDrwzS3YJaK5WKhRJYEpz3eiRMnFsfGJnfxcTN3a9fG/HjtMP5IpW1+dn+7nubQ0psC/hnw1wxx2Tq6uo5fmMwebsBvkgAmkW4rNhuC7ycpn4ey9WxPGBCKn4cPQBIUMgQQGSAyQHaze86iRcp9nshJhaPRJSg0ONMClZoia5hoAV1+XNd6I/QcgxgMHwtkrMoILOR7/eyY1B9z5HPLRrHH7ZyJiBZX0OqM+vLjYZtk/OvjZt6bGw1bIuZuSyi/sbISHDnYn95d9H3dHvb1DCWTQz2+8GI0Y/aErEG3ps2aEAJ9vLYz6gtkurW28VRsJO3Ut1XNhUC0mnS2Gzo9Nt5fHg4OZzzmYA4v9PiTntLgYMmT9PeQtV+Ey79QfV1DOxlN1ay29hg6lqKEFaem0aSaRotqGuu+wEw5oTdLi4saaU6en15M5SID4UWwfMfF7JGN2rdwfHI4Eq59EHFoHCZ9hPtb1AlDptH2rYKh5X5NR2QmCVMGI4qQka0AKP4NTlF0wmcMbPBuP+/0+Zy8/3jNTcPGzX/djNJ5TKDF5SZfYmjOOuhgHrIrgHmYdVWDWB0RABb0N2KwtDi0iw91m9ud3SFngqDCiyK+cPHZ3WuGtoqmLZ/m3lRHqr4mF2BN1JyMmoLZeU0uPSeDGnIyVpKTiUJOZnGf5rsHP3L2wF0H93Ffq/kx+lLt+z95+RupfSC+Fv0r4GNCSfSnpwcmqRxxyANYMVmR4uKisV2r13caHOZsjPvaxXfYeriKVttXQoxm7n+oX3vPn5JDw85hM4ttWuf5OTWObmc9Iq+A+vmzyE5ltl119jq2nVM2QwFGEC9TOea3SbN+q10EDyLMpvqqpsh8enbXYgo2b4upLFzwhSkp25tKyHURn619kDUIqXoI9NvQFZdOP9PD1jkeIJcpJlNKRoxFJaZZKSn+0ryqlRTr7Uqp+rz/BlxpvqfZY7QIoGFJVOcgbfdrzEiWmzIWmXBlXzq9rxKutyu2cCEQKIRt9ZaGIcGxy4aHLhslwccQiUTAKScSk3kPRCaIxogy/gPg6QA8b0Hb/ZahOQNraC516VrWZ9rgWSsVIgeA2tW9P69WZNyqKIVUqqOKPwEHCGzfHiZuixF1+o+SNRD3JLMzOSVMHA9yYkWNEQPVUPyj3Kf6vDGIEvsrl09IfvfIVpAYFJQYTMb/RmVJQjfvuD5MVgzNIZeuyeezGIxFXrAJZdFYPf4yXVL8JZdl4vp3jL9GRM4wtqT1zSZaxV8+X+bi/EP7PdHt8RfTmw0aHyxeut40WwXzli14WlES0zYloZGyqiGu6YSP7+mymQLjLlCRtUypY0arzVdqXyO5FtCNWwCf3q08kp3MZm+YPkMAme15pAyyUyTshIcUFoJnMk15pGirNBK/lUWaFMZTuZwtELO5C3E3n6xEM/PeqKskZJIWf9TuLiY8fHo8WdiQXuEWUoLVa+8xtPNiKuAD+RL4gtWZ8JpdVpOhwyHmgv5CjI/4FPvkBLomuVeAJk828bmlOaI2p13dyxLWaqC1AbQboDSrVMUyrTfZHA2BbfHIzFzH5C23iIluf1ePLQuBu2gkIeEdd4zXXkj3gsPUdzoTQyHAaRZw+g6+wGxm66VW1b157Vs6TjPJqrKqdTv1mKAWWzU5meFq3tpLFGeXkmArqWAEZ+WFaXyh9i+Tw9Ek7NLdc7HckQ2Ff11w+Sq+0CI/1bwrYoCd81Pb8zxdK4c6+U5tp6Pz0L4Hj8DsPwvNSNJMCNtqbrJuCHGPwryQn7r0edlCGi41PyWy0r8JQDaWn0JIuMT8lHN5xmDUaw097bN759rNkJMyGqYX/vz4VLupHaAdE4SqH0pg7seD2KX0xiTouXGbBEnoSan2IuWxES4fxxda5KdaWL1LzE9B7MlqO5jVdsrRhhSQnm/ITz309vXRTmc3WYvB/W8/sz7d7TZqu51dY/trPzpli9vg/6n/+dWrHSm7Pcm/msnFZpbKhQ9NoW2B2x/vvZpxbtzsdCMDQ4+nxqKKNY3cNmqoq+k12NoTRVPnl1aOdbpAZmwdq3sf6xZSfWGzt6vnNq5tMB3CP6z9f8J0UJwRcPfFF0KVtLutbVTBNQCXu/GFFrksw/9hLktiuawARs/huU2EDbV7Uvja8VTtThL0b24q5zo0eS6CtADQo//EppbwZ3eAP78NLqvwH26Dp1X4T7bBT6nwnwEcQEAS0rTRuqQd3YC26eelF0a71SAcemqBuU11ngrDupn/IUIH60rvs2XrgRs2SzoTbrOLRUgw4fopAXyvtlga5oTaW79zbA2v4ftrP/nRjzCH506duubc9Oc+p5wbAPoKm0lyjgPo01H6foFXKd30HAPln4Hx29sS/uwO8Oe3wdMq/CcMTv49Su/vUsZHt1D4Xrhf1wB/VoFv/gHgnQ3w5xn8RYB3aNIq/CcKXKmR0nU2s3WeonBam6TjWBhdcy3hz+4Af34bXFbhP9wGT6vwnxA4SFF+8xnuFPcw6gR5yaFb6xKTIvKQapAYPwH4FQFB0EnBcqtRAdzppwLTxXowAAiHkaVkyd00ElXvE1VYSO1l2LcsjqDZiCyOKJk/Hm+lLvTRcj2pwZf5866RCKkHmnuC8lxqRvYG8Z8FglB6HS6sS9XMlED6lSunq5nXuX2k2JrbK+RLpNp6ZAK/OfnaGVKFFYWl0MHUNbQ0WN0nkZonMMcPemRBHrTSZEVa1WAV2+FktoOciNKwimxHtp5qMqrxdxepV8G2u+HwDN1dQEbGDNFS4YG/wB+gmiHUlmZfv5jcf921udy11+HZ9z9Az9WkV65fuOlOznCari2tb1FZcDLZGWsJf3YH+PPb4GkV/hMFrtQl6P1eJvu/oLZGhMtueibDg9brPPIQlnhQT4vMdb1a52EmhHDJgxwql9pZtf1x5ARb3A6tC/gUZnVTyihr/ewTCdLN2EjPO73znfvY+ac9e+iZp6ezF7k55QwUHk1qsQATN9TVe5AL9beqgjWl3s/BfZgsb/Ic4qDnhB5NE23V0+3S1iGspWv+uKD+CltmV6kwn3e+66mR6elS7UXCZ1r/4L4B/PRTfv4H7kat4M/sAH9uG/whFX5hG/xhFf7jbfB/UeE/JXCkIXDup/gFoHQETaP70U7u3EkAzgZAngDyhFXbzQYF5NVTXH0oz7Lhfdn6acsADJSisEAWnmMnBJUU7TDtOaE3QXsB6E1Tp8J2ZBDJQHlGU09yqJlnjRqgR6L0Wtwq87QpyYO39IaCe0VDBx7YJ/NDwSOl0pTJty+fnsw6NbWvYFesFJD6PH5hLj+86M1fka3su+s9BigCxWZ8nDzYJ+/Sn06EoiFr0esiFR7sdMTLuVxZGFopeC2RSsrJm/tt/nIonZkZU4tDx2f3Ls0o8UJmM0nqIrAGAl2Dn+MeBof8PF3jIJOJ9pbwZ3aAP7cN/rAK/zGDEy/0aXr/Cejp0H9cjxSZgOYnDfBnFPjm76F5sQH+HIP/EiHMkfEZ/MfXq3kh9FF8ocUZsuaExdYZssVF2JbW3BQPmleispxkshxS6flvikeK8cXUEv7MDvDntsEfUuEXtsEfVuE/JnCkAfiPIXd0kWRRUGZrjxwnJMQbaPISgJf5RejEqV/kmHWLIy+V8biafy2zVH0Lz9bo2Bzg2T4ZLQWKUbvTE+4LFCMOHodcPpJn2jPUGy4p3ciMLx86HIUkQ3w8G415eifj4xnsFlZLJN3UO+QbFVZKJAPlcg37GF2/1Ig0JzaExtGr0fZIfYuuPgLo28qTKgVVE+uBTp6He6CVwddFQJtlSmckCxC4L6Xq7QjtRaA3TulvzqDpKbk7arFOLSLp9H9uC+X9/nzIVm+XQ0N7U30bbu96KT2Vc2lqX8CueDkgDYD+LuT7N7z916X2DEncxyp98m79C02ZtwThS2Wof7RJd0f63wB5uiNUZWlOmZO4v0dldLwpCtjKKZcJoNwyvQs7HuhoqFAIVCgk9vcTKMt6SuiQZ8dMS8y5wMevrYc8amZFWyyoZRpQoJdtRIcTdq/k9aXklM+RGAwnJgKiW/YlEhTiEb3xRGlwkdNsvJqPFf2RYirudgoud6gUE0ox3s0POOw5wRfxuoS0FMylMkKkd36h1kV1g+YtqC7lme71tIQ/swP8uW3wh1X4jxmc7inp/SVlHPRCA/xhFf5jAkccKsI4z3NPIRvq24o3ZMJrGVlaVJXPkXwmSTMnn0A5lKaVEJ96ZigN0msHKc5BKz+ttCUab1AOR7eKzta6hma4unZmMNFWujCgqdgUzAfNGItjQbEQsjqi+VNDc4H+Pb2JhaGQUJ5NRabcxnLkbc6bC0OR0JRwl7PPV9iVMnq7U35najAIh9qdXHj4gWuHjk1HheHVkrw0KAjByqHIrvhoTCjYUp5dcYRYrpidJ4ii1dY7cdXSqkxR8wutcqb1TLBBrebykvmPTgnwxeb87yIWIG+0K0/Tv9KYiLenf7+teecXl9zhevrX61565/b8L63ncgehnhtDN+wYc7ACqqVlyB1W67kWWDyRJPDgYwGoSa3t6uFjhG87zit3maENQ+s4ryQwm6q+2yq/eqJn8BX7k9vtc09CIfgbUAqenXNmLWa/FIp9o6kqrFSGR+bWOgyVbjlXYTViQi/YkkmgN4nuRNuDzeaUVut6WfNJbOWsR7eSxz9P/oKsELSmLIyjZvgJ1A/QIIupJZbniFHiwyyd2YJyILzcmPnkJlma8+F6KdwChfFPdkycPh0kWVCdkvDE3Q218SpwRc2IEv8jAA8WufcB1h7wqm+t86FAiCo0ROFBAggibUtHW0UBqsxBNQ1qAEiVvRsTRAX2bgysNih2Ae5y0btS8K2Z3jWk9qbYk8w1KdGlEVtt4JM0iqXFFFJX/y0fzY6ngu8qy0ZMeq+ySVlPsOLLrUtSdt5sdMQDFp8YTuGbpblY5PBAelfRZw9lXTbeEesLDk+4E0WPsJr1Z03ztr5osOL5G09aMHtdieNF7zBOewb8poAYdviSpYtf7wh7g3FPbjwmljJRc3w+RM4czgwIpWzcJm9E40f6R68p8IJBsRMpsJVf4d4MZPpQsSkTbmx51rlLLSg6FCvQUBnefs7Z8bvLr7rq8iNXXXXEmxYtFjHt9WZEy2TXgx/60AMPfOhDD44FRq+Ymjpe9furx6feejOV/T1weYy7CWYZb3pHwNhC1OtZOD1go4VeXc1xD5H0XC8t0hC2g6ES99z3utSou3q69p4J/M9FA99z8Uml5hKCy5eBBz403HTKzNhCrOr6wp9XcoEmNZ9eZoKgnhUj617Bg9guxmZeNRcbGo5NeLOxA9X1l0UnL+t397nO1o73zrzu2FK0PJUWsqniiZX0wctPDnLaaYKXG9bms4CXjJaads3Gl6y9eFBGfemrS91J25QqDEA6m6owUpEum4q5+u6Vpu7OohO++f6B3fbcQr88mbQMyrFxXyq83p+Ykr0jBV8+Yhf751KRaiHec9qfqZa82aClahFSrmwp5CtIaUd8KDqw26bVe+IlMTGRdZlcgoXKnxkI/SdY73bAb7XJuhtbFA7OkWwREcWkYqa1oLiIrDYz353MevWcV+BW4qnJ9o6mtNskO6RqixjkAec0nLbLbXwnvnp1ofaf2Hxo9YWz7mk3n+KfGvv4x0v4PbXXkRw5rMEXAL8Imm6yxcYW1YT6GvCohxXk+SzgBDj2sEo14/sWv62iXWI+VOX2qHe+j9QKd1fErC9lx9XfmPkMnBgsBUJD84lIVY73vAngkZI4tttm9WJ5+jNdRmfvbKGwt+wzOQNmRbdzgPvXQX66UWZLm5IE2WQr7Fkew0B5K6rxT1J9oyy8hbYfW5W4h6LuaA57cJcz5jcPDPmnBcP0521lvziU8WL/3ujSMX9hIprdOxiMTazmCrOeoi0sC9WZaHrjcvwD3uMdOTEXTh49lpkt+SPzr50/cvtKNOoDrFKk3gTrYEJyK7vQZKXgS2byFTsgVzRlct7UqNFLn9A6k+PZ2hfx/f3TCat25cC7br9pbFqeOX3nXxxW3nOMA9++BnwzIR+aRKtNuc6t+UYJYJSuu1plG2XZiu6sIoMpZicBQnwqkQRoS08zN8LKoEZcrmD1VBXd7KgnsphgNKrja+3hvK9v0purBiPy3wrSQDE94IwX/9MuJnmp5M2NRRNjWZfZFTDZYwGrvzSXSc+XhY95UqKlkg+kRI/RPXmrb0TKjfZlfXHB9eVAMSl2aV3Tcngo6XSlq2FXJiZ0arsC0bwQqmTc7uwI4lAM+PL5Jnli4qNyRRUwKk+IaJAqT7omebJSJ8p8hV5RC6WizghXo8qfBkCQZob5OAjVAohTUBGn2NJRvzwZye4bFIk4yfNuXIpmNo6QQxXVmW/yXu/olfOR1HZxivgIVqObvwQKXgPW0olanADUkAWqezXAYFRyOSXJ6ZLyPknyeSSJjJHd3I+ehDHMdIymV7mI2oNzhGXVSY2nt7KJnEbvlEIuITw1fJ21Esc+rydQSI8ecZM9DcULf4+LottgipNIBy2B07m2wW+nOr4C93+LOwNzmpEbtTiq0q6wOipDZVLfQNFJbonr7A/U6eJGNjZqt71DpU4ZewZ9C7/QcmzD1tgBLEFNrmzbovNxNjaMS8Y/sLGBr1OH5lAE5OgN3P9Lz3XHmk5AUrExq2/IhLcOXkQq2mbvquUbKfqgzuyPBvnenDjIZ4XF0sJhpxQVLdrDQRfBwxV8MlotZtIZT6w/4EmGsiuzYimXzfdLKmrUZg7R8w6tcDMQ3DoAN3MTbthh1NrVsr8iv9poI0dwe1sPQS7XKw7wuTpygkW7UWcSFih2WXesz+9JSrkW2BGZ24v/Bj3AfRLWpBOREpwWAly6vCYsLWnWND15bv+hQ39FZQbuxWtwbwTdRfbHcP04HaMfP4jOcRD0giafQ21s7wujGLGdsZPlRM9FIhqdTfTzfrFU4O519SWx2+X2ZVJDa34Fnyrg8wXuHBurEyBtylh/JPjVSFjTZhf8vC9YLuB/cvWlsNvp9mdTQ6t+RPEFvPApwCuC7iH4wvXjFA5z4Fdz5wB+L4HDlcE3X4W+gG7gCARd/EIdhl8N+8Qog9G7oVXeXRhD/4YfRTrGOx3lXblY5vW8Pn1H6JprQt+v3O9/3xmvQlsJ7n+m4f425f5ombfrow9eI915p/Ti+/z3V+73UvzJ+PhauD+C3kXwhOsZCi8B/I0U/m4Ch+sZOn4cfQ+bsBtpKO8wwoirVw6k+IUL2F1VxmX3cTr0Xvbcv+PHsLP5OfrGcxzfVXsNdvaz+7jf7HQf952LebiP2hysAZvzJk5PbYuJzhFDd2MDfiOyUto7AEZpb3qv8T18LGCxBGK8I07a+N1mIeXxpEk/7fGkBDM7E/Dn+EebZxkeBIIpHqToi39UC02Xy+xc5l7czj2NjHROHZuTVw4o8/QkMq//58rUVEUe6O8fkD9+/AenT3//CueR7732td874qRjRDb3ou+rY+hhRjoG8a40C0MkMRqhj9OB3sMevuL7p0//4LgyxsbmldjMfRme5pl+6ADf5hUyw2fjU69//ae4L0MZKUvfb74S/Z36HGK6cA5pVYp52I7I8Hn76z75yZNcLfviR8lzQTZfL0qq/CHPeaH10V4P9Ew0PxWDlrzTQbjHHGVjCA+cgu0GDSMc6u8nkD9kbE4PDmg0GoMVzGHQamgfGEx74h6dVxC8Ok/8ZLZv3tObybhMHoexYLR7jfJaeb4vm+jNLMu9cru2vZCTlzO9CYVO3A34yiq+vRRLB/SstCcSqii+HdCKFF+eFsDUs+ZKNazINhtkae00EKhXzIr9cU+bRxDgEnen/CmfsT2Ud4k2A9Bg9AHgJEUtVwDU5F6KWrbbL0fLa7IviwtGh8fkymR6PVHZ351V9Llj8wjexz0Jcuhsde6XA3+NZSxh+1DtV0Pcky++F545tKlD7+J+gTREnuj6U3sLi3hoYID7xYtOgBlh3OWXHtcK4xoHcecgHRZxDePq2cht6sggJWYYnYxfK87Xcvi8gv8A/ii+EnJ6RmRrijcstFRCLFNZ5qk5i+qP9l9uell7b/sJ0+V90elp/IWNWMZ11SlnJrbh27+f4JDe/Dzsex8EiZqmEpulek/Wb4KtJMT8FcwiVJrhrB/S0xLh8uNWeedSQ3ECj/gCsaHpgE+IDU/POWHvF45XpivxbMTY40wOSqW1QN41EIul48Mzw/FcxGS2RvsiuXnfF4wRMZgSvZaeWEBMCj58yuYOuz0hvz85nMkNOsxRN2T27REx7fTGfN6I35cYzqRG7D0xiFVD9iBP6Itvfhyfp79X0IPCf+r9aACQ5TdLGmbjoMSOb1heXi0dHo+ERtcKKXgRX8B5V3Gxf3Cf7Kgt0r1C7+avuMe4t9Gzw5NIBi4OkOiScjENvQINFdI09q/vSEZJxfpp9VDmnzg7zDcdkGw8XdhbWLtmdPT164XC+utHR69ZK2RTs8f7+4/PpurtywLyeCgx6JRscXd5fLQk5Bx+byUdGct78fjcdfszmf3Xzc1fv5rNrl4/P3ZqPpGYPzU2emouHp87NZqcyrtFZ9Rmnx0cm3dZE07RI+8isqhFPK7ie7ivszPTw3SXVMiSwhe0QJ/t6fr+MU7yik/X67l5VKC1L1IUPotKFJaFNk9g9Mne80odbFDhzp94k17DogteikqkyK4cAfiH6AR5YXIiGp0k7WQ0UI7xfKwcEEpRno+WYnNCxmbOZKR4fDxp4b246ivMpFIzBV+9DfOJwZA0mHQSMQ0NJnhs8IUsAd3S1NTLgibLOJEvefMKjZe7DdZ9GVVh5QfVlY9Cz0R7u6DnoD0/id5or41ZzCdQECDsLEvTjoedxtw6bazXyU2kUzlQCl9UKKpY2UzJ46999/LcG1Yy4YHpYLy/jXONiPKkJz+dcseMXGc56l92ZqNOaerKifGbjg6m9149klkMOlZO7n7jZWVsiPntabfP6Lf5s6L5m8c/+rpqbvW63WPHxoORiC86MxlbGk/wrtjXXu8tzvcOndidKB+/a23XaxbiLluvnDl422ou4Q18gLcK+SHgEdko/QPsGT0ogO5vqkM0Z/QA0HwYpOWvBmhYBugc0kNPSzVMz1L3pDVCq2U5IA20FpYLsrHWyeBedp+PZArBMdOPrKcfu0Q/Uhk+Vri8du+qZeUQX+RvdRad+0jfVXSedpWespy2fKv/HQOPwb+Bd/R/61vfwm3veAdSzsngx9HPNBVOjx5DCPoEFsOP4xHNboA9rsIkiHurFHZWhSXgvr302ScUGOEl7Jvm8X3gL3i6N9FlXzI9a2mRni3VkwyOxyf27ZsYX1wcj+RykWgu13XV8WOnTh07fpW8Z2Fhfn5hYY/yTjxcf4Zvg9UKshmbzgEqcyFFWVmyVXpwRUzZCiO4kNBZTbXrqF9BeARwd6MUopWH5gooO/J0KSlVyOUW0lMZZ0xyJcwRfjw2OO2IFgP/T+2X4fhoKeuIpESnFEyMVLyFYp9AY0vKuyrMn0AVmJ+vzx8l80fJ/CRUaafVgig7kMJeZmTHUNpRx7a0aUQqQtOUNG30iQuWfEDIjPTL5ajgiIHDGo670kFbxC/Kjojsze3mL/cEQsGgFI/5vUGPLeiTjJ6oS8oaDb1RTzLQkxQRB/givBf43waIzCHirVr8ogTa9osSnPoDP23nlWNSevbuYhdTANN5uu2RTJgnCVGpSOo3T8OZ/+FnBwY++dGZgXdNXb3vaObKK8WL/w2yGMYcTnDLnA59hsqmH/5eoH9/lsol+x7WMQg2kIgjSZKeQzoWv8JfW6fnWTUVAcTNcqUIuZWj1cqmM4O31tuH6cH0aL5cpPH/HenSZVdit+Qu23jXZHSonNdrbfnuaHJ+GLAqJIvlDiFh7070eKZGvhy2ePKxlfaI1+2keDK8kRWW04PIWTKCa+Ovt7hb+5wGtXk0UE44nYlyoN4mMplEIpvFHJ+sxmLVJF9v5dFiaWSkVBylc8fxQ1jiHiJz01jLptqwDui5offS8/6lKy3ZbFLaVW/FREKED37IAjliP+TbLcGs35cVLeDVwplMWMrQed3oBJyXSSMRFVGs6Z3Djnrp2w/TK6/p9lIGVDGN0Ek8WVLOmIBcUy+rpwWuqL45SHGPmK1W80hqIlf1DfATqVGzzWYeTU3wA76R7MSQVUiBIxWsVgEcakqwvmOUH5CkQX4sPRW2WqbSY/ygJA3wo+lJqzUy+Yy/N2S1hnr9rFV+r+s+/Aj3M5RGh9F23TW2eK9pS4lhHwmgqPLuO/MJVlX2fPC8lX4Xhe8SoBZ4W4QLypHBTdFtUbb7MY9v8BbjmVK8sqsSX5oZyh0QIsJ8pq9MAXvGhnLjHq7L4y+kQhlJzE6WZg51XHGsLenr90b7srFiNJiq9o6vdx4/1pag+cgiQrQOl0LrTe/ZGFuciwKDq75Tw1H8Q1nF/4WANkktandmt97AgVge9tvKRphofAY3v3qjvvoLhOOv1F4tl7Wa4+OWDjM5DVOadeesuWCp39T+gfs4jeCfns57L+s3eowFrTAsJCZy7qSQ5f2jBWFQ6DN6TMWpgFbZt/BweQpy9z50Gm0/fGFsfq/F2PKdXC3ysfcwXKxHPAeIsHrMqPs8tMy1O1nq3dlTfw/STL9Vf6Kt4RcvgGA7fKgRlMlHc/WCydejNftMC8sfvesjH/nI4oc//OG3fYS76WPiuCSNix+rfT47mjtzJjeaxSOENvArP4V1K6Krm85IGVtU4pU9QYaqW4ZVrdLQdrA2/LQSrYTVt+2sDHVBfQk531iPJysZKRSHcBk6Fc3WahInqbPZvVhZUxIr4p+Ky+X0/FC8fWQQ48GR9kR1qTe94O6154WxfV21Wg3jp/6pe74SLrv3pXrFkYODSW27pd3QY0i1DR4eDabFrFs8utqrNxo6rO25lSMhidqY4c1/x0/CHkiHwqgMti3I3NE5omVIZPl/xbUHodURt8QWzQ0tT/SOmvcANFTp6GthTNWAoKgZ4gqsK49U+j/vm4kWyBvkgdLuRCE1wsdsabdQsOHvd6+Nja91t7uDmhNXtoWHlouFxaGw7uUnuKCjYHFwtQc4j4X+fso65Mz/wL2vxX6dmg4M+3U9lvFf4Zf31d7VxT1wcY3Gc/XnwO89Sf4mMYXGAeNE0aPkFD+0T+JX0wzfo/jrCNF7RuAcw8/pPY9t/pjdc5De8wR+f8M9v2u6Z4re8zgmWLG5uBfpPWfVud7IxnmQ3EMzLlfi73IpWsvfipKVWFfHXL+BnCgnsi4rcv+vjz46Cv9xsvKlL1W+xMbBSfxdfLJl3jCIH6ot4ZMVcl8e3YQ/x9lRJ81gtNHwiTiPaLmeg8jff3/q/vem4Pre+z/2gTPpD3wgfeYD6Q/S9241gO8RwFem8awHiTCXCUa1U8nRqf7R1eAft0JZTUPiPwp4/Y4XBJ4PBBboleeFD1JEv+Z38n4/7/TXvqO0/p9WKD+D6AtA4z9yEfRtdArp4PouxsNbACc70GKnWRkD0AS0QYuVGCVsN2F7ANvDwIl/uO22f4BJrn5geiGvzS9MP4BajAFPsjEwe1MdtxWruJjFxTb83doSGQSCg2TjIByMgdhamlAf+qMzTTsvL9zFDpFuX2g9MIkt9qOUNbnKZz9b+cRoRcF5CHvBv54BnN3NmZLGV+CtEv19W+kfd71nZrRXmx+d4c7Ubvr4rbd+HMYIYYy/jd8OqxlF5yjdJoqgieUDNKpfMjGttyqBc0NGg5iukGdM8GfjEbsjYs409HF/LuEW3D4hmIvTlsk8kdU2VVa1TFYhzUqkdaz2Tnyytvklml/uw/+ILwB+IdT89qRawrUhM30duPXrkVHeLi2St8n7yRuSnG8y4cuY2xa3vSQZTZvdB+4FGfsgN4z3ct+on0amcvcdgN1EYc+osLsAdg+FPafCTnPj+L3cQwC7oMLu4Obwu7iHAfZjFfYObh2/mbsPYD9SYZ/k/Pgq7l8A9lMV9vlNQA5p6Elyu2IvNu/lhtEozKvaQdVVddXtoEbmpVfuP1DlvvE25ZkbuS8iWZNX86EakG3ltls21iY1+VfBPZ+DcV+5fVwmS3RcjowrlWWuemA/N8zG/TaMe4s6Lsdy/1a4zTK5tsF9kYx7M4z7JsqnctNJJRi3BQG6HgA+rbxqqqNLSvAkP2QUnLhsaFw7PgRkHTxI5/8zmP8OTZ7m7iFmpDqrjKB/GkYFWdWUlYfvOLL3yDg8DDi9amKCPPt6bhy9BdbKgUZb0duougA4h6xk9G0/AKgocSeZpa4RZbmuEHrpLdpY2Cp4nF3e9gzpBjzObuhy4+nhHmuPrFwVPr6S+yq6VyMDFRLQgZCZ2Z4uaLdMRBe0NqJ/TOMkVQ/JtEM2weM2Gh3aTFsq1NDnvtpj64H86jA0HlemQua7lVtH13P30XUj3K+LjV26/te/5u7rR4jbfAM3h24HuaV5i1Yc0rFDPF3s1WoLYUSDsZcb+vsdHo/D7vW+Gz526HNzXjt0Gz5ImfOb6HZNWvEtajXp/2Kab9KGgFiL6Dwf4fzoMOgamccK83TRech8FirB5h3SL/FCIU4+Nq/XBh/OLycS+XwiIYf9bpff73L76+OfQ4c1p/5X48eKxZjV67WS8c9l47FcLhbPhjwu3uvlXR5FXj62mUQTsHpmOjrH5KUTddDRozJLaOijysbBWoRStTNW9BpivaJfUzQIAYfg6NbE23ibzW5oMSZcOTpmB+r8344J9ov9dg7EXhGE/n/1rmepAAEAAAABDMx3DJjcXw889QAJA+gAAAAAzZeApQAAAADNl+MW/0D+vQSIA7gAAAAJAAIAAAAAAAB4AWNgZGBgvvHvPQMDy6r/Dv/FWDqAIqjgIwClcgdKAHgBbdMDjF9BGATw+fZs27Zt27UR1Ahq23ZY241RhLXtBkVQm6+TzfkuyS/zPe7OH2o1+gMALhGpQJioWgxQOUhVI5kOGCDvmKN5vIqzBb1AgCphvuL5+7SUtvF6YXOWMd0RrTzhqxajrzIBTJzhoQQO8sQwlA/iFJCtYtBDLiCemSAfEC+h8JcfvBaIHviGEnw3Hsh7zgZ6mOShhwohf/B+ZjifGcjnd8NXesCTz9TIbdiqa/CUM7AXznIQAbpPN0zSYak7sl977AdqFAvjN/1p7dZVskkDk/3a0/3mIEhV8Dl27I6JE7KFvdm5A3a2pWx8M37RF86tnbtjUsEs5HV2b093JxWENP1Z5cNf9aDhCJSPiKUGCiVvciIvSmy+FkWR+IkiSiCdEoTe2kGEUyLPNTIbmVlUwDmLCqBnckAcpctR5lFmBqK0F4gyCUQU+F5JRKR8ga0koAeF0xAKoGCdQ2CNjxjEtNe5C9nyEXEqEVHqDZJkPzz4HaTwXIhMRF+KpBCKpq7n+iNMxsO/NWt0V29KpTTyaJaHPkZ/kEkmQkzsUGgSSb4I4bXgZsk6u8qlUApW4fq720HXaA0tomW0iU7ROcBYT7PpLF2luTSNJtNEWkzTm+1udli7BID/k/8nHMTsAAAAeAEtwQPAtDAAANCz1artWLvOa9dv27Zt27Zt27Zt27ZtG997KpWqbsrVaqhuqJ6rvq2Bmvaa1ZrTWo22qLa19rwurOus261Pqx+of2/AhoaGuUa3sb1xrfGxqabpqpmY51p0lrJWjbW0tb/1uI2zFbQdtPvtre3PHXUdS53QWdu50fnW1di1l3EzJZmqTEOmLdOTGcpMZL4CAwBAAARkBHlBSVAVNARtQU8wFEwEc8FKNis7mp3OLmbXs7vZ41yYa8y153pzw7nJ3HxuNd+Qb8v35IfyE/m5/Ep+K3+QP8u/5X9CC4RQggrMCheinGg7OozOo9voOfrs1rkHup976nseeqd67/r8vsa+q37iH+x/GQgHVgtQyCzUFVoKXYXFwnlREtuKg8Xx4lbxtvhc/Iw12IXjODcujivj5rg9Hoyn44X4OL4d1ATDwdzB6sH1kksiUnapotRamhwyhbKGNoYzh49GCkfKRqpHGkZaR5ZGTkYd0abR5dH10e0xV6xkbGjsZbxm/Hgia2I74UhqkpkUJdVJS9KbzCebyWUZypKcX24oz5R3y1+pixamZWl12pC2pl1pfzqSTqZr6X56k75OCsnsyb7JrcnjikHJqjRVpir7lZd/fvwNsPeMZgAAAAEAAADxAFoABwBxAAUAAQAAAAAACgAAAgABcwADAAF4AY2Og07GYRjFf9ndQW7I9pBt1/TZxh/zuuymzp5l79V5jvYCTdxTR019CzV0wzOupVOTYd2HjD7j+neeBh7wnnEjwzw+4052awa5IE+VEmGi9GoKkqMsdEpJyrnYuPSM+BJTjDPJnM4Ka2yyzpbQ+4bn/HN67GP+OXViuWspJTmT8uXo/dB9qp7eHxxaciTEVQib4vCs6SyYmiVImqh5YoyTUUeIaaE5O0vW8v9/J6hoFVhmQsu1NS4lIm+IqHBYKCutgi9fVChjDUG945bPknkC7V1CCAB4AWzBRQHCAAAAwNtWBXeG2w93d2ISjARQgDsh8H2L/fMhCINIJCEpJS0jKyevoKikrKIqVlPX0NTS1tHV0zcwNDI2MTUzt7C0sraxtbN3cHRydnF1c/fw9PoRBA/dQihgAADne+/atm/9jLzMWmbb9sl2q2zbtnky19m1bsY+t9ywX0+9LNPbHX3cdNsDd91zX1+PPfTIAf0sd9AzTzzV3ycffDHQAIMMMdhQGw0zwnAjjTLGaGON89x4E00wyRSTbXLIfNNMNd0Mn5320ddIiESp8hUoVKRYiVJlylXIla1SlQRb1NksTaLjTjjqmKuuOe+CXXbLiSSHHXHFXM2ly9BYU111l6ebJt7LNMc8Cy1QLymSIyVSIy3SIyMyIyuyrbM+ciLXTOckm21N5JnlbORL8cdvf2X55ruTalSrtVIzPWyNAi0s9sJLS7zy1rsojKIojpIojbIoj4qojKqojpqojbqojwbRMKFN51at/mvR4f++3f41NRZGDMMwACyTZgnjcXGPMrdhXD5gmRLb/ye8dzedZ/+Xrm/2i+B/U5MsTBZpERBZpc/4hrHlPchitPoWB+r1H/z6BpS+oRdsIIoNvc1OpG+GMyeHLA76laZpOLh6i7R0HSjVyymkMQMopZgJlFLMAkopZlP6QCnlNkApYqYHlDymb/TpS03jTwtov73SAAAAsAArALIBAQIrAbICAgIrAbcCRDYqIRQACCu3A0A2KiEUAAgrALcBUUM0JBcACCsAsgQIByuwACBFfWkYREuwYFJYsAEbsABZsAGOAA==) format('woff')}@font-face{font-family:'Source Sans Pro';font-weight:600;src:url(data:application/font-woff;base64,d09GRgABAAAAAEPkABEAAAAAh/gAAQABAAAAAAAAAAAAAAAAAAAAAAAAAABHREVGAAABgAAAADYAAABAA0QDckdQT1MAAAG4AAAHKwAAGWjKVuYJR1NVQgAACOQAAACJAAAA4PFn1ldPUy8yAAAJcAAAAFMAAABgW3yVKGNtYXAAAAnEAAABRQAAAebzMPm1Y3Z0IAAACwwAAAAoAAAAKA27ATZmcGdtAAALNAAAAQIAAAFzBlmcN2dhc3AAAAw4AAAACAAAAAj//wADZ2x5ZgAADEAAADAwAABc4JLzHaJoZWFkAAA8cAAAADYAAAA2/iCz02hoZWEAADyoAAAAHwAAACQHrwOeaG10eAAAPMgAAAHjAAADxLPOIg9sb2NhAAA+rAAAAeEAAAHkDsgmwm1heHAAAECQAAAAIAAAACADCwIzbmFtZQAAQLAAAADgAAAB3CQ5P0Rwb3N0AABBkAAAAgUAAAM5bFBIb3ByZXAAAEOYAAAASwAAAEte3My2eAENwbEBQDAQAMADgH10RmAMHSUyaqbJ36mwAmqj1qayx8rhVLli5faofLHyS2o5VgWBWga3AAB4AbSOM8BXcRiFn3s//G1jybZbclNbmLNda1rD1pptt2S3ZNu23dvJNYbv5/ec5z334gB+GtIRt2PnLt0ID+01djh5SgHM5PPzrekO6Td6OOGvJ0jRFuGCtt9pq6q6auR2ZiDjmc1adnOW27xVgN/JOpWdujjyfSTIUaAJzejBSKYwjZksYgk78VKwmzSxGzSzK/QjQn8qM9Mes8j2sooQZYiQ+1jqO6k7pWbwqueV1Ef0IUw/atKf1iLeiDgnoimlIu6JeCn1NMt0l5Kzt/Lvq3onpiplUp4rX4xUMVKzlIg5zpIvXQe/51Aq5Qqr5DjqOomrc6N694vPySloN1OKS3+CPCb6hTisbmlMsPdM0naTUymF5MV0XVpRH+yxrbe7OjdTpKMILxU47OR/zrtne4Ei/3nYVtC58TftpuaF/5A9345oTgea/tDW22Gd2+y4Xtf/wzdeEv3xPv39/7Vv22qidv+vMk/bs0/cmDWYKzcQx8PMzMxUp0pfpi9Spg1U6cLMTbgJMzMz02Omtc+89ls7+8nJPn/fL7uTsU5aK2e/C2dM0mo085f0nxndFXyRdiaMEWEbRjyKMOJJ1lDnaTsvIeIT3iEhCVtWbJnaNiR2ZmY1evJdyT8WvXrVOWSYoO2+jKXEnu06hs3atvjz6N7TzsssCsFBNImfeF7Pn+cLjVI/mYnbCYaOoO5QY5O0emNrpL99U8u/v2fgrDcttIlkpMNqTNknN7GZL3hR1rWB5TwyRkkkK/5Jd/UiXuIBHrDzXmEVt/MITZZL/0eqwT0Z+RzDuOfG0uJbZ+7C0OpYoe20U9+24HN1DQOxLx/6zonuGdpv4cpGKmopKdlOAyfltekXnJ/h/H6ZeCIxQ7WIcO5mDVv4kTrv0edtrsufrdDccwivTHB4jpgtvMR3rOBz3mHNhG3jMKePmeci33mazcB+G1Kfvb7ws21tKE5XXsI4vnLUTpAoDYjGpjC5jJjPJBqT/PsBEno0SXgr7y3hIfGXC9/vcAxfeozQs2MDb/MRa1jCd3xBxVnRiKTQZKBIR1QwxAyI2Spn0FP/h9hZI4tN5lClGs5V1G2/E14zP07Ec3sqZ+JxbpL70C4TMdT02LhvgKUyh9rveohEZwFh3SJqw9002SB54niqxFzrDdt44eLS8xfyz13cS4MlC9YGQ4TN9W60MrLtKjUyh6kdlCfKmV1kzJdz5HMOqVo/1mGZ1Avr8by8fwFDzSnn73BEfuc7Nm/tkTMzw1ZFGT1LepH1fhaZH1f0dETzINtyu6fZ0dWhWFR98a9RMcBg1NeeHk9ayuJhMUZazqwW74eKMsXqUFdWTxGNDD+HTBG+0GgW72T2VPUsfZ46mLoFboY6q60sH4UqPnO2dZ+9o6wjCd2rWMJVXn/KCjByQ96HlDfp6l7X5PlHqrIHg5wr3t4IT/bRyBZWYXx+e9WxN1tcYkqae/nj3jlbfw5P+pbfI0VwrDMa+VmDvmfBIqYy9cy7i7j71G2UKHI+IXP4nVFx8soRNr9kvh+f9X6dd2wv8e9zXm09hWHAduZj9WsrGSNfy18NRrEfEKqUGn1/v2hVo1N45wXW0aSCkYqfcEWYmeW7BDExTclg/zuhXuqvXbSlrkZwyz65gR8ki0ic0+bSmewkmk/iv20PzJifDCUfv0PCgC5G6thW3pstJ9Ahpk/L2YHYYVHiVm/amKKvt/owc1M62t5CojZC2fzCMKLF7yCJ+H97ey0SOegjkul+6PDWZK4IS6HLZ/QW0FgjO/vFrOsM/20WXiXfezVRhQr9+XYYtbfe+kx45v5Svl/HR9ubRQMMCOLlct7R1gYGs6yDNPSftHBNk17m17RZ7VMv46XpV1Wy8T3m18LrWU8OKACj+Bnbtj2zRpw2aWLbtlWuJrZt59XyCPnKeO//d9rL6k7/q/npPX++FyMezOSBIhUy1KVAk20U2c0p1nOGc+xnglsc4i5PucALGeeVTPBGJnknU3yQLgbMvMaKDTtuqtRwUKdBEycu6uKmpTx48eGnQ4AegoQIkyECxEmQJA1ACkhLRorkyFOgyCglZlCmgvUnVexKpCGCVvtJFb8IQdy0Cf8kTkSJAAAU0co/idNPEZGyQIYEBf4+YhIVA0aGMDMsWUZQAAwwiKIPERMAvT9lwcgCzOLGKj6c4sMjIYLiIyw+ouIhJkbiYiIhWZJiJiVl0mIhI16y4idPkSAlCVAW3aGEqYmNJi3qtCVIR+r0SJBeqdMnDfqlyIBEGJQSQ2JnWCqMiINRaTKDubiZLz4WshgfS1iOiRViYaUYWM1G/GxiG0G2s4swu9lDnb0cJshRThDhJKdwcJZzBJhgEhdTdGlzUVJckjSXJccVyXCVa+S5LgVuiJObUuCWOLkrNe5Ji/tS44G0eMgTqjyVOC+lw2vp8FY6vJMkHyTGJ4nyTRJ8l/APlZVMdQB4AWNgZGBg4GJIYJjHwOTi5hPCwJeTWJLHIMXAwgAE//+D5cUYmB2jXBUY5JyDQhQYNEKCvBUYjKCyjGCaCQhZoSxmBjYoi4WBnYEjJzM9kcEIJ5mfnMNggUwyMEBMBWMmoFlSUB4HELMxnALLqjGwwMWkQDRYJQ9DJZBWZqgCkoZgdcoAVmYjbAAAAHgBJcWxYQFQEADQd3dJApUN/gwmACoLqAykZTOgNIENAF7zVOxz6Zdcv2bxPVaG0cj+X9VPZf40/hEA49lkDvdHXh9/1DkGTWwgLrlFU08ZkAyKAHgBXcsDjB0LAADAeYg/amNzsWrbtm3btm3bdhvVtn3e2HXjXu2JMYgihmxiIsgmHnmICgJx+fCvwsqqop0uxpnknHvSvfQxUjTSPHo1mhRNCbIFeYICQUJQLqgRjAgOJGRJyP7xI/hXoIhyqmqvq/G2OO++0KvPu9n3nTXIFeT7vMv+sSMf36MBHy/x8Qx8HMPH0XwsRUa2jPiHj+FcCCeGHcNpYdUwV9qptGMioAxaoBN6GYA9uIwQQJI0f4uZZ7GjLrhuvEW22ma/22ZbZ5bd5pjrgfseWuCI7fba4bEtnttpj12eeGm+Ky4675J9DkhxyClrPLXeYanOeeS4ExI9c9Am6Y45ba0bbrploZbqqKue+hpo6K5GmmiqmeZaaGWI0froq5/+BhjonkGGGma4EUYaY5TGBltiqRWWWW7lJ/Pae2MAAAAAFABeAHQAeAAAAAz/MwAMAeYADAIGAAwCPgAMAn4ADAKQAAwCyAAMeAFdUEVaAzEUTr09AVLL+3Co7NlgmcHd8nC3M+BO7SyPXdjNwbBXl5H8+sWMEIlZI0JL+tPlKqBx/b0YoaJfIiQ8+3tJI1wJKa1LRa4DFu4EG4PAzJOQNnl67BXdhTIjM9MnGWnLi8MT8vaUkIPTDKYliVV9yeOaBhrFcI2eIg7zPN7iPN7SPBnkGa4qMzCyxRP8cMmXmJXk6V3Sy5ruVZhGFYYBpEXOkiZHhQGRW/7aThlvLtsrew4kOBpkEizPsqppNEwCM5my6gK6z2TCmS6saiOcFsMlWo3RimFE0eGbsIzrfokjhi4IF40u6AIMAypeO5SYXdWWCgNg8h8k6mvkAAAAAAAB//8AAngBpXwHeBvH0ejuAQTABhBEOfR2AA69HQEQbGBvIiVKoihRxZYpOZLjKom2XCT3luZUx46S+OVP783/79hMeXHs9Kb0/C9Kc9yV3osFvtm9xRGgwFR9OtxicLc7MzttZ3aJmtA8QtwM9zqkQhrUjAzIgg6hhxEa2wUfaecjCKGOgUUG4AiAQ+qBxRXUBA1k7CytII3S0iotHWs9gloQ/v0KamffoaOOR1AnwDJZk9/oN4lGv1FrSmPBgE1lLHjxPP5zRffolXj7FcnulDpduiyVeTSb4l537jI8/43KfvyWb1T+dPjgwcN4/ILFxQsQAvRXK/CR4e4B/I1AD0NWT5DV12DfRgBtSK0AjARgZOTAL3qKeqvcAlRb04+gZooqFlNYFPTYgHlBK5gkk4Av4TvcerXe1cE/eka65jt3f+d63DbXdUWheHnX3J6PcPecO0pwU6HtDDcTcqEQ2rMhb00EYJKREeAXE0VBSK+gFvhuVnjnBIQADi0XbZmgFZL5KeU8nMWs0Vo82GLWc3FsyhXyXeE4tiiN7d+QdpSFYmliU3hkb+GJz4/1Dw7uWJrcPDO9xN1jDA0k03MGddvscHYyw+Obcqlk5H8qPyh0S9lvIoRRdvX3XJg7hbyoVKWjiaDdVEOHkwCcMpebALc2iqUTWmYZy64BTspZeW0KCwE94GuVcoUir4dvKS6b3nZFue9C75C9FI6OZJ0XbU8MuYYiLxooXzaXwmNzN+1K5fyTdre/f1fxqpsC3olUNrFwI5EByudB4HMLMDG/IZdbCKCFYPcIagV8ZJ4aq/yzynwrMnYZt3/o9e+Obz029T/vOnjpZQck7p63vnXrie2xC45dd+0VlRT0jMm4+BkYtxXNbjhqKwG0klHl8VRUJ7TwTCudV20aeEixaYVfdUw7LH6LZBEscN+OX1p5/uxZ7Ktcxt2z9K6lR5eQMvaPqNyPbDh2MwE0Nxq7uW7stRGNwnb8sspzv/zlMgz2yFLlV6g69wWY+xCa3XDu/QTgX5t7PaXJDy0rHdUNT/vpqG4Y1VkjDx5unUDkhbxkZEKRmT86HOjJRAyD9t5UYkJyXXzAles48WTgitGhq7YxudDzno5Jm0eWDIP+FRdWfuJPgnAwPnGjdI6m/ok5WkHNysw0A54qJicPI/VpeA7u2tNEWsBySUYBPoXty7h5ebnyJ2BY5S9Ye+4oDlR+JI+LPg/jqlBow3FVBKAi49I+oa9lZjwwsq3+Hj8A7xtRvPq+ljyuVd5XzByVaBXlaNGDgYN5QA6EWQiExcPmLk8qtWzNTEtjF3ofCPq7x/HHKuXklt5Ad7HKnwUYp+3v2Cc1Aaj/njnVEYBO5iAH77ZRcwqih3TQotRJJklrElRaC5Cpeu6WL569+SMXEKZ9D0dXK0dw19X/V5Hr7wE+TSi+IT5M+CjdHNNfI9GVZdxROQEs/PYSqtL2eujLja7csC8NAWhqAG4CcCN1Ay1akT0lpa1DaZngaQ1tWaFnN6PXxEtFMqdGkPGioFUJKlHwqCwwyTdfE1fHlm++XKXWcOr8kcKRLjXX1KS6FHjxqRMn8DCIUJwHLeDvJby5l88XC3zlO1V6+ok/2Xiu2Ew0dC4NpF0NDR3FXc/8DsM9hYkQUaQxQfr4V0bU6tYr2Q1QfdXLpKuL2AXIXvWyrqPFyhOIo3biKNgJExJQHtWZXQUhBWUYX/YL8AjzaJlsE+h8nlkFYo/F3AB8DwsBjcXs4fDWwRfPxGIzLx4cfPFsLDb74kFxIGHbs3nzHltioC29eOPclpMLqdTCyS1zNy6mLw6UF4tXnDx5RXGxHFD8RAT4p0fWDaxmvVatgIwjFhC0gTUwKF7DUut1iduwCKYcc7NnCnuGw+GRPfnDy9961eTkhdw95sxsqTCXt/8azx4fSD+JEOXVDu6lwCsDyqBNVVx8ZGhfDS5WArASXD6OkgiTeYwDtKPqM3zQaqctK9imGLFNwCdJ4RrWY2IFUqpapmqpkSi+G5gmVhmInzAWAku3+/ILA/4qg709W3P81owVgp/p0t7BQGBwbwn4ee5Dupa9k83FheWJKrtHjyx0t4oBTRNS+NwDfNYh2z8fkymKRonFCKMWSqyeucUVxBMYE1HmpU0qAVSsGvyYPr9vZGJiZN9vXnFw+YfSrsHQRO+b8N7u7lLi3NcxWkUwE8np4qa9ZubXwmBjz8EcSIpvYAyvwTJDAJk1G0uCRCvKABryPLgpLASPWAGmWOCuFJfGMttZxMNk2IvBCjDj/GJhd7K7x+AMWXfb0mHe37M1U3pxuNc3Gkt3G91h86I7I5h9/TuLwzek3+aPpsJml6WzWWzxxLqD4kjOlQxPOzzRoMlpMepCbb5YMRgZz3tzKUKbAyFOB3OgBerqQ3hGm+JQ5BnggBZEJamJSJGQ95No4HufxL/85DKXWFo692057pgDHS9Dv3bUt6EGtRNAew3ATABmmYnaqsFmgqo4K9D8uWWTkPF4ckHzlYGhPaXSniEBTM3d+amEyZSYyuNrK6/eemTS7588shVwWX0BaHQBLu1o8B9EfecjxyJ/hNrptKkkkwfz0gAGo60S1Dfs7bAb1Ua7Yc/xL78EUPhY98FS6WA3ngLvjFEnQqp2GNePrvnnx2U8aBwxUQBPAPwaZn5qmA3wEk9bLuRX5F/Btg5vlbxUAW/Tebyk69CpWy2tcxfPtVpb1TqDrnTlyVdt1Rk0aq1Bt+UVQNVD+cNdXZd04enKQ9IlefiCp8Ge7wpvCsP/yrvpfLcjEA0634rPwQRPfH78tAawE4C9hjQDARhk0jTwrl32nABqlQlSSbxMRxlLKpOgrLmEz3/wlsk2HhYmltaxGz64cstcu92gbufbNt+At+L+V/MZtzvDv7ryqcp/n3JIHo/kOIUQkw38F8DbgAb/ebzXo2mQVboOOYvw6cdPTMDiT93h0U9c99nl3+E3vis0Fg6Phd5Vufh3hGcR+Pgjjc37UX2ot95Pyyqhkf3KaXgMtBArWljEflBDDJFNBPdVfoo/VHkMlyu5cfz00njFsURtbRfYsC/gPyEnEkEa6+nQbTwhTBpZUGOgE0KwhHcVe2uBBwwUbgeYl6JlgVYAWjKqghx0dhWKYO/AwGnFAUxWUkZBFKjnKbKIXq/qeul9LRa/PTTmi0Uv7t23+4JmlX9TYmjrVaLXk3PmRqOdt29ZMJoEp8FlnnWELz9U+WHBFd4y7fe4HFdozHYf0DoFtqeZ+wyyAgq3rdO8zvUR3RrxHQTQgdTrvaoS0XUwaeygcZy8ruYpkR3QctCWBlo+hfAAM2IWLSHYw1UtOmQImAMg7lc7dUzlnQqnJnMOoWcmGhjzqlr2HHNI1uxwrrurm/vMQ9ucAWFob6l8YDTo8+RO8J075qe30bg8CvP6MZhX9/r1doNZrV9v25UsS7HO+9Qvt6OR0cVsZsJeNEf4vumpHo9kzgjzsdzOweAf+vcPC37blNG0uGl60W6c8voCw/uB/3HA6Szw3wycuG1DrJjlW5uQTgLoROqGJlgHvzSxCLQJdVL+dwIFNkqLXuG/juU/ZEo9dfSJeale4op5SnFc6NkUifW41ccu1Kmdk5F9lx8vFYoZR9aeGf5D3/7hoNu+5aPnBvLO8F03zG0vPsV3zlOdIrz/LtWpANq6EZ115roNfuFZnAi/AIYdMq6K4rQpUlNUQjGt34NrpiREQzZtNFzeFs/NSI6myhd0s32+olMUFtLSruEQnspKiWEdRT0wsCAFzCOTJuMk7xGGL7ykd7g8gDDgjPBu7muA2MKGmDPl72yYKDADopyCvI62Wk+TbzAdYJQwIOnGNFdgFPLFaoSDR53Ogf37jw0Pd0b6E460kTvUtj2/p3IVftVCkxQeSjtatCQnFlkV8V+Bt+1oDHh7Oap3hms4DhHAENKsxV3d8PsQ5XE3S87Ba4BU6DRcAAlTSDdA0gBJA2RcyUHMUM7zIBsscAyIGm1XgchJnt0YHUCYB1fVWQ8tay8Gi8YiFDmZJivT3SO9fVPJ2EjEGd4fDJjsfotd9OXHRXPI8OHdbR3u3KjYETC2tgvJnYt7QqMX9SU2FbzfFHLZYDCXm/SH0j63WevOe/MWdVvE404b1KaRRGw4yWubdujjjuhAzKrRtpiNFltpMDiYcnb4MniflElJuXRGor55Cj5+TvVxF9rI+CnmsbHl17D0IswwNXEGxcR11pk4YtONsnwahaljau8macvksWDUl/UeAzt2oTt58QWVr+BQf87rqbwHcagPBv0S9zhqhS6TqD7k1zVca2lIzjQOQwbCMCcwJAnpQbFv80YiXrgWjx3jhoJudyjkdgcXKhY5//vN1Rz6CoxjRG5UXOcTdOsjXQ0Zx4Y6YRyAsSwVjKikS5jxrkVherkj1Bd3inpri6XVz/d4olGPNxrFZ8+9IA5nnbqmBVVTMs7trWImzwvHwbwoORUlhbLxvPzzORVUk1MpkpyKCDmVqSOqh2589yMnb5w9wn2mMvHEFyo//M6ukwgTn4n+CLjoz8undDbICICdUDhilXpwkdcIwIupYx3Naq3WwIcHctxnzj1kMXILLdODTAZVOtBnP7r/H8mgbuPQl3myxvl5TomFm1mLyCpw7LS8EAf7pThsDVuSyQsaLyOGl6gM83WSrF27T4F/8E6lCkNGYSa9eXo5FE6VjoVE+MBnR/ypVCycq4p3f+U97IbWdBDoN6OL/3n6FR2snwGFXKaUTCEZMZ0KMfUKyfD3zyoaCVgP+1J1Cqn4tRcAVxMwJt/QO9QHwcBUxRG4630Xs4fU2zKTGA0PzadSOwZFcXBHKjU/FL6mv1AYGCgU+mlAIQzv74d7IAD36cXF6U2Li4jGdANcM+DEYro6f6RbnynVrS9HaRrWUJrgXRPLyJlYrtuqiIhJiSmalZiuSfHOPDg2YHF9WFcb033iGBGWmWhqQo7qfIMelTPHQrrIKe4DXY6wMExiupGgy7FNCelo/DSAz1JZ8aGbNuQ/kwXd+nBJ0yCggviJRU2wUGSRVDV2MvxTsROYEOLGN4idyjRiVTvHw+fHTp70ue3/tdURUGInRR+OA41GtO2f14f12m5c0/EzsvAb6oSfRbRM8h3TomAxt1s73IM8iP7OjNRyUK1Odle+zfLorwZ80oBZvaisDZ8ggER9jidBJUiRFoAF4J3EuhwPzawV6jM8/FqCZ7N/KBwJd3rCJltOtO/fLm3z5B15d0gwukJmey5qt2cmU9KB4K0Ot99h4DsNumZbIOkd2hbkx028lzdYOvTaZj6QDfiKUZvoBnrMQM9u7gjM8Vhj/tbpgmxDmtn6UmapCu4mtlqgmZ4ylmi1yVwTi+Z3j8/o9588OdbubDWbJXe8N2Qkkdydd+55fkHTtEPb6kgPRQCfUcDnZ/isYv/qp7exOivz3dD5GVl2k1SOm6nXAxVgoSjzTARR41rMnx89Foz4sq5jsKj0kcAEn638oD/nC+K5imUyDJZQttVtCBFcG+SL1q9eGGDjfJGpNiUgtF29ucXSom41t26+8l134LOrwelweDq4WrHItRyEuG/DuJAv+ufHZT5C98/mi/ys/G4AkJnlixDyrce2Du+1NIttuVfXqoXMUPPgJUPNkDnStml7Lzv5kpJOD229rvt2oEoYDwbHhVV2B+qeEsZEcVx4EmFSP8Dfwmcb5IkaW7Z/Jk8EsSMlxMwyRkCIWIO/lq8h4L2vOVFs5VvVzebm9PFXv+lEX5u9naS/uq7F6Ow+c9wM//f9+XcXWRMWS5y/SJaH1QKVBzcaR/VBl269rV2Pc+3CpB3pGHo8NQxlXJcw0quoCylrTc1iuq350at3tFoAT1Pz9JUfNQTT/RGzR295EdeUDnnxU7/xTQiBCf9vzq3GhtP2pqbdBM8AfLwVn22QT9L9a/kkmtZVSRZ/4Nmv4Que+VXl5gG8bU9/5YN7EVpdlfdSqLq4MFIjhLTop9jSEP6zDeBP1cH7FfgzdfBeBf58HXxZgf8c4ABaPYeQysDdA/RY0YkN6whMQRsX7Dh4tJ0KUQtrEVUDFikBgFZJNHSwrJeehQwWeM4k7wExUiFrsvjzkOHB1fI8fqnaluIlzl654dPbr8cT+NHKX374Q9yEM9LBzCVvW3rve+WSPdAI9R6R7J8AGjWUxl/i3Qjg8h4CykMd47m3IfxnG8CfqoP3KvDnZfjqX+HbV+jzbXL/6BX0+c3wvK8G/jMZvvoHgIdq4E/VwXsV+PMyXK5J0rk2srmepnBaC6T9dDK6tjaE/2wD+FN18H4F/kwdvFeBP0/goBHJ1TPczdxHUTPAE+iOqtREiExEGu5VWUEIGhEaOXFUBJrhSacsNKwFHTCPuYI62dOQMVSecyswn9KKsV9B76xyRS6NWeqAx9Ucg6gVi9XkA1/kfxHtJxU5Uzw+uHlPayu+1u0h1bgDkwP9Y14/qXgemhwcuDVKSpujXZPxk1eEh534wtgVo6TiWdyS2ZU4RqtyPdsySK4zAlNIzdMMOO7YYPdGfYq0SYkbtaflzFaHUgFtUbKidlltTrNdHDU7VuRlQS82Aq3Z9MJ10/gdlb+eOQOl+U2Tx+fTx4++KBi8+Bie3nrd1ijd0BLbfmLr9UfxNy+HeZXrS1QObExuJlAj+M82gD9VB+9V4M/LcLkuQJ93MbknGsIhD3zsovsgnGgR1QtJo3pstVrm7JCNCZEVJ7IqBqaZVbYfRjaww81wtwOvQiz9RHllqu45IgG4EXceuOzyJeklL+m5D/YdLU/99+ws3Wv0qd7/5TLy3iNcLKqxC9XVsjuAvlJ9VNFwXj+ObNRLq+MfRxy0eGjR9E5tDbtYrWEvHz6viH3Ykp4tFee67Hc/dbw/8yTwUq49cF8HXnooL3+CTagR/IkN4E/WwVcU+NMbwJ+rgz+pwM8SOFIROEfW4m2oD42gN6J6JujWz+IaIEUAKcKmenNBASll51QXSjFd6GK6QDTfiiJsX5NsJfyKjpRoywqtQdpyQ2uEOhRWF0nhNNZjlZKcOD8rHBbpJ0lSplRkydMkr/nfLnrdg06dFnMXbN4bXSpIYybPpkx6ImNvqnxbs6ng63JGhR3pnnm3dGFmaOtL7sXNZr9dGPNxfCYT69e+wu/xOo0JK9+ew2pHOB2LpYWBnZBRHhy3GGd5T1ZIRLYMbdnZIVdkNvWNDPdT3kdXRVKXAN77KO9/ga0MDjlzOrcBJgutDeFPbAB/sg6+osCfY3AM375Knz8k949uo/ASQripBv4EgTN/ZayBP8ngZwHu5FYU+HMAZ+tW9Al8tsF+rfOSDsp+raljsNys0BiG5WJJv3EmwwmFnhcoHgnGl86G8Cc2gD9ZB19R4E9vAH+OwJEK4M8CXA0QA4qtrX3DhIRwDU02ArAxPwiNcI0f1MGTNirb4Q5Z3mVfVlhzZWueLLzOlX3ekyyM6v3eRGFEjz0ON8kKhcbdqVTO4SaZotnedOoyz+JkXsy7d092iZjz7SyQBJHV2h3s9y2QtpAoBSktv1c5QK9bQQN70RFUv4rUbbhXQ15LNrMWLJhOwzN0n8wK8iIexSht3jRAWDFTrt1005YXWr012pqXNQ/oq9VWTQN1VUo5D/TlpL4+Kdd3dWhgW6qw0+leyKansnYVV/mGZqbgy4OSLmSkXW7PjlJqW3+Qe0U2E+/X/oHlxzYRFhRy2SJRTaOrmelmMSvlIYt2SNZJOcfLDXFfAbwP1nv4mhxvNwDgAXXDAMgADTl15KcTH2TfV1CGteSwQKrbtgnzDpdHXZ1/Jhopdb5L2bUFSuIqbC0kx9K8w+dwRbNRF58YisbGAzEp5w+6opmoy+62h4K5/FH8h8yWktcR7/aGpGjYanbZ7KGC6C/FbHbrFjHssPkcNn8y4E1G455AYnKs4gL5p/kHqi85pl88Qg3gT2wAf7IOvqLAn2NwWCOy5wvMvqzWwFcU+HMEjjiUgX5+y/0YdaA8WkT1gtnZYOH7cSJ3ZLUSXwENjtLKhF3ZixMFaTWC1Cbgnjkj3yUljhCVnJOJaaGyfc7Kp7CskCR5CeqIO4t9GDtLnuKgyZ840jvj653vSs4NwI7QaQgneX0mcI/3ej7nkoLjvld6t+3Z3m5vC9imh/z5kJlr7nvnsb6LpyJki23XfK/X7pY2+yfzA0aPYcIUd0wVEMvlKvX5nRuuqJkVVZjB8gQN85u1GUyfnJ8VjOdV3fl8XX72GOceC6enJSdJzwr9bk5Jz35GdftDszZfNT3rsG1+u5KflWun3J1QO02iE2ij5X+MAGKos0EJC35UaqedMFFBknCDqxOgBqWOqoVLD7+2kF/Y9MZomMjqFfUV1roqK8sywo9VAHeV01GGsusjUHg1RweTrlynVe8ye4OPkDKsM1VThpVLsfHwYMrRolvQaqKxuFKXBdrBhhwD2hPoJf8obtqoZlW3oxleV/YmNp8m3yC7A3dDGvph+z1lqA+gQRYjh1jOIkoZEZKNaT9ezwWZQcWatCV3zCx5YpCkfNtaBdoKFen36C+88cZxSGJq5Izl83UF6QXgDctoEp/pAh5cwZ1CrYhHY+jl9dpbE1V7CMCD1A2daC9yUiX2KGGjBiC9rH7lQRm2uRxYcQb6ZptJV1AENbN0V7fSGmZv1gSM4GBMZuJ+2AZPCqnqveJ/rWyfJzxXlPSYtF46mHXm7YktPpcwpm+LdtvcXhHfGp6Likt92dmC2ywk7dBxoi88MmuLSE7PbMwZ07+4szvs63M8mOq2dIa2J/ksFvm0w1EIO4Kpc99tFhy+sDs7IgYKyZAxPBkI9CYcM2VfIRkxRWd9wZ3SwFHJ7CTnhSJgF7/P3Y1aae2pPnOtb7g3uE0p6FnZ3uC1oizdF0z3HFEXxGF0cHn5ILl40dXR4RJ5dm9731vf+o53/tdb37fb3rN3dGRPN8937xkZ3dtjRxhNI4S/yJ2AkUbW7bHXNxBxlkmjdWM1tKqqjjuIhGeytJBC+A0Gyj99z9WZMc/CycotF+C3TjbbO889cQG1MX74+DbwwYv61+3W0jeQr6qe2E/L+TyDkgcvDqhYQCKuGUOwi73Y4g8PX7opUpBC/Y7BxL7h1HSXO1SeT9t7+DdVto0MXrZ3Lij1xtyDacklTSZiOxcvyHFNS6xW8nXALY22r1sB6/9urcSJEsqhqfozPxBKAKR1XdVEyMP01WGvnF1iFn2LezrTNdQZnyyky6Ixlwj3u3uj+0qpmYKnt6u0Sejfmtp8OHC/Oyol7RGXYd7gDFsjSb9zIpiwxsuRwqRZbZgrJ0bT9q6wvF7uJPkxmOtmwGvnOuuub5BL/DjZG0BEMS6baTUoKyIzzcx3K7NYHadluIl4ZbJMkzOFggVSrXlSosdxFaduc+iX8YG5yyrPvPCSuXOvcs247BnHRxbf/vbNcLznFsR4/w3AL4Am6jOdNdh5CcCr8J4lK70sWQn4nFlLZCr8Zmw2+S3COrc5657MFMYG896Yu2jC879uN4v26FTBFxrYmpi9RHi9MzrYUxowmgTcc9GpllZbdpPUta3bnRcIPxOA7w+oPqfWtCdOEIwjfYOaxcfp9m0N5adfiW/iSmkvpKDqwSb5OJCCbn1gg42RYlfG2edsLn/YWHR78hE759okRMeyTl9hKpqeL4diY7uzPdvdMwO9pW5/ZMcM/qDFaSvuHhYitux0LjNb8IRmrpnbd/t8JOYBrBL0zMkJwERqbAfqLBP8yCpUst5LA6oi2aepV2mFd6ut0cFU5Vv4fd1jEaP66h2vuPm6wYvGx07e9rp9iK3LZDvYDlozokgiCytqxisTQLlez8ooxvSMZN7gJaZl8skk/xlZMrvOyO6CVSj1uEidBYsUyfpF2e/EuAuap6py+Z7RbKrXFu32ecQ3O5zZZChnFlLPmHxRPiS5pYlofCzrMNi8BmvE0+ntnsukt5T8H8qUcklHyG1rt/a91lHwxIrJmC3o5L/myUZ8bWrHpESSmvZkWbTFQ95WdZs3kvOFyuBHUoNElkLAk28pslQvOgpHmHDJskQ0hldkSbNOlkzUU8qpVnrYAUhec5K1KvB7Z7+jeSgldud3dlZFaUaIjsqilAJRio7tyZbm3Xg8EJmfGegplR5noiQyUXKHZq4GUdoBokSwKsN+m2+jVwEtNtRgd52KTE7ViwEG5bjPF4v5fPHhQCIRgIv0kV6dRk9CH5Dbq98/JPfRAn2QAECo3SiVzuSb3cmkL5rcuum4aTAcCvjEge7pyxyrqzJO+GlORHdC9wtIQ+4Ap+PUwe+Sc4vw/LPcAyDjRuRADbaFNMtsFiWtStDWUHNItazumA1WaeISR49W3nevQpnc9yx6Fv+J9t2OPo4MbPWTyXqxUDRJRdIRo+vb6mUVdEe6Il0OHT2Kd7xeSCQEP/TGYopXce9FbhRFkSqeIsFTlMXEqJwiEVliDrgfHlCf5znVfC0Zb24yuEN+azzszVkHfbuKkdGckw+IXpP6RBWX7wX7cvFohA8mXLbecNYSG4j6pFQs1eVTyOWgFjGE7wVaCX480NoC6BhpBlaElp9Sja16df3OXJBRtVjLBuxr6qD4iJ6cdci/qxAdIfiEvZ0qgk+MXNgc6gWEolYh6ebrEVI4RrVmM74bPc59GPjfikh5TA3BKp1KAxa2qa9R8cNc+ciRj1H5gGfxa+HZMLqHrHHh8+u0j258IzrNfQR10BlsAkirnE3WY4vCRUC+eDoWVWmcYsgdjpzgbrSVktjv9oV68rcN0X5G8F3oDLfC+mkFSJPcDwi3pka6tSOkH4cYdIejJ/FKfT+AJ+CD/w/gE0avInjC59cpHPrH7+NWAP5qAodPBl89iM6g+zgCQed+WIXh96H7kMhg9Gm4U31E/aAnH0caxjMN5VkxX+S1vDZ9V+rYsdQ35+8NnXpjUOZxAZ4/W/N8k/y8WOQtWvHdR5N335184VTo3vl7g4iODf3j18DzYfR6gid8fpDCCwB/A4XfR+H3ETj0H0PfxDYcRirKN4ww4qrZfCH2y1/i8LzcL3uO06BT7L3v4odw4Pz3oGoTwy+vLOPADHuO++NGz3FfOddFniN2Bf0O7MorgY93kgHpGBF0B3bjlyATpb0FIZn2dbb3rfak32TyJ+32ZMBkCiTvMAlptysTMJsDGZc7LZhYff4G/OzqpxkeBIIpHqQOi5+tBAfHxih0dnUztnM/QnoyprKPlJf39vJ0Ey+v/UZ5bKw8WcrnS5MfPXTmjjvOHPJd9P0rr/z+RT7aR3x1M/qT0ocWtct9UNdJUijExopx+jrt6DXsZdYV7WP36mHs4R5HWqrtTSzeWT9DRrh2P3755Y9zj5fPBcr0HNph9LzyHpL1AN5TKxTzsLSQ4Hrt5Y8/vsj9qPzC28l7PjZeEcUV/pD3AnAXaKuTWZwVlII72SdGuFf1hDWxuAyAxYPsNZVwnHyRsKfgS3kMKpVKB0UEu9+sg6bBk/IV+KC9yScIviZ7cLHc7stHnMlY3KZ3WvTjeotDb4/Hks5I3tdeFpLxrZlCrlndLOUzW+NJAcl042Ad/gWKtQVaZtoKkaco/i1wD1H8eRopKtu25YJaviYhyUmWAG1QAPzWv4YlX/Cmz6ck7S0sUgzzEmCYK1AMFXrsegelx6m3KfQw+dyPR7jPgXzaGu2t5c6QCVcJf9j83Gbucy/IOri4qkHv5H6JVFTOMOJk+wuTuzg7y/3yBRvALNDv7D/q1yRYNj9f7Zer6VfLem5SegbpMULvpP/K4L5KHn9ZtlMZfDO+k/sCyLz5/LwxvEosVlHiqZkTtXt7XmS6vLXceoXpUI+0aQa/YynZZz9yxN6XXArt3CnvL30IYtsPIQMap5KcJvaAzuMIO7sqn08FrWKhKQvTaBKZRP7rN1ym1GSew9XQ/+XB4rCH5wXyaXuWL3oEb7Rvsi+aENv0ttRwtLDkG7V3C0Io0jfWF0mGPZZYfyS/w4MXXCGP09gWcLhEj8OoD6yYnS4r73V7E+VkaoDvEO0w19ZIuM/u9NlsPpcnPpCODlv9WU9X2BrmaazxYfwnep6/Y4MT/fWbU8CzA+dVgapiGfFty8t7C/vGRKiqdiXgkHoAB53d86X+7RJfGadrg/TqH7lP0PPdIhpDEnCwB2E0RDmYhFYXDWWSEOMLZ6orkCH4Zj+jRL7r9+cSbajJlfB/50RQOr94fHj4msV8fvGa4eHji/me2NRSd/fSZCw2Se5TsT3e/Ggo2WdLmoK81FPKuGNm0VWORcZybjw6e/1CMrlw/ezsDTvT6Z03zJYPT0ej04fL5UNTkcjUocHERNYZsOU6TaNdPaNWYzfvdUqk6IbUyIV78QPclyjdeTRAV0Vdach+p+EO9JnP1ObDPWeqtdcccCRKV0Q5yDwUKCwN9xzA5Dezp8k7j6A+mTvrvND6LJKKxdK8IAqkGM5q9T+EU7UeT348Ur17C6LVKha8vjy555Pb/WlTZyLvD+SmjGajyYZ73XBkNTGdd7vz0wk4uOqO89GSIPTEeD7WIwilKI85j2D06LYMDV3coW839lEdzq3uVfVwr0GjaBsqs9kfpLMfhpaBtiahZaUtD4nmoCV7mgy1kn6AeORsy7qVDtspSaE8OTegkdZRT0VBQ6tXVC7KOEx+yo1f88CuzTctZsSBmVC8T8vxw77ihLtrMtHl4Nqn4vZNfCpo9Y8cnhg+sb83NXdZf2yb37nrkuk7DvbioN/VGeYdVr8j6jZ85dC7jg/l9tw0M3LxaCAc9oRnx+I7RuPZ6LcuduYmkqWDmxKFAy9bmL5qU5jvHMyl9r1kXzRkc71W8KTk/dMC2b/JvRQ5kRddh87bksEADgJwyAsAFcvhfBxpoaWm+qNlyXdy18NdzbI4Krh3smyOmd1tDO5iz7lJng9cMb0kLb0sAr2EIlwm+LhqdkfH1j3WMcvV/KhlbrFjxwX8OH+1bfxMxzUdj83cMvNB+Ae3xx57DBtuuYXEUdvww2hVNcBpEcTd0CYwP34YT6imAfawAvPi9+NJCntEgYXhuf303RUKo3tZYF20gF9D89gRRNKsG6dXlYMFfF16de2Y08rYzp1j5PJFoz642i4/cODSSw8cuHxkZHp6aGh6eoT6km0I0MF3Ih0KKCPWbUuUx0KyIrJEqfDuhVCCH9uJwwWNyVi5nuVHJwB3G0ogko87b69r9cwHOi1vC9awdCiuWdSx/DfkYTPzFwhea9iYc0zGBjZBpOl4ReW5zORS1B9286lQdLjsyGRzzilKgxf4NgljR9EAIoJVXzNnfx5GR7P7YaXSY2VphxXkgd+alQ1flIN5uNWtNevd3I5g0SUWu+JZn9McMuTcZShbBC2wtknykbw7t9l2Wd7jcnsln4t32UwJX8DgjNj9SUNrOuRMeI2xoLymDgPy+4H3TagDzSDihRr8RQVU9xcVOOUP2zSdlrcpadkZvzYm+obTdIkjGDBPkplCnpRb/rdJnZSe7pl98P7DPaeKR7Ys9l54YeJvP6fyinCeW+A06JNULp3wfQf9/imKI/sd5tWPehERRVJgImskjNwUrQ6lVq9oINtnJv9lFbYDmG2GwQpT3ZjuAxfpOWNg7R2pwp4XcTYPn+U97gnx5IhObc5wRp+xnMWoGMuXmp0+U3ux03HPp4VO+6CxY1zr5yMER4YzPR/jRGQfF8Gz9q+UOBr7kRp1edjXnbDbE90+b4ncS14hFBLgwohPlCPRwQTPJwajkXKCHymlMqVSJlWi/IngN+MC9wEyNo2dzIrlaoGWA1p/f9wPubIhiyWUdVXvPlH0wYXfbA7m6J9UqN574wEhHhcCcTouj/bh57kCzEoSRdad02shchNiEyQfYY1TBpQxjbxJfFigmz2oTGtImCjvgtDWbpngB4ydncaB3tFMT09mrLdMvpV7x/iiy1Xgxyb7YvHe3nis7w1lvuQPlPhy37jXO94H3wJ++q3DYOgY/3lXudyVL5eJGCdXX4M/yz0PGO9bl/XRNzwDIa6V4gAksnMdxOrXnu9wI5Gd+RDZ31LBddEpKEEKr4tM85LFg3l8s6srGE1F+sf7I3Ob5lL7Al3CZDSbkQGjc5kxF/6DwxkVPaLfnxrJTV6kP3SwSfRtdgWSUX8i6E+W0+P72l50UBN3E/ok+DgD+dD42g4CCyEHsv0N9iKBUWWVFgviKP7BtOzhgsqultbTctbYovylnRCsoeXFLdFsmM71kSE5CSuvA/GZys5MD8cdHGnTtZOIprjFM2iKudNdLdpTL1E5nEtLE7adxVZT61iTQ7InJ3POWLBstRcle9o2bbEk+9xqgiOtwfwK8uxudDuq/2tL+vWbt/UNz6uqkZudbbCzFtlKsXbwHTzCabgzx20jJobcO6o+w0h/Vf78WM0mfVJIhosaOolcqpcM6h0Gtd6pH1x+4+0PPPDA8pvf/ObbTnEn7vOTM2z++ypf6+3tu//+vt5enCMxGfiOv8CcSehyVO+z9A2q4x8nioQSVK0SzPjG4a5jd+GMjLoAyAYU1Hn45lEO6GbWauR0EsNd+T5chMaAam0iSWiiMVtcmEynvFEJ/0XYWdx7m7lcwrhUbkkOz+eS29xD5qS7MN72/K8x/sKj+lHJl+O3JjPXH+smfzlEp9d2q3t2D/hhXnnX3GS/pk3bbNT1j8/6vIhD/as/oH+zSwO4FsF2eZmrkfeceiiVng7ZZXvhrmEup51ODkgl0TWapvHCjSoalUemXtqwaIRwAbencrnUl9wTweELjvqKM8nhWJkvCKIj0Yk/b5jp7p7Riw5v09KBthsv69oxIGovXuJ8/IRXXfkKZzMghFd3whxx3KkG62pqJjCsq7VYwu/BF49X3tTGvfPcbppHq74Hvuxz5DuJr1Rx6EdED0G3Orh/Dh+nGbqH8HcQknOS8IyWPvOx1afZM/vpMyv4XTXP6Nc9s5k+8zD+PELKWCb6zCOrq+yZk6yfB+Eunw85gH/MZVErcqO1mBekhPEaUcmiYZeUl2Q5/86DD+6E/9g3/8lPzn+S9YN9+Md4uWHeL4A/WRnBy/PkuSw6jk9zLhivFdHTljTTUAbjWM0VZF/3ut7X3dt7L/x/3YOvv4/oyX2v77vvPrkGFkDzgG+ZxqdOlFu3G6BtYFEuC1ioCNmZ+6uNH3FNrKqqSdyLgChGblF0w3UR/YTrFEX9E+RwNjmkXfl/8j30t3ngbwB9BGgme4m/iq5CGvh8NePp1YCjALRZgEZMwz6gFe5YjkNCFgO2eLElBJx59K67HoUhrvnARaMZdWb0og+gBn3Am6wPzE5w46Z8GefTON+Ef1wZIZ3gT+JAbScc9IHY3BpQNzpvz9HG0w1PsSML9ROvBR6xyX+QMia+/cEHt7+pb7uMcxHz+EvcA4CzY32Wo/Z4uEmgf7dVOL3/1EXFjDpdvIh7oHLdfXfddR/JS6I/45/gNwHVIsiRju07l6uTpjOyL5Y9lJ5pv0mOjqVcNRkhBLQ+34TgSUdClpiv3zdebeLerqTdY+9NS/SmyD+R2yZFbtVMbiFlSiR3Z+UUXq786pN0r2Q3fg6fRTwqo7pjaQ0Pn7OTiIC/kW2INLNW45OIIm+BXcGhiC/jJseE+XLYFtZrjtWfR4y0mXffTXT7VVw/3st9Xd4VzPT9CwB7HYU9ocBuB9hbKOxJBXYdN0RrG7ATWIFdz43g91LYcwxGxpiH/t4CsGcV2Ps4P76OexJgZxXYw6siPoBUbEc3lYXVG7l+NA3jKvZScWFtVXupknjh1qO7F7ivv0Z+53Lu0wjOYyj5TRXIvPzYa2+c36fqWoZnHoJ+b63vl8lYm5LfFIpS28Luo1w/6/dR6Pe1Sr8cy/GTxzz75m/kPk36hafRPZRPxfNtSgMCNB0APCMf69TAnMp4kj/ik9q7f65P3TcHZO3YQcc/DOPfD+OTHD3EkVSX5R60Z8iZWni3KL98//6r9u+GlwGn5cFB8u4hbgi9gSOrmKEG9NapNDV+JtJ73R+/k5W7lYyiaIqkaIrwBk02bPK7bG2Oln5omn1OO2lyQ6VBQ6chI3/KfFziHkMPqPqBCgGtAMTIbFIb3NdMRxtdgckrDhJFCNVRC2TYAbPfbW/Xm5v6NV3hmjb3mMFksNl7yHC8vTQky9A8zPVb6LwR7jOxASN0K1ZXXuDeMkPXsMDfEXQ/t8JyFg24pGEbcNrYMeZOwowaPyDVtPc5/H6HIxB4C1wOaHMjAYc9ELDDV3ZnYz4Oc9or+yGlcvQfDPM4fJWb7C7T9gbOjw5xT9JxTDBOGx2HjNdJpdi4QeolVSqlyGWy201wcf58IpnPJxP5lIvn3W6ed7H+gW9Qev+3+k/29CQ7HY5O0v9KLh6TpFg8l7LxVrvdyttkmXnrqohmYQaNtHeOyUwraqG9ixLLaGhFeUHhHuftAUeyx9cSzrh9qmyz32sL2CCT2GQxd1h1jfo0Io722YJa/90+wYaxvznDaUhG5P8DKD5xZwABAAAAAQzMTspD0l8PPPUACQPoAAAAAM2XgKcAAAAAzZfjGP8s/p8EqAPDAAAACQACAAAAAAAAeAFjYGRgYL7x7z0DA8ux/zr/vrOsAIqggo8AuyEIUgB4AW3TA4xeQRTF8TN3atu2bdu2bdt2o25UREVcRrWjmjGLqLb1+n+zVvLLucO8O5vPDmmY4r97gDWI/tlwDbVOamyLyTIa6v6Ryxjvoy6DdyoV73HfmH+JBBxhfVBSjiQrq4ZVURnbo0FWKvrjK6mIlVd+9zX6Y+VUy/KqmTVTb3dftcm67rdqu/Yqa7lYa8B8DrVzOaPHloe6oHr7vuptjVA93k825sxy1k6plJutYlZP3dx75bM3jJ+pQFy7i6oS+smC7xL9DT3ST1quTPSLHgeQX2MpvWVW348l6S+t0N9uVbBRnKPHrPjCahb3Tc/p5ZBDa5cj+orX1Ck9Z8V3IMexTu9phd5htdQovNUs3nULNqqcOdVCH1RGKRRJynpJaqO6K6qOaJiSbTU0uKRaqM/cAPccRdUKXalboWtijTJqiBbuJnmT7KI6wVPV8ZXI+N7u3PWFb+2m/qiLMaiBSiFHKZ8ijSaLhzyjRuH7RtLDa+69qHJ+rpowV9Ut0xBURkXUQIVMc5OoF6tsSo4Lb1ES9dEURVAC7TU2GhnzvVXBl1Ur3xY1VYG1Kkkah8ysJSqFukn43yXgJrZhNdYkzR3DOSnagPk4g+tYglmYiSlJ67OSHEhyJLgnxb+T/+MKsQQAeAEtwQMUIzkAANDaSmZSt0kxSnK3to2HtW3bts2HtW3btm3btv7X6XT1/12p9+sb6mfqrxtEQ3vDcsNxo8FY2tjWeNGkmrqatpu5ua/5uSVsqWuZaoXW1tal1tu2qrbj9qB9pP2xI7fjpvN/Z33nUudrV9I12/XRXdi90UM97T2XvUlvV+9an+zr6zsLbEAEBHCQExQFZcF6sBscB5fBffAafIcO6IdJ+D/MDYvD8rA2bA5fC6WFykJ9obXQXRgsXBeJyMWcYlGxrFhTbIrCSEaZUX5UGlVG9VFr1B0NRvPRarQdHUbn0W303F/RfzdQP9A60D0wODA+MD2wOKgGh4YsoaHh7OG+4c0RW6RzZH80Hh0Y3RwrGlscOxp7G9fFXfHc8brxlfHP2IejuCBuiNvinngwnoiX4r34JL6KX+KPxEUIoaQsaUgGk4VkL7mZKJiYmdicOJq4n9Ql1eTk5MFU0dTBdNX03vTx9MX07fRTSZZKS0Olu7Is/y9nl4fK+xWDUlM5quZU52tpras2UZuqLdd2aqe1u9RGozQv7U9H05X0NHMwzhqy7mwnO8zOsuvsIXvNvnIL93HK8/LKvCmfzNfyz/9l/q/4f33/W/vf3f/F//P/3/TXtj8B7WaMQAAAAAABAAAA8QBVAAcAaQAFAAEAAAAAAAoAAAIAAXMAAwABeAGVkLN2RGEUhb/YeYbbx7bZxE41tueyTZ2Hzl5nxZ7162wOgB7u6aCts482JuF5bmdYyGbdx6w/z53vPF088Pg8dzPaNvw8D3PYtswFVTwaJEnjCMWp0NR0Kq5qTJoyeRJCJVKcC2fxNMflmGKcSeZ0Vthil232NL3vfG587hv73PecO7HktbSGvHlpFZwP7adKOj84tOTIiXNJmuLzrOksmFomTpG0eTJiS/YdpjXN2Vmylla+eQ5Xq8YyE1qBrXHiUqrypDUnNZWluUTypTWV7N+L6x23fJnSE374RZx4AWzBRQHCAAAAwNtWBXeG2w93d2ISjARQgDsh8H2L/fMhCINIJCEpJS0jKyevoKikrKIqVlPX0NTS1tHV0zcwNDI2MTUzt7C0sraxtbN3cHRydnF1c/fw9PoRBA/dQihgAADne+/atm/9jLzMWmbb9sl2q2zbtnky19m1bsY+t9ywX0+9LNPbHX3cdNsDd91zX1+PPfTIAf0sd9AzTzzV3ycffDHQAIMMMdhQGw0zwnAjjTLGaGON89x4E00wyRSTbXLIfNNMNd0Mn5320ddIiESp8hUoVKRYiVJlylXIla1SlQRb1NksTaLjTjjqmKuuOe+CXXbLiSSHHXHFXM2ly9BYU111l6ebJt7LNMc8Cy1QLymSIyVSIy3SIyMyIyuyrbM+ciLXTOckm21N5JnlbORL8cdvf2X55ruTalSrtVIzPWyNAi0s9sJLS7zy1rsojKIojpIojbIoj4qojKqojpqojbqojwbRMKFN51at/mvR4f++3f41NRZGDMMwACyTZgnjcXGPMrdhXD5gmRLb/ye8dzedZ/+Xrm/2i+B/U5MsTBZpERBZpc/4hrHlPchitPoWB+r1H/z6BpS+oRdsIIoNvc1OpG+GMyeHLA76laZpOLh6i7R0HSjVyymkMQMopZgJlFLMAkopZlP6QCnlNkApYqYHlDymb/TpS03jTwtov73SAAAAsAArALIBAQIrAbICAgIrAbcCMCYeFw4ACCu3Ay4mHhcOAAgrALcBOzAmHBIACCsAsgQIByuwACBFfWkYREuwYFJYsAEbsABZsAGOAA==) format('woff')}</style><link rel="preload" href="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/integrator.js" as="script"><script type="text/javascript" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/integrator.js"></script><link rel="preload" href="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/integrator_002.js" as="script"><script type="text/javascript" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/integrator_002.js"></script><script src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/pubads_impl_301.js" async=""></script><style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
+.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
+.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
+.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
+</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_About.MathJax_MousePost {outline: none}
+.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+.MathJax_MenuItem {padding: 1px 2em; background: transparent}
+.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
+.MathJax_MenuActive .MathJax_MenuArrow {color: white}
+.MathJax_MenuArrow.RTL {left: .5em; right: auto}
+.MathJax_MenuCheck {position: absolute; left: .7em}
+.MathJax_MenuCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuRadioCheck {position: absolute; left: .7em}
+.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
+.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
+.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
+.MathJax_MenuDisabled {color: GrayText}
+.MathJax_MenuActive {background-color: #606872; color: white}
+.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
+.MathJax_ContextMenu:focus {outline: none}
+.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
+#MathJax_AboutClose {top: .2em; right: .2em}
+.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
+.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
+.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
+.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
+.MathJax_MenuClose:hover span {background-color: #CCC!important}
+.MathJax_MenuClose:hover:focus {outline: none}
+</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
+.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
+</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
+#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
+#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
+</style><style type="text/css">.MathJax_Preview {color: #888}
+#MathJax_Message {position: fixed; left: 1px; bottom: 2px; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
+#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
+.MathJax_Error {color: #CC0000; font-style: italic}
+</style><style type="text/css">.MJXp-script {font-size: .8em}
+.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
+.MJXp-bold {font-weight: bold}
+.MJXp-italic {font-style: italic}
+.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
+.MJXp-largeop {font-size: 150%}
+.MJXp-largeop.MJXp-int {vertical-align: -.2em}
+.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
+.MJXp-display {display: block; text-align: center; margin: 1em 0}
+.MJXp-math span {display: inline-block}
+.MJXp-box {display: block!important; text-align: center}
+.MJXp-box:after {content: " "}
+.MJXp-rule {display: block!important; margin-top: .1em}
+.MJXp-char {display: block!important}
+.MJXp-mo {margin: 0 .15em}
+.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
+.MJXp-denom {display: inline-table!important; width: 100%}
+.MJXp-denom > * {display: table-row!important}
+.MJXp-surd {vertical-align: top}
+.MJXp-surd > * {display: block!important}
+.MJXp-script-box > *  {display: table!important; height: 50%}
+.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
+.MJXp-script-box > *:last-child > * {vertical-align: bottom}
+.MJXp-script-box > * > * > * {display: block!important}
+.MJXp-mphantom {visibility: hidden}
+.MJXp-munderover, .MJXp-munder {display: inline-table!important}
+.MJXp-over {display: inline-block!important; text-align: center}
+.MJXp-over > * {display: block!important}
+.MJXp-munderover > *, .MJXp-munder > * {display: table-row!important}
+.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
+.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
+.MJXp-mtr {display: table-row!important}
+.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
+.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-mlabeledtr {display: table-row!important}
+.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
+.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
+.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
+.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
+.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
+.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
+.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
+.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
+.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
+.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
+.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
+.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
+.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
+.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
+</style></head>
+    <body data-gr-c-s-loaded="true"><div id="MathJax_Message" style="display: none;"></div><button aria-hidden="true" href="javascript:;" title="focus catcher" class="js-focus-catcher u-screenreader-only" tabindex="-1"></button><div id="popup-search" class="u-composite-layer popup-search-theme" style="top:-60px;left:-60px;visibility:hidden;opacity:0;" aria-hidden="true" aria-label="popup"><svg class="popup-arrow" xmlns="http://www.w3.org/2000/svg" width="33.7" height="18.4" viewBox="0 0 33.7 18.4"><path class="fill" fill="#F7FBFE" d="M1.4 18.4h30.9l-15.5-16.9z"></path><path class="stroke" fill="#98BED7" d="M0 18.4h1.4l15.4-16.9 15.5 16.9h1.4l-16.9-18.4z"></path></svg><div class="popup-arrow popup-arrow-shadow icon--popup-arrow-shadow"></div><div class="popup__search"><div tabindex="-1" class="popup-base-theme__inner" data-component="SpringerLink-Popup-inner"></div></div><button tabindex="-1" class="popup-close" data-component="SpringerLink-Popup-close"><img alt="Close" src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%3E%3Cpath%20fill%3D%22%23666%22%20d%3D%22M1.706.292A.996.996%200%200%200%20.294.294a1.002%201.002%200%200%200-.002%201.412L5.527%206.94.292%2012.177a.996.996%200%200%200%20.002%201.412c.39.39%201.026.385%201.412%200L6.94%208.354l5.236%205.235a.998.998%200%200%200%201.414-1.413L8.355%206.94l5.235-5.234a.996.996%200%200%200-.002-1.412%201.002%201.002%200%200%200-1.412-.002L6.94%205.527%201.707.292z%22%2F%3E%3C%2Fsvg%3E"></button></div>
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WCF9Z9"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="skip-to">
+    <a class="skip-to__link pseudo-focus" href="#main-content">Skip to main content</a>
+</div>
+        <div class="page-wrapper">
+            <noscript>
+    <div class="nojs-banner u-interface">
+        <p>This service is more advanced with JavaScript available, learn more at <a
+                href="http://activatejavascript.org" target="_blank" rel="noopener">http://activatejavascript.org</a>
+        </p>
+    </div>
+</noscript>
+                    <div id="leaderboard" class="leaderboard" data-component="SpringerLink.GoogleAds" data-namespace="leaderboard">
+            <div class="leaderboard__wrapper">
+                <p class="leaderboard__label">Advertisement</p>
+                <button class="leaderboard__hide" title="Hide this advertisement" data-track="click" data-track-action="Hide advertisement" data-track-label="">Hide</button>
+                <div id="doubleclick-leaderboard-ad" class="leaderboard__ad u-pt-24" data-google-query-id="COr9nqXGpeACFSGn7QodaO0BfA"><div id="google_ads_iframe_270604982/springerlink/book/chapter_0__container__" style="border: 0pt none;"><iframe id="google_ads_iframe_270604982/springerlink/book/chapter_0" title="3rd party ad content" name="google_ads_iframe_270604982/springerlink/book/chapter_0" scrolling="no" marginwidth="0" marginheight="0" style="border: 0px none; vertical-align: bottom;" srcdoc="" data-google-container-id="1" data-load-complete="true" width="728" height="90" frameborder="0"></iframe></div></div>
+            </div>
+        </div>
+
+                <header id="header" class="header u-interface">
+        <div class="header__content">
+            <div class="header__menu-container">
+                    <a id="logo" class="site-logo" href="https://link.springer.com/" title="Go to homepage">
+                <div class="u-screenreader-only">SpringerLink</div>
+    <svg class="site-logo__springer" width="148" height="30" role="img" focusable="false" aria-hidden="true">
+        <image width="148" height="30" alt="" src="/springerlink-static/1716009814/images/png/springerlink.png" xlink="http://www.w3.org/1999/xlink" xlink:href="/springerlink-static/1716009814/images/svg/springerlink.svg"></image>
+    </svg>
+
+    </a>
+
+
+                    <nav id="search-container" class="u-inline-block">
+                        <div class="search">
+                            <div class="search__content">
+                                <form class="u-form-single-input" action="/search" method="get" role="search">
+    <label for="search-springerlink">Search SpringerLink</label>
+    <div class="u-relative">
+        <input id="search-springerlink" name="query" type="text" autocomplete="off">
+        <input class="u-hide-text" type="submit" value="Submit" title="Submit" data-track="click-nonlink" data-track-action="Search SpringerLink" data-track-label="">
+        <svg class="u-vertical-align-absolute" width="13" height="13" viewBox="222 151 13 13" version="1.1" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true" role="presentation">
+            <path d="M227 159C228.7 159 230 157.7 230 156 230 154.3 228.7 153 227 153 225.3 153 224 154.3 224 156 224 157.7 225.3 159 227 159L227 159 227 159 227 159ZM230 160.1L231.1 159 233.9 161.7C234.2 162.1 234.2 162.6 233.9 162.9 233.6 163.2 233.1 163.2 232.7 162.9L230 160.1 230 160.1 230 160.1 230 160.1ZM227 161L227 161C224.2 161 222 158.8 222 156 222 153.2 224.2 151 227 151 229.8 151 232 153.2 232 156 232 158.8 229.8 161 227 161L227 161 227 161 227 161 227 161Z" stroke="none" fill-rule="evenodd"></path>
+        </svg>
+    </div>
+</form>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <nav class="nav-container u-interface">
+    <div class="global-nav__wrapper">
+        <div class="search-button">
+            <a class="search-button__label" href="#search-container" role="button" aria-pressed="false" aria-haspopup="true" aria-controls="popup-search">
+                <span class="search-button__title">Search</span><svg width="12" height="12" viewBox="222 151 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" focusable="false" aria-hidden="true" role="presentation">
+                    <path d="M227 159C228.7 159 230 157.7 230 156 230 154.3 228.7 153 227 153 225.3 153 224 154.3 224 156 224 157.7 225.3 159 227 159L227 159 227 159 227 159ZM230 160.1L231.1 159 233.9 161.7C234.2 162.1 234.2 162.6 233.9 162.9 233.6 163.2 233.1 163.2 232.7 162.9L230 160.1 230 160.1 230 160.1 230 160.1ZM227 161L227 161C224.2 161 222 158.8 222 156 222 153.2 224.2 151 227 151 229.8 151 232 153.2 232 156 232 158.8 229.8 161 227 161L227 161 227 161 227 161 227 161Z" stroke="none" fill-rule="evenodd"></path>
+                </svg>
+            </a>
+        </div>
+
+        <ul class="global-nav" data-component="SV.Menu" data-title="Navigation menu" data-text="Menu">
+            <li>
+                <a href="https://link.springer.com/">
+                    <span class="u-overflow-ellipsis">Home</span>
+                </a>
+            </li>
+
+                <li class="global-nav__logged-out">
+                    <a class="test-login-link" href="https://link.springer.com/signup-login?previousUrl=https%3A%2F%2Flink.springer.com%2Fchapter%2F10.1007%2F978-3-030-03493-1_34" data-track="click" data-track-action="Log in" data-track-label="">
+                        <span class="u-overflow-ellipsis">Log in</span>
+                    </a>
+                </li>
+
+        </ul><div class="main-menu u-composite-layer c-button-dropdown c-button-dropdown--ghost" data-component="SV.Dropdown" data-namespace="Menu" aria-label="button with dropdown options" style=""><button id="button-Dropdown-Menu-dropdown" type="button" title="Navigation menu" class="c-button-dropdown__button" data-role="button-dropdown__control" aria-pressed="false" aria-expanded="false" aria-controls="Dropdown-Menu-dropdown"><span class="u-overflow-ellipsis c-button-dropdown__button-title">Menu</span><span class="c-button-dropdown__icon"></span></button><div class="u-composite-layer c-button-dropdown__container" aria-hidden="true" aria-label="dropdown" id="Dropdown-Menu-dropdown"><ul class="main-menu__content" data-role="button-dropdown__content"><li>
+                <a href="https://link.springer.com/">
+                    <span class="u-overflow-ellipsis">Home</span>
+                </a>
+            </li><li class="global-nav__logged-out">
+                    <a class="test-login-link" href="https://link.springer.com/signup-login?previousUrl=https%3A%2F%2Flink.springer.com%2Fchapter%2F10.1007%2F978-3-030-03493-1_34" data-track="click" data-track-action="Log in" data-track-label="">
+                        <span class="u-overflow-ellipsis">Log in</span>
+                    </a>
+                </li></ul></div></div>
+    </div> 
+</nav> 
+            </div>
+
+        </div>
+    </header>
+
+            
+            <main id="main-content" class="main-wrapper" tabindex="-1">
+                <div class="main-container uptodate-recommendations-off">
+                    <aside class="main-sidebar-left">
+                        <div class="main-sidebar-left__content">
+                            <div class="cover-image test-cover" itemscope="">
+                                    <a class="test-cover-link" href="https://link.springer.com/book/10.1007/978-3-030-03493-1">
+        <span class="u-screenreader-only">Intelligent Data Engineering and Automated Learning – IDEAL 2018</span>
+        <img class="test-cover-image" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/978-3-030-03493-1.jpg" itemprop="image" alt="">
+    </a>
+
+
+                            </div>
+                        </div>
+                    </aside>
+                    <div class="main-body" data-role="NavigationContainer">
+                        
+
+
+
+                        <article class="main-body__content">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="FulltextWrapper"><div class="ArticleHeader main-context"><div id="enumeration" class="enumeration">    <div>
+        <a data-test="ConfSeriesLink" href="https://link.springer.com/conference/ideal" data-track="click" data-track-action="Conference series" data-track-label="">
+            <span data-test="ConfSeriesName"> International Conference on Intelligent Data Engineering and Automated Learning</span>
+        </a>
+    </div>
+<p class="test-LocationInConferenceProceeding icon--meta-keyline"><span data-test="ConferenceAcronym">IDEAL 2018</span>: <span class="BookTitle"><a href="https://link.springer.com/book/10.1007/978-3-030-03493-1" data-track="click" data-track-action="Book title" data-track-label="">Intelligent Data Engineering and Automated Learning – IDEAL 2018</a></span><span class="page-numbers-info">
+                pp 317-327</span><span class="u-inline-block u-ml-4"> |
+                <a href="#citeas" data-track="click" data-track-action="Cite as link" data-track-label="Enumeration section">Cite as</a></span></p></div><div class="MainTitleSection"><h1 class="ChapterTitle" lang="en">Exploring Coclustering for Serendipity Improvement in Content-Based Recommendation</h1></div><div class="authors u-clearfix authors--enhanced" data-component="SpringerLink.Authors"><ul class="u-interface u-inline-list authors__title" data-role="AuthorsNavigation"><li><a href="#authors" class="selected" data-track="click" data-track-action="Authors tab" data-track-label="">Authors</a></li><li><a href="#authorsandaffiliations" data-track="click" data-track-action="Authors and affiliations tab" data-track-label="">Authors and affiliations</a></li></ul><span class="marker" style="width: 160px;"></span><div class="authors__list" data-role="AuthorsList" id="authors" tabindex="-1"><ul class="test-contributor-names"><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4"><span itemprop="name" class="authors__name">Andrei&nbsp;Martins&nbsp;Silva</span></li><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4"><span itemprop="name" class="authors__name">Fernando&nbsp;Henrique&nbsp;da&nbsp;Silva Costa</span></li><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4"><span itemprop="name" class="authors__name">Alexandra&nbsp;Katiuska&nbsp;Ramos&nbsp;Diaz</span></li><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4"><span itemprop="name" class="authors__name">Sarajane&nbsp;Marques&nbsp;Peres</span><span class="author-information"><span class="authors__contact"><a href="mailto:sarajane@usp.br" title="sarajane@usp.br" itemprop="email" data-track="click" data-track-action="Email author" data-track-label=""><img src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/email.svg" alt="Email author" width="24" height="24"></a></span></span></li></ul></div><div class="authors__affiliations" id="authorsandaffiliations" tabindex="-1"><div class="authors-affiliations u-interface"><ul class="test-contributor-names"><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4"><span itemprop="name" class="authors-affiliations__name">Andrei&nbsp;Martins&nbsp;Silva</span><ul class="authors-affiliations__indexes u-inline-list" data-role="AuthorsIndexes"><li data-affiliation="affiliation-1">1</li></ul></li><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4"><span itemprop="name" class="authors-affiliations__name">Fernando&nbsp;Henrique&nbsp;da&nbsp;Silva Costa</span><ul class="authors-affiliations__indexes u-inline-list" data-role="AuthorsIndexes"><li data-affiliation="affiliation-1">1</li></ul></li><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4"><span itemprop="name" class="authors-affiliations__name">Alexandra&nbsp;Katiuska&nbsp;Ramos&nbsp;Diaz</span><ul class="authors-affiliations__indexes u-inline-list" data-role="AuthorsIndexes"><li data-affiliation="affiliation-1">1</li></ul></li><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4"><span itemprop="name" class="authors-affiliations__name">Sarajane&nbsp;Marques&nbsp;Peres</span><ul class="authors-affiliations__indexes u-inline-list" data-role="AuthorsIndexes"><li data-affiliation="affiliation-1">1</li></ul><span class="author-information"><span class="author-information__contact u-icon-before"><a href="mailto:sarajane@usp.br" title="sarajane@usp.br" itemprop="email" data-track="click" data-track-action="Email author" data-track-label="" tabindex="-1">Email author</a></span><span class="author-information__orcid u-icon-before icon--orcid u-icon-no-repeat"><a href="http://orcid.org/0000-0003-3551-6480" itemprop="url" title="View OrcID profile" target="_blank" rel="noopener" data-track="click" data-track-action="OrcID" data-track-label="" tabindex="-1">View author's OrcID profile</a></span></span></li></ul><ol class="test-affiliations"><li class="affiliation" data-test="affiliation-1" data-affiliation-highlight="affiliation-1" itemscope="" itemtype="http://schema.org/Organization"><span class="affiliation__count">1.</span><span class="affiliation__item"><span itemprop="department" class="affiliation__department">School of Arts, Sciences and Humanities</span><span itemprop="name" class="affiliation__name">University of São Paulo</span><span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress" class="affiliation__address"><span itemprop="addressRegion" class="affiliation__city">São Paulo</span><span itemprop="addressCountry" class="affiliation__country">Brazil</span></span></span></li></ol></div></div></div><div class="main-context__container" data-component="SpringerLink.ArticleMetrics"><div class="main-context__column"><span><span class="test-render-category">Conference paper</span></span><div class="article-dates"><span class="article-dates__label">First Online: </span><span class="article-dates__first-online"><time datetime="2018-11-09">09 November 2018</time></span></div></div><div class="main-context__column">    <ul id="book-metrics" class="article-metrics u-sansSerif">
+            <li class="article-metrics__item">
+                    <a class="article-metrics__link gtm-chapterreaders-count" href="http://www.bookmetrix.com/detail/chapter/6f5e9a45-28a2-4d55-898b-99d270baa6ac#readers" target="_blank" rel="noopener" title="Visit Bookmetrix for full Mendeley reader details" id="chapterreaders-link">
+                            <span id="chapterreaders-count-number" class="test-metric-count c-button-circle gtm-chapterreaders-count">2</span>
+                       <span class="test-metric-name article-metrics__label gtm-chapterreaders-count">Readers</span>
+                    </a>
+            </li>
+            <li class="article-metrics__item">
+                    <a class="article-metrics__link gtm-chapterdownloads-count" href="http://www.bookmetrix.com/detail/chapter/6f5e9a45-28a2-4d55-898b-99d270baa6ac#downloads" target="_blank" rel="noopener" title="Visit Bookmetrix for full download details" id="chapterdownloads-link">
+                            <span id="chapterdownloads-count-number" class="test-metric-count c-button-circle gtm-chapterdownloads-count">303</span>
+                       <span class="test-metric-name article-metrics__label gtm-chapterdownloads-count">Downloads</span>
+                    </a>
+            </li>
+    </ul>
+</div></div><span id="test-SeriesTitle" class="vol-info">
+                Part of the
+                <a class="gtm-book-series-link" href="https://link.springer.com/bookseries/558">Lecture Notes in Computer Science</a>
+                book series (LNCS, volume 11314)</span></div><section class="Abstract" id="Abs1" tabindex="-1" lang="en"><h2 class="Heading">Abstract</h2><p id="Par1" class="Para">Content-based
+ recommender systems are widely used in different domains. However, they
+ are usually inefficient to produce serendipitous recommendations. A 
+recommendation is serendipitous if it is both relevant and unexpected. 
+The literature indicates that one possibility of achieving serendipity 
+in recommendations is to design them using partial similarities between 
+items. From such intuition, coclustering can be explored to offer 
+serendipitous recommendations to users. In this paper, we propose a 
+coclustering-based approach to implement content-based recommendations. 
+Experiments carried out on the MovieLens 2K dataset show that our 
+approach is competitive in terms of serendipity.</p></section><div class="KeywordGroup" lang="en"><h2 class="Heading">Keywords</h2><span class="Keyword">Content-based recommender systems&nbsp;</span><span class="Keyword">Serendipity&nbsp;</span><span class="Keyword">Coclustering&nbsp;</span><span class="Keyword">Nonnegative Matrix Factorization&nbsp;</span><span class="Keyword">Jaccard similarity&nbsp;</span></div><div class="note test-pdf-link" id="cobranding-and-download-availability-text"><div id="chapter_no_access_banner">This is a preview of subscription content, <a id="test-login-banner-link" href="https://link.springer.com/signup-login?previousUrl=https%3A%2F%2Flink.springer.com%2Fchapter%2F10.1007%2F978-3-030-03493-1_34" data-track="click" data-track-action="Preview banner - Log in" data-track-label="">log in</a> to check access.</div></div><div class="article-actions--inline" id="article-actions--inline" data-component="article-actions--inline"><div class="citations u-interface c-button-dropdown" data-component="SV.Dropdown" data-namespace="citations--inline" aria-label="button with dropdown options">
+        <button id="button-Dropdown-citations--inline-dropdown" type="button" class="c-button-dropdown__button" data-role="button-dropdown__control" aria-pressed="false" aria-expanded="false" aria-controls="Dropdown-citations--inline-dropdown"><span class="u-overflow-ellipsis c-button-dropdown__button-title">
+    <span>Cite</span>
+    <span class="hide-text-small">paper</span>
+</span><span class="c-button-dropdown__icon"></span></button>
+<div class="u-composite-layer c-button-dropdown__container" aria-hidden="true" aria-label="dropdown" id="Dropdown-citations--inline-dropdown"><ul class="citations__content" data-role="button-dropdown__content">
+    <li>
+        <a href="#citeas" data-track="click" data-track-action="Cite as link" data-track-label="Cite dropdown">How to cite?</a>
+    </li>
+        <li>
+            <a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-030-03493-1_34?format=refman&amp;flavour=citation" title="Download this paper's citation as a .RIS file" data-track="click" data-track-action="Export citation" data-track-label="RIS">
+                <span class="citations__extension" data-gtmlabel="RIS">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"></path></svg>
+                    .RIS
+                </span>
+                <span class="citations__types">
+                        <span>
+                            Papers
+                        </span>
+                        <span>
+                            Reference Manager
+                        </span>
+                        <span>
+                            RefWorks
+                        </span>
+                        <span>
+                            Zotero
+                        </span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-030-03493-1_34?format=endnote&amp;flavour=citation" title="Download this paper's citation as a .ENW file" data-track="click" data-track-action="Export citation" data-track-label="ENW">
+                <span class="citations__extension" data-gtmlabel="ENW">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"></path></svg>
+                    .ENW
+                </span>
+                <span class="citations__types">
+                        <span>
+                            EndNote
+                        </span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-030-03493-1_34?format=bibtex&amp;flavour=citation" title="Download this paper's citation as a .BIB file" data-track="click" data-track-action="Export citation" data-track-label="BIB">
+                <span class="citations__extension" data-gtmlabel="BIB">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"></path></svg>
+                    .BIB
+                </span>
+                <span class="citations__types">
+                        <span>
+                            BibTeX
+                        </span>
+                        <span>
+                            JabRef
+                        </span>
+                        <span>
+                            Mendeley
+                        </span>
+                </span>
+            </a>
+        </li>
+</ul></div>
+    </div></div><section class="Section1 RenderAsSection1" id="Bib1" tabindex="-1"><h2 class="Heading">References</h2><div class="content"><ol class="BibliographyWrapper"><li class="Citation"><div class="CitationNumber">1.</div><div class="CitationContent" id="CR1">Balabanović, M., Shoham, Y.: Fab: content-based, collaborative recommendation. Commun. ACM <strong class="EmphasisTypeBold ">40</strong>(3), 66–72 (1997)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1145/245108.245124"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Fab%3A%20content-based%2C%20collaborative%20recommendation&amp;author=M.%20Balabanovi%C4%87&amp;author=Y.%20Shoham&amp;journal=Commun.%20ACM&amp;volume=40&amp;issue=3&amp;pages=66-72&amp;publication_year=1997"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">2.</div><div class="CitationContent" id="CR2">Billsus, D., Pazzani, M.J.: User modeling for adaptive news access. User Model. User-Adapt. Interact. <strong class="EmphasisTypeBold ">10</strong>(2–3), 147–180 (2000)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1023/A%3A1026501525781"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=User%20modeling%20for%20adaptive%20news%20access&amp;author=D.%20Billsus&amp;author=MJ.%20Pazzani&amp;journal=User%20Model.%20User-Adapt.%20Interact.&amp;volume=10&amp;issue=2%E2%80%933&amp;pages=147-180&amp;publication_year=2000"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">3.</div><div class="CitationContent" id="CR3">Cantador,
+ I., Brusilovsky, P.L., Kuflik, T.: 2nd Workshop on Information 
+Heterogeneity and Fusion in Recommender Systems (HetRec2011). ACM (2011)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Cantador%2C%20I.%2C%20Brusilovsky%2C%20P.L.%2C%20Kuflik%2C%20T.%3A%202nd%20Workshop%20on%20Information%20Heterogeneity%20and%20Fusion%20in%20Recommender%20Systems%20%28HetRec2011%29.%20ACM%20%282011%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">4.</div><div class="CitationContent" id="CR4">Ge,
+ M., Delgado-Battenfeld, C., Jannach, D.: Beyond accuracy: evaluating 
+recommender systems by coverage and serendipity. In: Proceedings of the 
+4th ACM Conference on Recommender Systems, pp. 257–260. ACM (2010)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Ge%2C%20M.%2C%20Delgado-Battenfeld%2C%20C.%2C%20Jannach%2C%20D.%3A%20Beyond%20accuracy%3A%20evaluating%20recommender%20systems%20by%20coverage%20and%20serendipity.%20In%3A%20Proceedings%20of%20the%204th%20ACM%20Conference%20on%20Recommender%20Systems%2C%20pp.%20257%E2%80%93260.%20ACM%20%282010%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">5.</div><div class="CitationContent" id="CR5">de
+ Gemmis, M., Lops, P., Semeraro, G., Musto, C.: An investigation on the 
+serendipity problem in recommender systems. Inf. Process. Manag. <strong class="EmphasisTypeBold ">51</strong>(5), 695–717 (2015)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1016/j.ipm.2015.06.008"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=An%20investigation%20on%20the%20serendipity%20problem%20in%20recommender%20systems&amp;author=M.%20Gemmis&amp;author=P.%20Lops&amp;author=G.%20Semeraro&amp;author=C.%20Musto&amp;journal=Inf.%20Process.%20Manag.&amp;volume=51&amp;issue=5&amp;pages=695-717&amp;publication_year=2015"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">6.</div><div class="CitationContent" id="CR6">Herlocker,
+ J.L., Konstan, J.A., Terveen, L.G., Riedl, J.T.: Evaluating 
+collaborative filtering recommender systems. ACM Trans. Inf. Syst. <strong class="EmphasisTypeBold ">22</strong>(1), 5–53 (2004)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1145/963770.963772"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Evaluating%20collaborative%20filtering%20recommender%20systems&amp;author=JL.%20Herlocker&amp;author=JA.%20Konstan&amp;author=LG.%20Terveen&amp;author=JT.%20Riedl&amp;journal=ACM%20Trans.%20Inf.%20Syst.&amp;volume=22&amp;issue=1&amp;pages=5-53&amp;publication_year=2004"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">7.</div><div class="CitationContent" id="CR7">Iaquinta,
+ L., De Gemmis, M., Lops, P., Semeraro, G., Filannino, M., Molino, P.: 
+Introducing serendipity in a content-based recommender system. In: 8th 
+International Conference on Hybrid Intelligent Systems (HIS 2008), pp. 
+168–173. IEEE (2008)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Iaquinta%2C%20L.%2C%20De%20Gemmis%2C%20M.%2C%20Lops%2C%20P.%2C%20Semeraro%2C%20G.%2C%20Filannino%2C%20M.%2C%20Molino%2C%20P.%3A%20Introducing%20serendipity%20in%20a%20content-based%20recommender%20system.%20In%3A%208th%20International%20Conference%20on%20Hybrid%20Intelligent%20Systems%20%28HIS%202008%29%2C%20pp.%20168%E2%80%93173.%20IEEE%20%282008%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">8.</div><div class="CitationContent" id="CR8">Iaquinta,
+ L., De Gemmis, M., Lops, P., Semeraro, G., Molino, P.: Serendipitous 
+encounters along dynamically personalized museum tours. In: Proceedings 
+of the 1st Italian Information Retrieval Workshop (IIR 2010), pp. 
+101–102 (2010)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Iaquinta%2C%20L.%2C%20De%20Gemmis%2C%20M.%2C%20Lops%2C%20P.%2C%20Semeraro%2C%20G.%2C%20Molino%2C%20P.%3A%20Serendipitous%20encounters%20along%20dynamically%20personalized%20museum%20tours.%20In%3A%20Proceedings%20of%20the%201st%20Italian%20Information%20Retrieval%20Workshop%20%28IIR%202010%29%2C%20pp.%20101%E2%80%93102%20%282010%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">9.</div><div class="CitationContent" id="CR9">Ienco,
+ D., Robardet, C., Pensa, R.G., Meo, R.: Parameter-less co-clustering 
+for star-structured heterogeneous data. Data Min. Knowl. Discov. <strong class="EmphasisTypeBold ">26</strong>(2), 217–254 (2013)<span class="Occurrences"><span class="Occurrence OccurrenceAMSID"><a class="gtm-reference" data-reference-type="MathSciNet" target="_blank" rel="noopener" href="http://www.ams.org/mathscinet-getitem?mr=3017737"><span><span>MathSciNet</span></span></a></span><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/s10618-012-0248-z"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Parameter-less%20co-clustering%20for%20star-structured%20heterogeneous%20data&amp;author=D.%20Ienco&amp;author=C.%20Robardet&amp;author=RG.%20Pensa&amp;author=R.%20Meo&amp;journal=Data%20Min.%20Knowl.%20Discov.&amp;volume=26&amp;issue=2&amp;pages=217-254&amp;publication_year=2013"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">10.</div><div class="CitationContent" id="CR10">Jenders,
+ M., Lindhauer, T., Kasneci, G., Krestel, R., Naumann, F.: A serendipity
+ model for news recommendation. In: Hölldobler, S., Krötzsch, M., 
+Peñaloza, R., Rudolph, S. (eds.) KI 2015. LNCS (LNAI), vol. 9324, pp. 
+111–123. Springer, Cham (2015). <span class="ExternalRef">&nbsp;<a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-319-24489-1_9"><span class="RefSource">https://doi.org/10.1007/978-3-319-24489-1_9</span></a></span><span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-319-24489-1_9"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=A%20serendipity%20model%20for%20news%20recommendation&amp;author=M.%20Jenders&amp;author=T.%20Lindhauer&amp;author=G.%20Kasneci&amp;author=R.%20Krestel&amp;author=F.%20Naumann&amp;pages=111-123&amp;publication_year=2015"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">11.</div><div class="CitationContent" id="CR11">Koren, Y., Bell, R., Volinsky, C.: Matrix factorization techniques for recommender systems. Computer <strong class="EmphasisTypeBold ">42</strong>(8), 30–37 (2009)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1109/MC.2009.263"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Matrix%20factorization%20techniques%20for%20recommender%20systems&amp;author=Y.%20Koren&amp;author=R.%20Bell&amp;author=C.%20Volinsky&amp;journal=Computer&amp;volume=42&amp;issue=8&amp;pages=30-37&amp;publication_year=2009"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">12.</div><div class="CitationContent" id="CR12">Kotkov, D., Wang, S., Veijalainen, J.: A survey of serendipity in recommender systems. Knowl.-Based Syst. <strong class="EmphasisTypeBold ">111</strong>, 180–192 (2016)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1016/j.knosys.2016.08.014"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=A%20survey%20of%20serendipity%20in%20recommender%20systems&amp;author=D.%20Kotkov&amp;author=S.%20Wang&amp;author=J.%20Veijalainen&amp;journal=Knowl.-Based%20Syst.&amp;volume=111&amp;pages=180-192&amp;publication_year=2016"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">13.</div><div class="CitationContent" id="CR13">Linden, G., Smith, B., York, J.: Amazon.com recommendations: item-to-item collaborative filtering. IEEE Internet Comput. <strong class="EmphasisTypeBold ">7</strong>(1), 76–80 (2003)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1109/MIC.2003.1167344"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Amazon.com%20recommendations%3A%20item-to-item%20collaborative%20filtering&amp;author=G.%20Linden&amp;author=B.%20Smith&amp;author=J.%20York&amp;journal=IEEE%20Internet%20Comput.&amp;volume=7&amp;issue=1&amp;pages=76-80&amp;publication_year=2003"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">14.</div><div class="CitationContent" id="CR14">Lops,
+ P., de Gemmis, M., Semeraro, G.: Content-based recommender systems: 
+state of the art and trends. In: Ricci, F., Rokach, L., Shapira, B., 
+Kantor, P.B. (eds.) Recommender Systems Handbook, pp. 73–105. Springer, 
+Boston (2011). <span class="ExternalRef">&nbsp;<a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-0-387-85820-3_3"><span class="RefSource">https://doi.org/10.1007/978-0-387-85820-3_3</span></a></span><span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/978-0-387-85820-3_3"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Content-based%20recommender%20systems%3A%20state%20of%20the%20art%20and%20trends&amp;author=P.%20Lops&amp;author=M.%20Gemmis&amp;author=G.%20Semeraro&amp;pages=73-105&amp;publication_year=2011"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">15.</div><div class="CitationContent" id="CR15">Murakami,
+ T., Mori, K., Orihara, R.: Metrics for evaluating the serendipity of 
+recommendation lists. In: Satoh, K., Inokuchi, A., Nagao, K., Kawamura, 
+T. (eds.) JSAI 2007. LNCS (LNAI), vol. 4914, pp. 40–46. Springer, 
+Heidelberg (2008). <span class="ExternalRef">&nbsp;<a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-540-78197-4_5"><span class="RefSource">https://doi.org/10.1007/978-3-540-78197-4_5</span></a></span><span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-540-78197-4_5"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Metrics%20for%20evaluating%20the%20serendipity%20of%20recommendation%20lists&amp;author=T.%20Murakami&amp;author=K.%20Mori&amp;author=R.%20Orihara&amp;pages=40-46&amp;publication_year=2008"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">16.</div><div class="CitationContent" id="CR16">Pensa,
+ R.G., Boulicaut, J.F., Cordero, F., Atzori, M.: Co-clustering numerical
+ data under user-defined constraints. Stat. Anal. Data Min. <strong class="EmphasisTypeBold ">3</strong>(1), 38–55 (2010)<span class="Occurrences"><span class="Occurrence OccurrenceAMSID"><a class="gtm-reference" data-reference-type="MathSciNet" target="_blank" rel="noopener" href="http://www.ams.org/mathscinet-getitem?mr=2585065"><span><span>MathSciNet</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Co-clustering%20numerical%20data%20under%20user-defined%20constraints&amp;author=RG.%20Pensa&amp;author=JF.%20Boulicaut&amp;author=F.%20Cordero&amp;author=M.%20Atzori&amp;journal=Stat.%20Anal.%20Data%20Min.&amp;volume=3&amp;issue=1&amp;pages=38-55&amp;publication_year=2010"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">17.</div><div class="CitationContent" id="CR17">Piao,
+ S., Whittle, J.: A feasibility study on extracting twitter users’ 
+interests using NLP tools for serendipitous connections. In: 3rd 
+International Conference on Privacy, Security, Risk and Trust and 3rd 
+International Conference on Social Computing, pp. 910–915. IEEE (2011)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Piao%2C%20S.%2C%20Whittle%2C%20J.%3A%20A%20feasibility%20study%20on%20extracting%20twitter%20users%E2%80%99%20interests%20using%20NLP%20tools%20for%20serendipitous%20connections.%20In%3A%203rd%20International%20Conference%20on%20Privacy%2C%20Security%2C%20Risk%20and%20Trust%20and%203rd%20International%20Conference%20on%20Social%20Computing%2C%20pp.%20910%E2%80%93915.%20IEEE%20%282011%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">18.</div><div class="CitationContent" id="CR18">Yoo,
+ J., Choi, S.: Orthogonal nonnegative matrix tri-factorization for 
+co-clustering: multiplicative updates on Stiefel manifolds. Inf. 
+Process. Manag. <strong class="EmphasisTypeBold ">46</strong>(5), 559–570 (2010)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1016/j.ipm.2009.12.007"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Orthogonal%20nonnegative%20matrix%20tri-factorization%20for%20co-clustering%3A%20multiplicative%20updates%20on%20Stiefel%20manifolds&amp;author=J.%20Yoo&amp;author=S.%20Choi&amp;journal=Inf.%20Process.%20Manag.&amp;volume=46&amp;issue=5&amp;pages=559-570&amp;publication_year=2010"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">19.</div><div class="CitationContent" id="CR19">Zheng,
+ Q., Ip, H.H.: Customizable surprising recommendation based on the 
+tradeoff between genre difference and genre similarity. In: 
+International Conference on WEB Intelligence and Intelligent Agent 
+Technology, vol. 1, pp. 702–709. IEEE (2012)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Zheng%2C%20Q.%2C%20Ip%2C%20H.H.%3A%20Customizable%20surprising%20recommendation%20based%20on%20the%20tradeoff%20between%20genre%20difference%20and%20genre%20similarity.%20In%3A%20International%20Conference%20on%20WEB%20Intelligence%20and%20Intelligent%20Agent%20Technology%2C%20vol.%201%2C%20pp.%20702%E2%80%93709.%20IEEE%20%282012%29"><span><span>Google Scholar</span></span></a></span></span></div></li></ol></div></section><section class="Section1 RenderAsSection1"><h2 class="Heading" id="copyrightInformation">Copyright information</h2><div class="ArticleCopyright content"><div class="ChapterCopyright">©&nbsp;Springer Nature Switzerland AG&nbsp;2018</div></div></section></div>
+                        </article>
+                        <aside class="section section--collapsible" id="AboutThisContent">
+    <h2 class="section__heading" id="aboutcontent">About this paper</h2>
+    <div class="section__content bibliographic-information">
+                <div id="crossMark" class="crossmark">
+            <a data-crossmark="10.1007%2F978-3-030-03493-1_34" target="_blank" rel="noopener" href="https://crossmark.crossref.org/dialog/?doi=10.1007%2F978-3-030-03493-1_34" title="Verify currency and authenticity via CrossMark" data-track="click" data-track-action="Crossmark" data-track-label="">
+                <span class="u-screenreader-only">CrossMark</span>
+                <svg class="CrossMark" id="crossmark-icon" width="57" height="81">
+                    <image width="57" height="81" alt="Verify currency and authenticity via CrossMark" src="/springerlink-static/1716009814/images/png/crossmark.png" xlink="http://www.w3.org/1999/xlink" xlink:href="/springerlink-static/1716009814/images/svg/crossmark.svg"></image>
+                </svg>
+            </a>
+        </div>
+
+        <div class="crossmark__adjacent">
+            <dl class="citation-info u-highlight-target u-mb-16" id="citeas" tabindex="-1">
+    <dt class="test-cite-heading">
+        Cite this paper as:
+    </dt>
+    <dd id="citethis-text">Silva A.M., da Silva Costa F.H., Diaz A.K.R.,
+ Peres S.M. (2018) Exploring Coclustering for Serendipity Improvement in
+ Content-Based Recommendation. In: Yin H., Camacho D., Novais P., 
+Tallón-Ballesteros A. (eds) Intelligent Data Engineering and Automated 
+Learning – IDEAL 2018. IDEAL 2018. Lecture Notes in Computer Science, 
+vol 11314. Springer, Cham</dd>
+</dl>
+                <ul class="bibliographic-information__list bibliographic-information__list--inline">
+        <li class="bibliographic-information__item">
+            <span class="bibliographic-information__title">First Online</span>
+            <span class="bibliographic-information__value u-overflow-wrap">09 November 2018</span>
+        </li>
+        <li class="bibliographic-information__item">
+            <span class="bibliographic-information__title">DOI</span>
+            <span class="bibliographic-information__value u-overflow-wrap" id="doi-url">https://doi.org/10.1007/978-3-030-03493-1_34</span>
+        </li>
+            <li class="bibliographic-information__item">
+                <span class="bibliographic-information__title">Publisher Name</span>
+                <span class="bibliographic-information__value" id="publisher-name">Springer, Cham</span>
+            </li>
+            <li class="bibliographic-information__item">
+                <span class="bibliographic-information__title">Print ISBN</span>
+                <span class="bibliographic-information__value" id="print-isbn">978-3-030-03492-4</span>
+            </li>
+            <li class="bibliographic-information__item">
+                <span class="bibliographic-information__title">Online ISBN</span>
+                <span class="bibliographic-information__value" id="electronic-isbn">978-3-030-03493-1</span>
+            </li>
+
+                <li class="bibliographic-information__item">
+            <span class="bibliographic-information__title">eBook Packages</span>
+                <span class="bibliographic-information__value"><a id="ebook-package" href="https://link.springer.com/search?facet-content-type=%22Book%22&amp;package=11645&amp;facet-start-year=2018&amp;facet-end-year=2018" data-track="click" data-track-action="Ebook packages" data-track-label="">Computer Science</a></span>
+        </li>
+
+    </ul>
+
+            <ul class="bibliographic-information__list">
+            <li class="bibliographic-information__item">
+                <a id="about-book" href="https://www.springer.com/978-3-030-03492-4?wt_mc=ThirdParty.SpringerLink.3.EPR653.About_eBook" data-track="click" data-track-action="About this link to Springer.com" data-track-label="10.1007/978-3-030-03493-1_34">Buy this book on publisher's site</a>
+            </li>
+        <li class="bibliographic-information__item">
+            <a id="reprintsandpermissions-link" target="_blank" rel="noopener" href="https://s100.copyright.com/AppDispatchServlet?publisherName=SpringerNature&amp;orderBeanReset=true&amp;orderSource=SpringerLink&amp;copyright=Springer+Nature+Switzerland+AG&amp;author=Andrei+Martins+Silva%2C+Fernando+Henrique+da+Silva+Costa%2C+Alexandra+Katiuska+Ramos+Diaz+et+al&amp;contentID=10.1007%2F978-3-030-03493-1_34&amp;endPage=327&amp;publicationDate=2018&amp;startPage=317&amp;title=Exploring+Coclustering+for+Serendipity+Improvement+in+Content-Based+Recommendation&amp;imprint=Springer+Nature+Switzerland+AG&amp;publication=eBook" title="Visit RightsLink for information about reusing this paper" data-track="click" data-track-action="Reprints and Permissions" data-track-label="">Reprints and Permissions</a>
+        </li>
+</ul>
+
+
+
+        </div>
+      
+      
+          
+    </div>
+</aside>
+
+                        <div class="section section--collapsible uptodate-recommendations gtm-recommendations">
+    <h2 class="uptodate-recommendations__title section__heading gtm-recommendations__title" id="uptodaterecommendations">Personalised recommendations</h2>
+    <div class="section__content">
+        <div class="uptodate-recommendations__container">
+             <link rel="uptodate-inline" href="https://link.springer.com/springerlink-static/1716009814/css/recommendations.css">
+        </div>
+    </div>
+</div>
+                                <div id="doubleclick-native-ad" data-component="SpringerLink.GoogleAds" data-namespace="native"></div>
+
+                        
+
+
+
+    <div class="sticky-banner sticky-banner--buybox u-interface u-hide" data-component="SpringerLink.StickyBanner" data-namespace="hasLink">
+        <div class="sticky-banner__container"><span class="sticky-banner__title sticky-banner__title--long u-overflow-ellipsis" title="Exploring Coclustering for Serendipity Improvement in Content-Based Recommendation">Exploring Coclustering for Serendipity Improvement in Content-Based Recommendation</span>
+                <div class="citations c-button-dropdown" data-component="SV.Dropdown" data-namespace="citationsSticky" aria-label="button with dropdown options">
+        <button id="button-Dropdown-citationsSticky-dropdown" type="button" class="c-button-dropdown__button" data-role="button-dropdown__control" aria-pressed="false" aria-expanded="false" aria-controls="Dropdown-citationsSticky-dropdown"><span class="u-overflow-ellipsis c-button-dropdown__button-title">
+    <span>Cite</span>
+    <span class="hide-text-small">paper</span>
+</span><span class="c-button-dropdown__icon"></span></button>
+<div class="u-composite-layer c-button-dropdown__container" aria-hidden="true" aria-label="dropdown" id="Dropdown-citationsSticky-dropdown"><ul class="citations__content" data-role="button-dropdown__content">
+    <li>
+        <a href="#citeas" data-track="click" data-track-action="Cite as link" data-track-label="Cite dropdown">How to cite?</a>
+    </li>
+        <li>
+            <a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-030-03493-1_34?format=refman&amp;flavour=citation" title="Download this paper's citation as a .RIS file" data-track="click" data-track-action="Export citation" data-track-label="RIS">
+                <span class="citations__extension" data-gtmlabel="RIS">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"></path></svg>
+                    .RIS
+                </span>
+                <span class="citations__types">
+                        <span>
+                            Papers
+                        </span>
+                        <span>
+                            Reference Manager
+                        </span>
+                        <span>
+                            RefWorks
+                        </span>
+                        <span>
+                            Zotero
+                        </span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-030-03493-1_34?format=endnote&amp;flavour=citation" title="Download this paper's citation as a .ENW file" data-track="click" data-track-action="Export citation" data-track-label="ENW">
+                <span class="citations__extension" data-gtmlabel="ENW">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"></path></svg>
+                    .ENW
+                </span>
+                <span class="citations__types">
+                        <span>
+                            EndNote
+                        </span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-030-03493-1_34?format=bibtex&amp;flavour=citation" title="Download this paper's citation as a .BIB file" data-track="click" data-track-action="Export citation" data-track-label="BIB">
+                <span class="citations__extension" data-gtmlabel="BIB">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"></path></svg>
+                    .BIB
+                </span>
+                <span class="citations__types">
+                        <span>
+                            BibTeX
+                        </span>
+                        <span>
+                            JabRef
+                        </span>
+                        <span>
+                            Mendeley
+                        </span>
+                </span>
+            </a>
+        </li>
+</ul></div>
+    </div>
+
+                
+
+
+
+                <div class="sticky-banner__buybox-link sticky-banner__buybox-link--sticky">
+        <a href="#buy" class="gtm-buybox-anchor">
+            Buy options
+        </a>
+    </div>
+
+        </div>
+    </div>
+
+
+                    </div>
+                    <aside class="main-sidebar-right u-interface">
+                        <div data-role="sticky-wrapper">
+                            <div class="main-sidebar-right__content u-composite-layer" data-component="SpringerLink.StickySidebar">
+                                <div class="article-actions" id="article-actions">
+                                    <h2 class="u-screenreader-only" aria-hidden="true">Actions</h2>
+
+                                        <div id="buy">
+                                            
+
+<style type="text/css">
+    .buybox {
+        margin: 16px 0 0;
+        position: relative;
+    }
+    .buybox {
+        font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-size: 1.4rem;
+    }
+    .buybox {
+        zoom: 1;
+    }
+    .buybox:after,
+    .buybox:before {
+        content: '';
+        display: table;
+    }
+    .buybox:after {
+        clear: both;
+    }
+    /*---------------------------------*/
+    .buybox .buybox__header {
+        border: 1px solid #b3b3b3;
+        border-bottom: 0;
+        padding: 8px;
+        position: relative;
+        background-color: #f2f2f2;
+    }
+    .buybox__header .buybox__login {
+        font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-size: 1.4rem;
+        letter-spacing: .017em;
+        display: inline-block;
+        line-height: 1.2;
+        padding: 0;
+    }
+    .buybox__header .buybox__login:before {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: perspective(1px) translateY(-50%);
+        transform: perspective(1px) translateY(-50%);
+        content: '\A';
+        width: 34px;
+        height: 34px;
+        left: 10px;
+    }
+    /*---------------------------------*/
+    .buybox .buybox__body {
+        padding: 0;
+        padding-bottom: 16px;
+        position: relative;
+        text-align: center;
+        background-color: #fcfcfc;
+        border: 1px solid #b3b3b3;
+    }
+    /******/
+    .buybox__body .buybox__section {
+        padding: 16px 12px 0 12px;
+        text-align: left;
+    }
+    .buybox__section .buybox__buttons {
+        text-align: center;
+        width: 100%;
+    }
+    /********** mycopy buybox specific **********/
+    .buybox.mycopy__buybox .buybox__body {
+        background-color: transparent;
+    }
+    .buybox.mycopy__buybox .buybox__section .buybox__buttons {
+        border-top: 0;
+        padding-top: 0;
+    }
+    /******/
+    .buybox__section:nth-child(2) .buybox__buttons {
+        border-top: 1px solid #b3b3b3;
+        padding-top: 20px;
+    }
+    .buybox__buttons .buybox__buy-button {
+        display: inline-block;
+        text-align: center;
+        margin-bottom: 5px;
+        padding: 6px 12px;
+        max-width: 180px
+    }
+    .buybox__buttons .buybox__price {
+        white-space: nowrap;
+        text-align: center;
+        font-size: larger;
+        padding-top: 6px;
+    }
+    .buybox__section .buybox__meta {
+        letter-spacing: 0;
+        padding-top: 12px;
+    }
+    .buybox__section .buybox__meta:only-of-type {
+        padding-top: 0;
+        position: relative;
+        bottom: 6px;
+    }
+    /********** mycopy buybox specific **********/
+    .buybox.mycopy__buybox .buybox__section .buybox__meta {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    /******/
+    .buybox__meta .buybox__product-title {
+        display: inline;
+        font-weight: bold;
+    }
+    .buybox__meta .buybox__list {
+        line-height: 1.3;
+    }
+    .buybox__meta .buybox__list li {
+        position: relative;
+        padding-left: 1em;
+        list-style: none;
+        margin-bottom: 5px;
+    }
+    .buybox__meta .buybox__list li:before {
+        font-size: 1em;
+        content: '\2022';
+        float: left;
+        position: relative;
+        top: .1em;
+        font-family: serif;
+        font-weight: 600;
+        text-align: center;
+        line-height: inherit;
+        color: #666;
+        width: auto;
+        margin-left: -1em;
+    }
+    .buybox__meta .buybox__list li:last-child {
+        margin-bottom: 0;
+    }
+    /********** chapter buybox specific **********/
+    .buybox.chapter__buybox .buybox__section .buybox__meta {
+        border-top: 1px solid #d3d3d3;
+        padding-top: 12px;
+    }
+    .buybox.chapter__buybox .buybox__section .buybox__buy-ebook {
+        margin-bottom: 12px;
+    }
+    /******/
+    /*---------------------------------*/
+    .buybox .buybox__footer {
+        border: 1px solid #b3b3b3;
+        border-top: 0;
+        padding: 8px;
+        position: relative;
+        border-style: dashed;
+        line-height: 1.3;
+    }
+    .buybox .deepdyve {
+        display: none;
+        text-align: left;
+        margin: 8px 12px 0 12px;
+        padding-top: 5px;
+        border-top: 1px solid #d3d3d3;
+    }
+    /*-----------------------------------------------------------------*/
+    @media screen and (min-width: 460px) and (max-width: 1074px) {
+        .buybox__body .buybox__section {
+            display: inline-block;
+            vertical-align: top;
+            padding: 12px 12px;
+            padding-bottom: 0;
+            text-align: left;
+            width: 48%;
+        }
+        .buybox__body .buybox__section {
+            padding-top: 16px;
+            padding-left: 0;
+        }
+        .buybox__section:nth-of-type(2) .buybox__meta {
+            border-left: 1px solid #d3d3d3;
+            padding-left: 28px;
+        }
+        .buybox__section:nth-of-type(2) .buybox__buttons {
+            border-top: 0;
+            padding-top: 0;
+            padding-left: 16px ;
+        }
+        .buybox__buttons .buybox__buy-button {
+        }
+        /********** article buybox specific **********/
+        .buybox.article__buybox .buybox__section:nth-of-type(2) {
+            margin-top: 16px;
+            padding-top: 0;
+        }
+        .buybox.article__buybox .buybox__section:nth-of-type(2) .buybox__meta {
+            margin-top: 40px;
+            padding-top: 0;
+            padding-bottom: 45px;
+        }
+        .buybox.article__buybox .buybox__section:nth-of-type(2) .buybox__meta:only-of-type {
+            margin-top: 8px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+        /********** mycopy buybox specific **********/
+        .buybox.mycopy__buybox .buybox__section:first-child {
+            width: 69%;
+            padding-left: 12px ;
+        }
+        .buybox.mycopy__buybox .buybox__section:last-child {
+            width: 29%;
+        }
+        /********** chapter buybox specific **********/
+        .buybox.chapter__buybox .buybox__body {
+            display: flex;
+            align-items: stretch;
+            padding-left: 12px;
+            padding-top: 12px;
+        }
+        .buybox.chapter__buybox .buybox__section .buybox__meta {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            border-top: 0;
+            padding-top: 0;
+        }
+        /******/
+    }
+    /*-----------------------------------------------------------------*/
+    @media screen and (max-width: 459px) {
+        /********** mycopy buybox specific **********/
+        .buybox.mycopy__buybox .buybox__body {
+            padding-bottom: 5px;
+        }
+        .buybox.mycopy__buybox .buybox__section:last-child {
+            text-align: center;
+            width: 100%;
+        }
+        .buybox.mycopy__buybox .buybox__buttons {
+            display: inline-block;
+            width: 150px ;
+        }
+        /******/
+    }
+    /*-----------------------------------------------------------------*/
+</style>
+
+<div class="buybox chapter__buybox" data-webtrekktrackid="196033507532344" data-webtrekkcontentid="SL-chapter">
+    <div class="buybox__header">
+        <span class="buybox__login">Log in to check access</span>
+    </div>
+    <div class="buybox__body">
+        <div class="buybox__section">
+            <div class="buybox__buttons">
+            
+                <div class="buybox__buy-ebook">
+                    <a data-product-id="978-3-030-03493-1_Intelligent Data Engineering and A" data-tracking-category="ebook" data-ecommerceparam_11="chapter-page" href="https://checkout.springer.com/checkout/add?utm_source=springerlink&amp;utm_medium=referral&amp;utm_campaign=sl-buybox_chapterPage_ebook&amp;isbn=978-3-030-03493-1" class="buybox__buy-button c-button c-button--blue" data-gtm="buybox__buy-button-ebook">
+                        <span class="buybox__buy" data-gtm="buybox__buy-button">Buy eBook</span>
+                    </a>
+                    <div class="buybox__price" data-gtm="buybox__buy-button">
+                        EUR&nbsp;89.24
+                    </div>
+                </div>
+            
+            
+                <form class="buybox__form" action="https://order.springer.com/public/checkout?utm_source=springerlink&amp;utm_medium=referral&amp;utm_campaign=sl-buybox_chapterPage_chapter" method="POST">
+                    
+                        <input type="hidden" name="type" value="chapter">
+                    
+                        <input type="hidden" name="doi" value="10.1007/978-3-030-03493-1_34">
+                    
+                        <input type="hidden" name="isxn" value="978-3-030-03493-1">
+                    
+                        <input type="hidden" name="contenttitle" value="Exploring Coclustering for Serendipity Improvement in Content-Based Recommendation">
+                    
+                        <input type="hidden" name="copyrightyear" value="2018">
+                    
+                        <input type="hidden" name="year" value="2018">
+                    
+                        <input type="hidden" name="authors" value="Andrei Martins Silva, et al.">
+                    
+                        <input type="hidden" name="title" value="Intelligent Data Engineering and Automated Learning – IDEAL 2018">
+                    
+                        <input type="hidden" name="mac" value="178fefab2ba8ca56bce8796e89503295">
+                    
+                        <input type="hidden" name="returnurl" value="https://link.springer.com/chapter/10.1007/978-3-030-03493-1_34">
+                    
+                    <button data-product-id="10.1007/978-3-030-03493-1_34_Exploring Coclustering for Serendi" data-tracking-category="ppv" data-ecommerceparam_11="chapter-page" type="submit" class="buybox__buy-button c-button c-button--blue" data-gtm="buybox__buy-button">
+                        <span class="buybox__buy" data-gtm="buybox__buy-button">Buy paper (PDF)</span>
+                    </button>
+                    <div class="buybox__price" data-gtm="buybox__buy-button">
+                        EUR&nbsp;30.69
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        
+        <div class="buybox__section">
+            <div class="buybox__meta">
+                <ul class="buybox__list">
+                    <li>Instant download</li>
+                    <li>Readable on all devices</li>
+                    <li>Own it forever</li>
+                    <li>Local sales tax included if applicable</li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <div class="buybox__footer">
+    <a class="js-buybox__inst-sub-link" data-gtm="buybox__inst-sub-link" href="https://www.springernature.com/gp/librarians/licensing/license-options?utm_source=springerlink&amp;utm_medium=referral&amp;utm_campaign=sl-buybox_chapterPage_institutionalCustomers">
+        Learn about institutional subscriptions</a>
+</div>
+
+    
+
+</div>
+
+<script>
+(function () {
+    var forEach = function (array, callback, scope) {
+        for (var i = 0; i < array.length; i++) {
+            callback.call(scope, i, array[i]);
+        }
+    };
+
+    var trackDomain = 'springergmbh01.webtrekk.net';
+    var domain = 'link.springer.com';
+    var loadEventSent = false;
+
+    var buyboxRoot = document.getElementsByClassName('buybox')[0];
+    var webtrekkTrackId = buyboxRoot.getAttribute('data-webtrekkTrackId');
+    var webtrekkContentId = buyboxRoot.getAttribute('data-webtrekkContentId');
+
+    function LinkTrack(webtrekkTrackId) {
+        if (!webtrekkTrackId) return;
+
+        var data = {
+            trackDomain: trackDomain,
+            trackId: webtrekkTrackId,
+            domain: domain,
+            contentId: 'springer_com.buybox',
+            customSessionParameter: {
+                2: getBusinessPartnerIds()
+            }
+        };
+
+        if (!window.webtrekkV3 && console) {
+            console.log('No webtrekk found.', data);
+            return;
+        }
+
+        return new webtrekkV3(data);
+    }
+
+    function Track(product, webtrekkTrackId, eCommerceParam_11, action) {
+        if (!product) return;
+
+        var data = {
+            trackDomain: trackDomain,
+            trackId: webtrekkTrackId,
+            domain: domain,
+            contentId: webtrekkContentId,
+            product: product.id,
+            productStatus: action,
+            productCategory: {
+                1: product.trackingCategory
+            },
+            customEcommerceParameter: {
+                9: domain,
+                11: eCommerceParam_11
+            },
+            customSessionParameter: {
+                2: getBusinessPartnerIds()
+            }
+        };
+
+        if (!window.webtrekkV3 && console) {
+            console.log('No webtrekk found.', data);
+            return;
+        }
+
+        return new webtrekkV3(data);
+    }
+
+    function track(trackingConfig) {
+        return function(payload) {
+            if (!trackingConfig) return
+            if (payload) {
+                trackingConfig.sendinfo(payload)
+            } else {
+                trackingConfig.sendinfo()
+            }
+            return true
+        }
+    }
+
+    function trackAddToCart(trackingConfig) {
+        return track(trackingConfig)()
+    }
+
+    function trackOnLoad(trackingConfig) {
+        if (loadEventSent) return;
+        loadEventSent = true;
+        return track(trackingConfig)()
+    }
+
+    function trackSubscription(trackingConfig) {
+        return track(trackingConfig)({linkId: 'inst. subscription info'})
+    }
+
+    function trackDeepDyve(trackingConfig) {
+        return track(trackingConfig)({linkId: 'Rent Article'})
+    }
+
+    function getBusinessPartnerIds() {
+        var businessPartnerIDs = [];
+        try {
+            var ids = window.dataLayer[0]["user"]["license"]["businessPartnerID"];
+            if(ids && ids.length) businessPartnerIDs = ids;
+        } catch(e) {}
+        return businessPartnerIDs.join(";");
+    }
+
+    var bindClickLinkHandle = function (link) {
+        if (!link) return;
+
+        link.addEventListener('click', function (event) {
+            trackSubscription(LinkTrack(webtrekkTrackId));
+        });
+    };
+
+    var bindLoadButtonHandle = function (button) {
+        if (!button) return;
+
+        var productId = button.getAttribute('data-product-id');
+        var trackingCategory = button.getAttribute('data-tracking-category');
+        var eCommerceParam_11 = button.getAttribute('data-eCommerceParam_11');
+
+        window.addEventListener('load', function (event) {
+            trackOnLoad(Track({
+                id: productId,
+                trackingCategory: trackingCategory
+            }, webtrekkTrackId, eCommerceParam_11, 'view'));
+        });
+    };
+
+    var bindClickButtonHandle = function (button) {
+        if (!button) return;
+
+        var productId = button.getAttribute('data-product-id');
+        var trackingCategory = button.getAttribute('data-tracking-category');
+        var eCommerceParam_11 = button.getAttribute('data-eCommerceParam_11');
+
+        button.addEventListener('click', function (event) {
+            trackAddToCart(Track({
+                id: productId,
+                trackingCategory: trackingCategory
+            }, webtrekkTrackId, eCommerceParam_11, 'add'));
+        });
+    };
+
+    var buyButtons = document.getElementsByClassName('buybox__buy-button');
+    forEach(buyButtons, function (index, button) {
+        bindLoadButtonHandle(button);
+        bindClickButtonHandle(button);
+    });
+
+    var sublinks = document.getElementsByClassName('js-buybox__inst-sub-link');
+    forEach(sublinks, function (index, link) {
+        bindClickLinkHandle(link);
+    });
+
+    var bindDeepDyveClickHandle = function (link) {
+        if (!link) return
+
+        link.addEventListener('click', function (event) {
+            trackDeepDyve(LinkTrack(webtrekkTrackId))
+        })
+    }
+
+    var deepDyveLink = document.getElementById('deepdyve-link')
+    bindDeepDyveClickHandle(deepDyveLink)
+})();
+</script>
+
+                                        </div>
+
+                                    <div class="u-js-hide u-js-show-two-col">
+                                        
+        
+
+
+
+
+                                            <div class="citations c-button-dropdown" data-component="SV.Dropdown" data-namespace="citations" aria-label="button with dropdown options">
+        <button id="button-Dropdown-citations-dropdown" type="button" class="c-button-dropdown__button" data-role="button-dropdown__control" aria-pressed="false" aria-expanded="false" aria-controls="Dropdown-citations-dropdown"><span class="u-overflow-ellipsis c-button-dropdown__button-title">
+    <span>Cite</span>
+    <span class="hide-text-small">paper</span>
+</span><span class="c-button-dropdown__icon"></span></button>
+<div class="u-composite-layer c-button-dropdown__container" aria-hidden="true" aria-label="dropdown" id="Dropdown-citations-dropdown"><ul class="citations__content" data-role="button-dropdown__content">
+    <li>
+        <a href="#citeas" data-track="click" data-track-action="Cite as link" data-track-label="Cite dropdown" tabindex="-1">How to cite?</a>
+    </li>
+        <li>
+            <a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-030-03493-1_34?format=refman&amp;flavour=citation" title="Download this paper's citation as a .RIS file" data-track="click" data-track-action="Export citation" data-track-label="RIS" tabindex="-1">
+                <span class="citations__extension" data-gtmlabel="RIS">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"></path></svg>
+                    .RIS
+                </span>
+                <span class="citations__types">
+                        <span>
+                            Papers
+                        </span>
+                        <span>
+                            Reference Manager
+                        </span>
+                        <span>
+                            RefWorks
+                        </span>
+                        <span>
+                            Zotero
+                        </span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-030-03493-1_34?format=endnote&amp;flavour=citation" title="Download this paper's citation as a .ENW file" data-track="click" data-track-action="Export citation" data-track-label="ENW" tabindex="-1">
+                <span class="citations__extension" data-gtmlabel="ENW">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"></path></svg>
+                    .ENW
+                </span>
+                <span class="citations__types">
+                        <span>
+                            EndNote
+                        </span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="https://citation-needed.springer.com/v2/references/10.1007/978-3-030-03493-1_34?format=bibtex&amp;flavour=citation" title="Download this paper's citation as a .BIB file" data-track="click" data-track-action="Export citation" data-track-label="BIB" tabindex="-1">
+                <span class="citations__extension" data-gtmlabel="BIB">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"></path></svg>
+                    .BIB
+                </span>
+                <span class="citations__types">
+                        <span>
+                            BibTeX
+                        </span>
+                        <span>
+                            JabRef
+                        </span>
+                        <span>
+                            Mendeley
+                        </span>
+                </span>
+            </a>
+        </li>
+</ul></div>
+    </div>
+
+                                            
+
+
+
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+                                <div class="skyscraper-ad u-hide" data-component="SpringerLink.GoogleAds" data-namespace="skyscraper">
+        <div class="skyscraper-ad__wrapper">
+            <p class="skyscraper-ad__label">Advertisement</p>
+            <button class="skyscraper-ad__hide" title="Hide this advertisement" data-track="click" data-track-action="Hide advertisement" data-track-label="">Hide</button>
+            <div id="doubleclick-ad" class="skyscraper-ad__ad"></div>
+        </div>
+    </div>
+
+                        </div>
+                    </aside>
+                </div>
+            </main>
+                <footer class="footer u-interface">
+        <div class="footer__aside-wrapper">
+            <div class="footer__content">
+                <div class="footer__aside">
+                    <p class="footer__strapline">Over 10 million scientific documents at your fingertips</p>
+                                <div class="footer__edition c-button-dropdown c-button-dropdown--ghost" data-component="SV.EditionSwitcher" aria-label="button with dropdown options">
+                                    <button id="button-EditionSwitcher-1101051111-dropdown" type="button" title="Switch between Academic &amp; Corporate Edition" class="c-button-dropdown__button" data-role="button-dropdown__control" aria-pressed="false" aria-expanded="false" aria-controls="EditionSwitcher-1101051111-dropdown"><span class="u-overflow-ellipsis c-button-dropdown__button-title">Academic Edition</span><span class="c-button-dropdown__icon"></span></button>
+                                    <div class="u-composite-layer c-button-dropdown__container" aria-hidden="true" aria-label="dropdown" id="EditionSwitcher-1101051111-dropdown"><ul data-role="button-dropdown__content">
+                                        <li class="selected"><a href="https://link.springer.com/siteEdition/link?previousUrl=/chapter/10.1007/978-3-030-03493-1_34&amp;id=siteedition-academic-link" id="siteedition-academic-link" data-track="click" data-track-action="Academic edition" data-track-label="">Academic Edition</a></li>
+                                        <li><a href="https://link.springer.com/siteEdition/rd?previousUrl=/chapter/10.1007/978-3-030-03493-1_34&amp;id=siteedition-corporate-link" id="siteedition-corporate-link" data-track="click" data-track-action="Corporate edition" data-track-label="" tabindex="-1">Corporate Edition</a></li>
+                                    </ul></div>
+                                </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__content">
+            <ul class="footer__nav">
+                <li>
+                    <a href="https://link.springer.com/">Home</a>
+                </li>
+                <li>
+                    <a href="https://link.springer.com/impressum">Impressum</a>
+                </li>
+                <li>
+                    <a href="https://link.springer.com/termsandconditions">Legal information</a>
+                </li>
+                <li>
+                    <a href="https://link.springer.com/privacystatement">Privacy statement</a>
+                </li>
+                <li>
+                    <a href="https://link.springer.com/cookiepolicy">How we use cookies</a>
+                </li>
+                <li>
+                    <a href="https://link.springer.com/accessibility" data-track="click" data-track-action="Accessibility" data-track-label="Footer">Accessibility</a>
+                </li>
+                <li>
+                    <a id="contactus-footer-link" href="https://link.springer.com/contactus" data-track="click" data-track-action="Contact Us" data-track-label="Footer">Contact us</a>
+                </li>
+            </ul>
+            <a class="parent-logo" target="_blank" rel="noopener" href="https://www.springernature.com/" title="Go to Springer Nature">
+                <span class="u-screenreader-only">Springer Nature</span>
+                <svg width="125" height="12" focusable="false" aria-hidden="true">
+                    <image width="125" height="12" src="/springerlink-static/1716009814/images/png/springernature.png" xlink="http://www.w3.org/1999/xlink" xlink:href="/springerlink-static/1716009814/images/svg/springernature.svg">
+                    </image>
+                </svg>
+            </a>
+
+            <p class="footer__copyright">© 2018 Springer Nature Switzerland AG. Part of <a target="_blank" rel="noopener" href="https://www.springernature.com/">Springer Nature</a>.</p>
+                <p class="footer__user-access-info">
+                    <span>Not logged in</span>
+                    <span>Not affiliated</span>
+                    <span>51.171.254.157</span>
+                </p>
+        </div>
+    </footer>
+
+        </div>
+        <script type="text/javascript">
+    (function() {
+        var linkEl = document.querySelector('.js-ctm');
+        var scriptsList = [];
+        var polyfillFeatures = '';
+
+        window.SpringerLink = window.SpringerLink || {};
+        window.SpringerLink.staticLocation = '/springerlink-static/1716009814';
+        window.eventTrackerInstance = null;
+
+        if (window.matchMedia && window.matchMedia(linkEl.media).matches) {
+            (function(h){h.className = h.className.replace('no-js', 'js')})(document.documentElement);
+
+            polyfillFeatures = 'default,fetch,Promise,Object.setPrototypeOf,Object.entries,Number.isInteger,MutationObserver,startsWith,Array.prototype.includes,Array.from,IntersectionObserver';
+
+            scriptsList = [
+                'https://cdn.polyfill.io/v2/polyfill.min.js?features=' + polyfillFeatures + '&flags=gated',
+                window.SpringerLink.staticLocation + '/js/main.js'
+            ];
+
+            scriptsList.forEach(function(script) {
+                var tag = document.createElement('script');
+                tag.async = false;
+                tag.src = script;
+
+                document.body.appendChild(tag);
+            });
+        }
+    })();
+</script><script src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/polyfill.js"></script><script src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/main.js"></script>
+
+    <script>
+    (function() {
+        var linkEl = document.querySelector('.js-ctm');
+        if (window.matchMedia && window.matchMedia(linkEl.media).matches) {
+            var scriptMathJax = document.createElement('script');
+            scriptMathJax.async = false;
+            scriptMathJax.src = '/springerlink-static/1716009814/js/mathJax.js';
+            var s0 = document.getElementsByTagName('script')[0];
+            s0.parentNode.insertBefore(scriptMathJax, s0);
+        }
+    })();
+</script>
+
+
+    <script type="text/javascript" id="googletag-push">
+        
+            var adSlot = '270604982/springerlink/book/chapter';
+        
+
+        var definedSlots = [
+                {slot: [728, 90], containerName: 'doubleclick-leaderboard-ad'},
+                {slot: [160, 600], containerName: 'doubleclick-ad'},
+            {slot: [2, 2], containerName: 'doubleclick-native-ad'}
+        ];
+    </script>
+
+
+        
+        <span id="chat-widget" class="u-hide"></span>
+        
+    
+
+<div id="optanon" class="modern"><div id="optanon-popup-bg"></div><div id="optanon-popup-wrapper" role="dialog" aria-modal="true" tabindex="-1" lang="en-GB"><div id="optanon-popup-top"><a href="#" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Preferences Close Button');" class="optanon-close-link optanon-close optanon-close-ui" title="Close Preference Centre"><div id="optanon-close" style="background: url(https://optanon.blob.core.windows.net/skins/default_flat_bottom_two_button_white/v2/images/optanon-pop-up-close.png);width:34px;height:34px;"></div></a></div><div id="optanon-popup-body"><div id="optanon-popup-body-left"><div id="optanon-popup-body-left-shading"></div><div id="optanon-branding-top-logo" style="background-image: url(https://optanon.blob.core.windows.net/logos/5138/5138:link.springer.com/springer.png) !important;"></div><ul id="optanon-menu"><li class="menu-item-on menu-item-about" title="Your Privacy"><p><a href="#">Your Privacy</a></p></li><li class="menu-item-necessary menu-item-on" title="Strictly Necessary Cookies"><p><a href="#">Strictly Necessary Cookies</a></p></li><li class="menu-item-on menu-item-performance" title="Performance Cookies"><p><a href="#">Performance Cookies</a></p></li><li class="menu-item-on menu-item-functional" title="Functional Cookies"><p><a href="#">Functional Cookies</a></p></li><li class="menu-item-on menu-item-advertising" title="Targeting Cookies"><p><a href="#">Targeting Cookies</a></p></li><li class="menu-item-moreinfo menu-item-off" title="More Information"><p><a target="_blank" href="https://link.springer.com/cookiepolicy" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Preferences Cookie Policy');">More Information</a></p></li></ul></div><div id="optanon-popup-body-right"><h2 aria-label="true">Privacy Preference Centre</h2><h3></h3><div id="optanon-popup-more-info-bar"><div class="optanon-status"><div class="optanon-status-editable"><form><fieldset><p><input type="checkbox" value="check" id="chkMain" checked="checked" class="optanon-status-checkbox"><label for="chkMain">Active</label></p></fieldset></form></div><div class="optanon-status-always-active optanon-status-on"><p>Always Active</p></div></div></div><div id="optanon-main-info-text"></div></div><div class="optanon-bottom-spacer"></div></div><div id="optanon-popup-bottom"> <a href="https://onetrust.com/poweredbyonetrust" target="_blank"><div id="optanon-popup-bottom-logo" style="background: url(https://optanon.blob.core.windows.net/skins/default_flat_bottom_two_button_white/v2/images/cookie-collective-top-bottom.png);width:155px;height:35px;" title="powered by OneTrust"></div></a><div class="optanon-button-wrapper optanon-save-settings-button optanon-close optanon-close-consent"><div class="optanon-white-button-left"></div><div class="optanon-white-button-middle"><a href="#" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Preferences Save Settings');">Save Settings</a></div><div class="optanon-white-button-right"></div></div><div class="optanon-button-wrapper optanon-allow-all-button optanon-allow-all" style="display: none;"><div class="optanon-white-button-left"></div><div class="optanon-white-button-middle"><a href="#" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Preferences Allow All');">Allow All</a></div><div class="optanon-white-button-right"></div></div></div></div></div><div class="optanon-alert-box-wrapper  " style="display:none"><div class="optanon-alert-box-bottom-top"><div class="optanon-alert-box-corner-close"><a class="optanon-alert-box-close" href="#" title="Close Banner" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Banner Close Button');"></a></div></div><div class="optanon-alert-box-bg"><div class="optanon-alert-box-logo"> </div><div class="optanon-alert-box-body"><p>We
+ use cookies to personalise content and ads, to provide social media 
+features and to analyse our traffic. We also share information about 
+your use of our site with our social media, advertising and analytics 
+partners in accordance with our <a href="https://link.springer.com/privacystatement">Privacy Statement</a>. You can manage your preferences in Manage Cookies.</p></div><div class="optanon-clearfix"></div><div class="optanon-alert-box-button-container"><div class="optanon-alert-box-button optanon-button-close"><div class="optanon-alert-box-button-middle"><a class="optanon-alert-box-close" href="#">Close</a></div></div><div class="optanon-alert-box-button optanon-button-allow"><div class="optanon-alert-box-button-middle"><a class="optanon-allow-all" href="#" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Banner Accept Cookies');">OK</a></div></div><div class="optanon-alert-box-button optanon-button-more"><div class="optanon-alert-box-button-middle"><a class="optanon-toggle-display" href="#" onclick="Optanon.TriggerGoogleAnalyticsEvent('OneTrust Cookie Consent', 'Banner Open Preferences');">Manage Cookies</a></div></div></div><div class="optanon-clearfix optanon-alert-box-bottom-padding"></div></div></div><script type="text/javascript" id="eventtracker-init">var eventTrackerBaseUrl="https:\/\/event-tracker.springernature.com",eventTrackerInstance=null;if("undefined"!==eventTrackerBaseUrl){var script=document.createElement("script");script.src=eventTrackerBaseUrl+"/dist/eventTracker.js";script.type="text/javascript";script.async=!0;script.defer=!0;script.onload=function(){eventTrackerInstance=new EventTracker({baseUrl:eventTrackerBaseUrl,platform:google_tag_manager["GTM-WCF9Z9"].macro(13)});dataLayer.push({event:"eventTrackerActive"})};document.body.appendChild(script)};</script><script src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/eventTracker.asc" type="text/javascript" async="" defer="defer"></script><iframe src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/a.html" title="EventTracker" id="event-tracker" style="display:none; visibility:hidden" aria-hidden="true" tabindex="-1" width="0" height="0"></iframe><script type="text/javascript" id="">var data={content_type:google_tag_manager["GTM-WCF9Z9"].macro(40),doi:google_tag_manager["GTM-WCF9Z9"].macro(41),business_partner_ids:google_tag_manager["GTM-WCF9Z9"].macro(42)};eventTrackerInstance&&eventTrackerInstance.sendDisplayEvent(data);</script><button aria-hidden="true" href="javascript:;" title="focus catcher" class="js-focus-catcher u-screenreader-only" tabindex="-1"></button><div style="display: none; visibility: hidden;"><script id="gpt-control-script" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/gpt.js"></script>
+
+<script id="gpt-control-setup">var googletag=googletag||{};googletag.cmd=googletag.cmd||[];</script></div><script type="text/javascript" id="gtm-in-page-section-view">(function(d,z){function n(){for(var a in dataLayer)if(dataLayer.hasOwnProperty(a)&&dataLayer[a]["Event Category"])return dataLayer[a]["Event Category"];return"warning: no event category"}function v(a,b,c,h){"undefined"!==typeof dataLayer?dataLayer.push({event:"Scroll To Section",eventCategory:n(),eventAction:a,eventLabel:b,eventValue:1,eventNonInteraction:h}):("undefined"!==typeof ga&&ga("send","event",n(),a,b,1,{nonInteraction:1}),"undefined"!==typeof _gaq&&_gaq.push(["_trackEvent",n(),a,b,1,!0]))}
+function k(b,g,c,h){if(-1===a[c].cache.indexOf(c+"-"+h)&&document.querySelectorAll(b).length){var f="viewed"===h?document.querySelectorAll(b)[0].getBoundingClientRect().height:0,x=document.querySelectorAll(b)[0].getBoundingClientRect().top+d.pageYOffset;g>=x+f&&(v(p(c)+" "+p(h),b,c,!1),a[c].cache.push(c+"-"+h),q++)}}function r(a){a=document.querySelectorAll(a);return a.length?a[0].offsetHeight||0:0}function m(b,g,c){var f=d.pageYOffset+d.innerHeight;if(q>=w)"handleClick"===g&&d.removeEventListener(b,
+t),"throttle"===g&&d.removeEventListener(b,u);else if(c)setTimeout(function(){0<r(a[c].content)&&(a[c].reached&&k(a[c].content,f,c,"reached"),a[c].viewed&&k(a[c].content,f,c,"viewed"))},10);else for(var e in a)a.hasOwnProperty(e)&&0<r(a[e].content)&&(a[e].reached&&k(a[e].content,f,e,"reached"),a[e].viewed&&k(a[e].content,f,e,"viewed"))}function y(b){b=document.querySelectorAll(a[b].content).length;return 0<b?!0:!1}function p(a){return a.charAt(0).toUpperCase()+a.slice(1)}function u(a,b){var c,f,e,
+g=null,d=0,k=function(){d=new Date;g=null;e=a.apply(c,f)};return function(){var h=new Date;d||(d=h);var l=b-(h-d);c=this;f=arguments;0>=l?(clearTimeout(g),g=null,d=h,e=a.apply(c,f)):g||(g=setTimeout(k,l));return e}}function t(a,b){return function(c){a(c,b)}}var w=0,q=0,a={recommendations:{content:".gtm-recommendations iframe",clickable:".gtm-recommendations .gtm-recommendations__title",exists:!1,reached:!1,viewed:!0,size:0,cache:[]},"abstract":{content:"Section.Abstract",clickable:null,exists:!0,
+reached:!1,viewed:!0,size:0,cache:[]},references:{content:".Bibliography \x3e .content, [id^\x3dBib1] \x3e .content",clickable:".Bibliography \x3e .Heading, [id^\x3dBib1] \x3e .Heading",exists:!0,reached:!0,viewed:!0,size:0,cache:[]},about:{content:"#AboutThisContent",clickable:"#AboutThisContent \x3e #aboutcontent",exists:!1,reached:!1,viewed:!0,size:0,cache:[]}};d.addEventListener("scroll",u(function(){m("scroll","throttle")},500));d.addEventListener("orientationchange",u(function(){m("orientationchange",
+"throttle")},500));for(var b in a)if(a.hasOwnProperty(b)&&(a[b].exists&&a[b].size++,a[b].reached&&a[b].size++,a[b].viewed&&a[b].size++,w+=a[b].size,a[b].exists&&y(b)||!a[b].exists)){a[b].exists&&-1===a[b].cache.indexOf(b+"-exists")&&(v(p(b)+" Exists",a[b].content,b,!0),a[b].cache.push(b+"-exists"),q++);if(0<r(a[b].content)){var l=d.pageYOffset+d.innerHeight;a[b].reached&&k(a[b].content,l,b,"reached");a[b].viewed&&k(a[b].content,l,b,"viewed")}a[b].clickable&&(l=document.querySelectorAll(a[b].clickable)[0])&&
+(l.addEventListener("click",t(function(a,b){m("click","handleClick",b)},b)),l.addEventListener("click",t(function(a,b){13==a.keyCode&&m("click","handleClick",b)},b)))}})(window);</script><script type="text/javascript" id="gtm-krux-control">window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);(function(){var a=document.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===location.protocol?"https:":"http:")+"//cdn.krxd.net/controltag/KDqyaFZ_.js";var b=document.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)})();</script><script type="text/javascript" id="gtm-krux-interchange">window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);(function(){function c(b){b="kxmacmillan_"+b;try{var a=window.localStorage}catch(d){a=null}return a?a[b]||"":navigator.cookieEnabled?(a=document.cookie.match(b+"\x3d([^;]*)"))&&unescape(a[1])||"":""}Krux.user=c("user");Krux.segments=c("segs")?c("segs").split(","):[]})();</script><script type="text/javascript" id="gtm-krux-consent">var allowed=google_tag_manager["GTM-WCF9Z9"].macro(89);allowed=!0===allowed?1:0;Krux("consent:set",{dc:allowed,al:allowed,tg:allowed,cd:!1,sh:!1,re:!1},function(a,b){a&&console.error(a)});</script><script type="text/javascript" id="gtm-gpt-setup">window.Krux||((Krux=function(){Krux.q.push(arguments)}).q=[]);
+googletag.cmd.push(function(){googletag.pubads().setTargeting("doi",google_tag_manager["GTM-WCF9Z9"].macro(90));googletag.pubads().setTargeting("kwrd",google_tag_manager["GTM-WCF9Z9"].macro(91));googletag.pubads().setTargeting("pmc",google_tag_manager["GTM-WCF9Z9"].macro(92));googletag.pubads().setTargeting("BPID",google_tag_manager["GTM-WCF9Z9"].macro(93));googletag.pubads().setTargeting("edition",google_tag_manager["GTM-WCF9Z9"].macro(94));googletag.pubads().setTargeting("sucode",google_tag_manager["GTM-WCF9Z9"].macro(95));googletag.pubads().setTargeting("eissn",google_tag_manager["GTM-WCF9Z9"].macro(96));googletag.pubads().setTargeting("pissn",
+google_tag_manager["GTM-WCF9Z9"].macro(97));googletag.pubads().setTargeting("eisbn",google_tag_manager["GTM-WCF9Z9"].macro(98));googletag.pubads().setTargeting("pisbn",google_tag_manager["GTM-WCF9Z9"].macro(99));googletag.pubads().setTargeting("logged",google_tag_manager["GTM-WCF9Z9"].macro(100));googletag.pubads().setTargeting("EventCategory",google_tag_manager["GTM-WCF9Z9"].macro(101));googletag.pubads().setTargeting("ksg",Krux.segments);googletag.pubads().setTargeting("kuid",Krux.user);googletag.pubads().setRequestNonPersonalizedAds(google_tag_manager["GTM-WCF9Z9"].macro(105)?0:1);googletag.pubads().disableInitialLoad();
+googletag.enableServices()});</script><script type="text/javascript" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/n.html"></script><iframe id="google_osd_static_frame_3307678308542" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;"></iframe><div class="kxhead" data-id="KDqyaFZ_" style="display:none !important;"><span class="kxtag kxinvisible" data-id="20636"><script>
+// this tag is intentionally blank
+</script></span><span class="kxtag kxinvisible" data-id="20637"></span><span class="kxtag kxinvisible" data-id="20638"></span><span class="kxtag kxinvisible" data-id="20651"><script type="text/javascript">Krux('social.init');</script></span><span class="kxtag kxinvisible" data-id="24671"><script>
+(function() {
+
+    Krux('scrape', {
+        'page_attr_Citation_Title_Springer': {
+            'meta_name': 'citation_title'
+        },
+        'page_attr_Citation_DOI_Springer': {
+            'meta_name': 'citation_doi'
+        },
+        'page_attr_Product_Name_Springer': {
+            'meta_name': 'citation_journal_title'
+        },
+        'page_attr_Article_Type_Springer': {
+            'meta_name': 'citation_article_type'
+        },
+        'page_attr_Citation_Author_Springer': {
+            'dom_multi': 'meta[name="citation_author"]:@content'
+        }
+    });
+
+    if (typeof dataLayer !== 'undefined' && dataLayer[0]) {
+        Krux('set', 'page_attr_Article_Keywords_Springer', dataLayer[0].Keywords);
+        Krux('set', 'page_attr_Business_Partner_ID_Springer', dataLayer[0].Bpids);
+        Krux('set', 'page_attr_Business_Partner_Names_Springer', dataLayer[0].Bpnames);
+        Krux('set', 'page_attr__Subject_Codes_Srpinger', dataLayer[0].SubjectCodes);
+    }
+
+})();
+</script></span><span class="kxtag kxinvisible" data-id="28134"><script>
+(function() {
+
+    // cient only wants to collect first two paths
+    Krux('scrape', {
+        'page_attr_Springer_Link_url_path_1': {
+            'url_path': '1'
+        }
+    });
+    Krux('scrape', {
+        'page_attr_Springer_Link_url_path_2': {
+            'url_path': '2'
+        }
+    });
+    // Krux('scrape',{'page_attr_url_path_3':{'url_path':'3'}});
+    // Krux('scrape',{'page_attr_meta_keywords':{meta_name:'keywords'}});
+
+    // Krux('scrape',{'page_attr_domain':{url_domain: '2'}});
+
+})();
+</script></span></div></body><iframe id="kx-proxy-KDqyaFZ_" src="Exploring%20Coclustering%20for%20Serendipity%20Improvement%20in%20Content-Based%20Recommendation%20|%20SpringerLink_files/proxy.html" style="display: none; visibility: hidden; height: 0; width: 0;"></iframe></html>
