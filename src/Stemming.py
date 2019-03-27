@@ -2,50 +2,59 @@ from time import time
 
 import numpy as np
 import pandas as pd
+from nltk.stem import PorterStemmer
+from nltk.stem import WordNetLemmatizer
 
 data_base_dir = '../../datasets/Movielens/'
 data_dir2 = data_base_dir + 'Movielens Latest/ml-latest/'
 data_dir = data_base_dir + 'ml-20m/'
 
-genome_scores = data_dir + 'genome-scores.csv'
+genome_scores = data_dir2 + 'genome-scores.csv'
 genome_tags = data_dir + 'genome-tags.csv'
 movies = data_dir + 'movies.csv'
 ratings = data_dir + 'ratings.csv'
 tags = data_dir + 'tags.csv'
 
+lemmatizer = WordNetLemmatizer()
 
-def map_stemmed_word(x, stemmed_word):
+def map_lemmatized_word(x, lemmatized_word):
     x = x.split()
 
     for w in x:
         w1 = w.replace("(", "")
         w1 = w1.replace(")", "")
 
-        if w1.startswith(stemmed_word):
+        # if w1.startswith(lemmatized_word):
+        #     return True
+        a = str(lemmatizer.lemmatize(w1, pos='a'))
+        r = str(lemmatizer.lemmatize(w1, pos='r'))
+        n = str(lemmatizer.lemmatize(w1, pos='n'))
+        v = str(lemmatizer.lemmatize(w1, pos='v'))
+        s = str(lemmatizer.lemmatize(w1, pos='s'))
+
+        # if str(lemmatizer.lemmatize(w1, pos='v')) == lemmatized_word:
+        #     return True
+        if a == lemmatized_word or r == lemmatized_word or n == lemmatized_word or v == lemmatized_word or s == lemmatized_word:
             return True
 
     return False
 
-def perform_stemming(stemming_phrases, genome_tags_df):
-    stemming_dict = {}
 
-    for sp in stemming_phrases:
-        ending_with_s_condition = genome_tags_df.apply(lambda x: x['tag'].endswith(sp), axis=1).values
+def apply_lemmatization_mapping(stemming_phrases, genome_tags_df):
+    lemma_dict = {}
 
-        candidate_words = genome_tags_df[ending_with_s_condition]['tag'].values
+    candidate_words = genome_tags_df['tag'].values
 
-        for w in candidate_words:
-            stemmed_word = w[:-len(sp)]
+    for w in candidate_words:
+        lemma = lemmatizer.lemmatize(w, pos='v')
+        match_condition = genome_tags_df.apply(lambda x: map_lemmatized_word(x['tag'], lemma), axis=1)
+        mapped_list = genome_tags_df[match_condition]['tag'].values.tolist()
 
-            if (len(stemmed_word) > 2):
-                match_condition = genome_tags_df.apply(lambda x: map_stemmed_word(x['tag'], stemmed_word), axis=1)
+        if len(mapped_list) > 0:
+            lemma_dict[lemma] = genome_tags_df[match_condition]['tag'].values.tolist()
 
-                mapped_list = genome_tags_df[match_condition]['tag'].values.tolist()
+    return lemma_dict
 
-                if len(mapped_list) > 0:
-                    stemming_dict[stemmed_word] = genome_tags_df[match_condition]['tag'].values.tolist()
-
-    return stemming_dict
 
 def drop_singular_value_keys(stemming_dict):
     print("# of Dictionary keys before dropping singular values: %d" % len(stemming_dict))
@@ -90,14 +99,11 @@ def map_similar_values_to_keys(stemming_dict, genome_tags_df):
     # difference
     remaining_tags = np.setdiff1d(all_tags, all_dict_values)
 
-    # TODO remove or keep
-    # remaining_tags = all_tags
-
-    # TODO now apply similar value mapping for remaining tags
+    # now apply similar value mapping for remaining tags
     new_stemming_dict = {}
 
     for stemmed_word in remaining_tags:
-        match_condition = genome_tags_df.apply(lambda x: map_stemmed_word(x['tag'], stemmed_word), axis=1)
+        match_condition = genome_tags_df.apply(lambda x: map_lemmatized_word(x['tag'], stemmed_word), axis=1)
         mapped_list = genome_tags_df[match_condition]['tag'].values.tolist()
 
         if len(mapped_list) > 0:
@@ -145,8 +151,8 @@ def main():
     # TODO think of better stemming phrases
     stemming_phrases = ['ies', 's', 'ed', 'ion']
 
-    # perform stemming
-    stemming_dict = perform_stemming(stemming_phrases, genome_tags_df)
+    # perform lemmatization
+    stemming_dict = apply_lemmatization_mapping(stemming_phrases, genome_tags_df)
 
     remove_redundant_keys(stemming_dict)
 
@@ -156,16 +162,23 @@ def main():
     final_stemming_dict = {**stemming_dict, **new_stemming_dict}
     print("Final Stemming Dictionary: " + str(final_stemming_dict))
     print(len(final_stemming_dict.values()))
+    print_dict_value_count(final_stemming_dict)
 
     # generate new tag genome summed up values for new keys
     genome_scores_df = pd.read_csv(genome_scores)
+    movies_df = pd.read_csv(movies)
+    ratings_df = pd.read_csv(ratings, usecols=range(3),
+                             dtype={'userId': np.int32, 'movieId': np.int32, 'rating': np.float64}, low_memory=False)
+    all_user_ids = ratings_df['userId'].unique()
+    all_movie_ids = movies_df[movies_df['genres'] != '(no genres listed)']['movieId'].unique()
+    genome_scores_df = genome_scores_df[genome_scores_df['movieId'].isin(all_movie_ids)]
     genome_scores_df = genome_scores_df.pivot(index='movieId', columns='tagId', values='relevance')
 
     final_genome_vector_df = generate_genome_term_vector(final_stemming_dict, genome_tags_df, genome_scores_df)
     print(final_genome_vector_df.head())
 
     # TODO enable to save csv file
-    save_csv_flag = False
+    save_csv_flag = True
 
     if save_csv_flag:
         file_name = "movies_genome_vector.csv"

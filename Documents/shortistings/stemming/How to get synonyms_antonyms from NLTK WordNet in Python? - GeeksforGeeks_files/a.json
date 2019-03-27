@@ -1,0 +1,13 @@
+{
+  "0": "#################################################################################################################################",
+  "1": "#                                                                                                                               #",
+  "2": "# IMPORTANT - PLEASE UPDATE YOUR API ENDPOINT                                                                                   #",
+  "3": "#                                                                                                                               #",
+  "4": "# This API endpoint is deprecated and has now been shut down. To keep using the freegeoip API, please update your integration   #",
+  "5": "# to use the new ipstack API endpoint, designed as a simple drop-in replacement.                                                #",
+  "6": "# You will be required to create an account at https://ipstack.com and obtain an API access key.                                #",
+  "7": "#                                                                                                                               #",
+  "8": "# For more information on how to upgrade please visit our Github Tutorial at: https://github.com/apilayer/freegeoip#readme      #",
+  "9": "#                                                                                                                               #",
+  "a": "#################################################################################################################################"
+}
