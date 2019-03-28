@@ -178,7 +178,7 @@ def main():
     print(final_genome_vector_df.head())
 
     # TODO enable to save csv file
-    save_csv_flag = True
+    save_csv_flag = False
 
     if save_csv_flag:
         file_name = "movies_genome_vector.csv"
