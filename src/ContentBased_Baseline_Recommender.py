@@ -7,6 +7,7 @@ from sklearn.preprocessing import MinMaxScaler
 data_base_dir = '../../datasets/Movielens/'
 data_dir2 = data_base_dir + 'Movielens Latest/ml-latest/'
 data_dir = data_base_dir + 'ml-20m/'
+data_output_dir = data_base_dir + 'output/'
 
 genome_scores = data_dir + 'genome-scores.csv'
 genome_tags = data_dir + 'genome-tags.csv'
@@ -28,7 +29,7 @@ class ContentBased_Baseline_Recommender:
 class CB_ClusteringBased_Recommender:
 
     def __init__(self, ratings_df, genome_scores_df, user_term_vector_df, item_item_similarities_df, K=20,
-                 n_neighbours=20, n_clusters=8, relevant_movies_threshold=0.2):
+                 n_neighbours=20, n_clusters=8, relevant_movies_threshold=0.2, random_state=171450):
         """
 
         :param ratings_df: Ratings df, original as read from Movielens dataset
@@ -45,7 +46,7 @@ class CB_ClusteringBased_Recommender:
         self.K = K
         self.n_neighbours = n_neighbours
         self.item_item_similarities_df = item_item_similarities_df
-        self.kmeans_instance = KMeans(n_clusters=n_clusters)
+        self.kmeans_instance = KMeans(n_clusters=n_clusters, random_state=random_state)
         self.relevant_movies_threshold = relevant_movies_threshold
 
     def recommend_movies(self, user_id, K=None):
@@ -64,17 +65,17 @@ class CB_ClusteringBased_Recommender:
             = self.choose_appropriate_clusters_for_diversification(clusters_series)
 
         # decide ratio of movies selected from similar clusters to movies selected from sparse clusters
-        N_movies_similar = int(self.K / self.relevant_movies_threshold)
+        N_movies_similar = int(self.K * self.relevant_movies_threshold)
         N_movies_per_dense_cluster = int(N_movies_similar / above_mean_cluster_index.size)
 
         # existing greedy re-ranking approach for movies in sparse clusters
         N_movies_diverse = self.K - N_movies_similar
 
+        # RL1 - Recommendation List from Dense clusters
         dense_cluster_recommendations = list()
 
         # fetch n_neighbors for each movie in target_clusters
-        previous_recommendations_count = 0  # denotes number of movies recommended from previous cluster
-        N_movies = 0
+        previous_recommendations_count = N_movies_per_dense_cluster  # denotes number of movies recommended from previous cluster
         for cluster in above_mean_cluster_index:
             # find best K movies for each movie in a cluster
             # TODO rank according to highest diversity or decide best approach to re-rank these movies
@@ -82,35 +83,43 @@ class CB_ClusteringBased_Recommender:
             # movies from this cluster
             watched_movies = clusters_series[cluster]
             # if less movies are recommended from previous cluster(s), automatically recommend N extra movies
-            N_movies = N_movies + N_movies_per_dense_cluster + (
-                    N_movies_per_dense_cluster - previous_recommendations_count)
+            N_movies = N_movies_per_dense_cluster + max(0, N_movies_per_dense_cluster - previous_recommendations_count)
 
             recommended_movies = self.find_similar_movies_to_dense_cluster(watched_movies, user_id, N_movies)
             dense_cluster_recommendations.extend(recommended_movies.tolist())
 
             # actual number of movies recommended from this cluster
-            N_movies = recommended_movies.size
+            # difference indicates N movies yet to be recommended
+            previous_recommendations_count = recommended_movies.size
 
         # In case if movies recommended form dense clusters are less than intended
         N_movies_diverse = N_movies_diverse + len(dense_cluster_recommendations) - N_movies_similar
 
-        for cluster in below_mean_cluster_index:
-            # greedy-re-ranking algorithm, based on rating, diversity, similarity to watched and user profile.
-            # movies from this cluster
-            watched_movies = clusters_series[cluster]
+        # greedy-re-ranking algorithm, based on rating, diversity, similarity to watched and user profile.
+        # movies from this cluster
+        # RL2 - Recommendation List from Sparse clusters
+        sparse_cluster_recommendations = list()
 
-            pass
+        # get all watched movies from clusters below mean
+        watched_movies = list()
+        for cluster in below_mean_cluster_index:
+            watched_movies.extend(clusters_series[cluster])
+
+        sparse_cluster_recommendations.extend(
+            self.find_similar_movies_to_sparse_cluster(watched_movies, user_id, N_movies_diverse, clusters_series))
 
         # rank similar movies for each cluster, and select top-N from each cluster
-
         # duplicate processing, keep one with the top cluster rank
+        dense_cluster_recommendations.extend(sparse_cluster_recommendations)
+
+        return dense_cluster_recommendations
 
     def find_similar_movies_to_sparse_cluster(self, watched_movies, user_id, N_movies_diverse, clusters_series):
         # TODO test
         ranking_df = pd.DataFrame()
 
         for watched_movie_id in watched_movies:
-            similar_movies = self.item_item_similarities_df[watched_movie_id].sort_values(ascending=False)[:K]
+            similar_movies = self.item_item_similarities_df[watched_movie_id].sort_values(ascending=False)[:self.n_neighbours]
 
             similar_movies_df = pd.DataFrame(similar_movies)
             similar_movies_df['movieId'] = similar_movies_df.index
@@ -141,7 +150,7 @@ class CB_ClusteringBased_Recommender:
         movie_ratings_dict = candidate_movie_ratings_df['rating'].to_dict()
 
         def assign_rating(x):
-            x['R_cu'] = movie_ratings_dict[x['Candidate Movie Id']]
+            x['R_cu'] = movie_ratings_dict[x['watched_movie_id']]
 
             return x
 
@@ -149,8 +158,8 @@ class CB_ClusteringBased_Recommender:
 
         ranking_df = ranking_df.apply(lambda x: assign_rating(x), axis=1)
 
-        # TODO add cluster rank as well
-        ranks = ranking_df.loc[:, ['S_c', 'S_u', 'diversity', 'R_cu']].rank(method='dense')
+        # add cluster rank as well, remove this line
+        # ranks = ranking_df.loc[:, ['S_c', 'S_u', 'diversity', 'R_cu']].rank(method='dense')
 
         # ranking formula
         # TODO add cluster ranking, also check how to calculate spearman ranking rather than below formula
@@ -164,29 +173,58 @@ class CB_ClusteringBased_Recommender:
             return x
 
         cluster_size_df['size'] = None
-        cluster_size_df.apply(lambda x: process(x), axis=1)
-        cluster_size_df['rank'] = cluster_size_df.rank(method='dense').astype(np.int)
+        cluster_size_df = cluster_size_df.apply(lambda x: process(x), axis=1)
 
-        # The '\' sign indicates continuation of code from next line
-        ranking_df['composite_score'] = ranking_df['R_cu'] * ranking_df['diversity'] \
-                                        * ranking_df['S_u'] * ranking_df['S_c']
+        # smaller the cluster size, higher the score
+        cluster_size_df['C_i'] = cluster_size_df.rank(method='dense', ascending=False).astype(np.int)
 
-        def assign_cluster_rank(x):
-            x['cluster_rank'] = self.get_movie_cluster_rank(x['movieId'], clusters_series, cluster_size_df)
+        def assign_cluster_score(x):
+            x['C_i'] = self.get_movie_cluster_score(x['watched_movie_id'], clusters_series, cluster_size_df)
             return x
 
-        ranking_df['cluster_rank'] = None
-        ranking_df.apply(lambda x: assign_cluster_rank(x), axis=1)
+        ranking_df['C_i'] = None
+        ranking_df = ranking_df.apply(lambda x: assign_cluster_score(x), axis=1)
+
+        # The '\' sign indicates continuation of code from next line
+        # TODO rework on this equation,
+        #   consider something like (R_cu * rank(R_cu) + diversity * rank(diversity) + (S_u) * rank(S_u) + (S_c) * rank(S_c) + C_i
+        ranking_df['composite_score'] = ranking_df['R_cu'] * ranking_df['diversity'] \
+                                        * ranking_df['S_u'] * ranking_df['S_c'] * ranking_df['C_i']
 
         sorted_scores_df = ranking_df.sort_values('composite_score', ascending=False)
+        sorted_scores_df.to_csv(data_output_dir + "ranking_composite1.csv")
+
+        ranking_df['rank(R_cu)'] = ranking_df['R_cu'].rank(method='dense')
+        ranking_df['rank(diversity)'] = ranking_df['diversity'].rank(method='dense')
+        ranking_df['rank(S_u)'] = ranking_df['S_u'].rank(method='dense')
+        ranking_df['rank(S_c)'] = ranking_df['S_c'].rank(method='dense')
+
+        # TODO rework on this equation,
+        #   consider something like (R_cu * rank(R_cu) + diversity * rank(diversity) + (S_u) * rank(S_u) + (S_c) * rank(S_c) + C_i
+        # TODO check difference in df rank reordering with that from above formula
+        ranking_df['composite_score'] = ranking_df['R_cu'] * ranking_df['rank(R_cu)'] + ranking_df['diversity'] * ranking_df['rank(diversity)'] \
+                                        + ranking_df['S_u'] * ranking_df['rank(S_u)'] + ranking_df['S_c'] * ranking_df['rank(S_c)'] + ranking_df['C_i']
+
+        sorted_scores_df = ranking_df.sort_values('composite_score', ascending=False)
+        sorted_scores_df.to_csv(data_output_dir + "ranking_composite2.csv")
+
+        # TODO ranking experiment 3:
+        ranking_df.drop(['composite_score', 'rank(R_cu)', 'rank(diversity)', 'rank(S_u)', 'rank(S_c)'], axis=1, inplace=True)
+        exp3_df = ranking_df.sort_values(['S_c', 'S_u', 'diversity', 'R_cu', 'C_i'], ascending=False)
+        exp3_df.to_csv(data_output_dir + "ranking_composite3.csv")
+
+        exp4_df = ranking_df.sort_values(['S_c', 'diversity', 'S_u', 'C_i', 'R_cu'], ascending=False)
+        exp3_df.to_csv(data_output_dir + "ranking_composite4.csv")
+
+        print("Dataframes similarity:", exp3_df.equals(exp4_df))
 
         return sorted_scores_df.loc[:, ['movieId']][:N_movies_diverse].values.reshape(1, -1)[0]
 
     @staticmethod
-    def get_movie_cluster_rank(movieId, clusters_series, cluster_size_df):
+    def get_movie_cluster_score(movieId, clusters_series, cluster_size_df):
         for cluster in clusters_series.index.tolist():
             if movieId in clusters_series[cluster]:
-                return cluster_size_df.loc[cluster, ['rank']].values[0]
+                return cluster_size_df.loc[cluster, ['C_i']].values[0]
 
         return 0
 
@@ -201,7 +239,7 @@ class CB_ClusteringBased_Recommender:
             similar_movies_df = pd.DataFrame(similar_movies)
             similar_movies_df['movieId'] = similar_movies_df.index
             # similar_movies_df['watched_movie_id'] = similar_movies.name
-            similar_movies_df.columns = ['movieId']
+            similar_movies_df.columns = ['S_c', 'movieId']
             similar_movies_df.reset_index(drop=True, inplace=True)
 
             ranking_df = ranking_df.append(similar_movies_df, ignore_index=True)
@@ -227,7 +265,7 @@ class CB_ClusteringBased_Recommender:
         #   or whether multiple columns should be considered while ranking these movies
         ranking_df.sort_values('diversity', ascending=False, inplace=True)
 
-        return ranking_df.loc[:, ['movieId']][:N_movies_per_dense_cluster].values
+        return ranking_df.loc[:, ['movieId']][:N_movies_per_dense_cluster].values.reshape(1, -1)[0]
 
     def fetch_n_neighbors_for_target_clusters(self, target_clusters, all_cluster):
         """
@@ -297,8 +335,7 @@ class CB_ClusteringBased_Recommender:
     def get_users_watched_movies(self, user_id):
         user_movies_d = {}
 
-        for uid in range(31, 50):
-            user_movies_d[uid] = self.ratings_df[self.ratings_df['userId'] == user_id]['movieId'].values.tolist()
+        user_movies_d[user_id] = self.ratings_df[self.ratings_df['userId'] == user_id]['movieId'].values.tolist()
 
         return user_movies_d
 
@@ -332,7 +369,8 @@ def main():
 
     genome_scores_df = pd.read_csv(genome_scores)
     genome_scores_df = genome_scores_df.pivot(index='movieId', columns='tagId', values='relevance')
-    genome_score_movies = genome_scores_df['movieId'].unique()
+    # genome_score_movies = genome_scores_df['movieId'].unique()
+    genome_score_movies = genome_scores_df.index.unique().values
 
     ratings_df = pd.read_csv(ratings, usecols=range(3),
                              dtype={'userId': np.int64, 'movieId': np.int64, 'rating': np.float64}, low_memory=False)
@@ -347,6 +385,11 @@ def main():
     item_item_similarity_df = pd.DataFrame(item_item_distances, index=genome_scores_df.index,
                                            columns=genome_scores_df.index)
     print(item_item_distances)
+
+    # recommender = ContentBased_Baseline_Recommender()
+    recommender = CB_ClusteringBased_Recommender(ratings_df, genome_scores_df, user_genome_vector_df, item_item_similarity_df)
+    recommended_movies = recommender.recommend_movies(1)
+    print(recommended_movies)
 
     # movies_vector = genome_scores_df.values
     #
