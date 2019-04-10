@@ -33,7 +33,18 @@ class ContentBased_Baseline_Recommender:
     # TODO recommend using lemmatized tag-genome term vector
 
     def __init__(self):
-        pass
+        movies_genome_vector_df = None
+        movies_lemmatized_genome_vector_df = None
+        movies_genre_binary_term_vector_df = None
+        movies_genre_integer_term_vector_df = None
+
+        # ml-20m setup
+        # load all movies in df,
+        # load tag-genome scores df
+        # filter movies only under tag-genome df
+        # filter-out movies with (no genres listed)
+        # store final list of movie ID's
+        # udpate genome_scores_df, ratings_df and movies_df to only keep updated movie ID's
 
 
 # TODO create enum to allow selection between ranking algorithms

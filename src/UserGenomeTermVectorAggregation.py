@@ -16,7 +16,6 @@ tags = data_dir + 'tags.csv'
 genres = data_dir + 'u.genre'
 
 
-
 def main():
     stemmed = 'stemmed'
     unstemmed = 'unstemmed'
