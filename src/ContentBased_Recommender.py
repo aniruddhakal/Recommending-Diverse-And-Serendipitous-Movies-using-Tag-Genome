@@ -1,9 +1,11 @@
+from enum import Enum
 import numpy as np
 import pandas as pd
 from sklearn.metrics import pairwise_distances, silhouette_score
 from sklearn.cluster import KMeans
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.cluster import AgglomerativeClustering
+from DataLoaderPreprocessor import DataLoaderPreprocessor
 from time import time
 
 data_base_dir = '../../datasets/Movielens/'
@@ -25,6 +27,20 @@ user_unstemmed_genome_vector = data_dir + 'user_unstemmed_genome_terms_df_gzip'
 user_stemmed_genome_vector = data_dir + 'user_stemmed_genome_terms_df_gzip'
 
 
+class BaselineRecommender_VectorType:
+    # user binary terms, movie binary terms
+    GENRE_BINARY = 1
+
+    # user integer terms, movie binary terms
+    GENRE_INTEGER = 2
+
+    # user lemmatized terms, movie lemmatized terms
+    GENOME_LEMMATIZED = 3
+
+    # user full genome terms, movie full genome terms
+    GENOME_FULL = 4
+
+
 class ContentBased_Baseline_Recommender:
     # TODO recommend using genre binary term vector
     # TODO recommend using genre integer/float normalized term vector
@@ -32,11 +48,28 @@ class ContentBased_Baseline_Recommender:
     # TODO recommend using tag-genome term vector
     # TODO recommend using lemmatized tag-genome term vector
 
-    def __init__(self):
-        movies_genome_vector_df = None
-        movies_lemmatized_genome_vector_df = None
-        movies_genre_binary_term_vector_df = None
-        movies_genre_integer_term_vector_df = None
+    def __init__(self, dataset='ml20m', movie_genre_binary_terms_df=None, movies_lemmatized_genome_term_vector_df=None,
+                 user_int_genre_terms_df=None, user_genre_binary_term_vector_df=None,
+                 user_lemmatized_genome_terms_df=None, user_full_genome_terms_df=None, ratings_df=None,
+                 genome_scores_df=None, movies_df=None):
+        self.dataset = dataset
+
+        self.movies_genre_binary_term_vector_df = movie_genre_binary_terms_df
+        self.movies_lemmatized_genome_vector_df = movies_lemmatized_genome_term_vector_df
+        self.movies_full_genome_vector_df = genome_scores_df
+
+        self.user_int_genre_terms_df = user_int_genre_terms_df
+        self.user_genre_binary_term_vector_df = user_genre_binary_term_vector_df
+
+        self.user_full_genome_terms_df = user_full_genome_terms_df
+        self.user_lemmatized_genome_terms_df = user_lemmatized_genome_terms_df
+
+        self.ratings_df = ratings_df
+        self.movies_df = movies_df
+        self.movie_average_ratings_df = None
+
+        if self.ratings_df is not None:
+            self.movie_average_ratings_df = self.ratings_df.loc[:, ['movieId', 'rating']].groupby('movieId').mean()
 
         # ml-20m setup
         # load all movies in df,
@@ -45,6 +78,85 @@ class ContentBased_Baseline_Recommender:
         # filter-out movies with (no genres listed)
         # store final list of movie ID's
         # udpate genome_scores_df, ratings_df and movies_df to only keep updated movie ID's
+
+    def load_all_data(self):
+        data_loader = DataLoaderPreprocessor()
+        self.ratings_df, self.movies_full_genome_vector_df, self.movies_df \
+            = data_loader.load_and_preprocess_data(self.dataset)
+
+        self.movie_genre_binary_terms_df, self.movies_lemmatized_genome_vector_df, self.user_int_genre_terms_df, \
+        self.user_genre_binary_term_vector_df, self.user_lemmatized_genome_terms_df, self.user_full_genome_terms_df \
+            = data_loader.load_and_process_user_data(self.dataset)
+
+        self.movie_average_ratings_df = self.ratings_df.loc[:, ['movieId', 'rating']].groupby('movieId').mean()
+
+    def get_vector_type_mapping(self, string_vector_type):
+        """
+
+        :param string_vector_type:
+        :raises: ValueError if there's incorrect value in string_vector_type
+        :return:
+        """
+        vector_types_dict = {
+            'genre_binary': BaselineRecommender_VectorType.GENRE_BINARY,
+            'genre_int': BaselineRecommender_VectorType.GENRE_INTEGER,
+            'genome_lemmatized': BaselineRecommender_VectorType.GENOME_LEMMATIZED,
+            'genome_full': BaselineRecommender_VectorType.GENOME_FULL
+        }
+
+        vector_type = vector_types_dict[string_vector_type]
+
+        if vector_type is None:
+            raise ValueError("%s is invalid argument, please read documentation for right choice of arguments")
+
+        return vector_types_dict[vector_type]
+
+    def recommend_k_most_similar_movies(self, user_id, K, vector_type=BaselineRecommender_VectorType.GENRE_BINARY):
+        """
+
+        :param K: Number of best similar movies to recommend
+        :param vector_type: string {'genre_binary', 'genre_int', 'genome_lemmatized', 'genome_full'}or enum of type BaselineRecommender_VectorType,
+         with possible values for enum being {GENRE_BINARY, GENRE_INTEGER, GENOME_LEMMATIZED, GENOME_FULL}
+        :return:
+        """
+
+        if type(vector_type is str):
+            vector_type = self.get_vector_type_mapping(vector_type)
+
+        recommend_k_similar_movies = {
+            BaselineRecommender_VectorType.GENRE_BINARY: self.user_binary_genre_based_recommendations(user_id, K),
+            BaselineRecommender_VectorType.GENRE_INTEGER: self.user_integer_genre_based_recommendations(user_id, K),
+            BaselineRecommender_VectorType.GENOME_FULL: self.user_full_genome_based_recommendations(user_id, K),
+            BaselineRecommender_VectorType.GENOME_LEMMATIZED: self.user_lemmatized_genome_based_recommendations(user_id,
+                                                                                                                K)
+        }
+
+        return recommend_k_similar_movies[vector_type]
+
+    def user_binary_genre_based_recommendations(self, user_id, K):
+
+        return None
+
+    def user_integer_genre_based_recommendations(self, user_id, K):
+        user_term_vector = self.user_int_genre_terms_df.loc[user_id, :].values.reshape(1, -1)
+
+        distances = pairwise_distances(user_term_vector, self.movies_genre_binary_term_vector_df.values,
+                                       metric='cosine')
+
+        nearest_movies_df = pd.DataFrame(index=self.movie_genre_binary_terms_df.index.values)
+        nearest_movies_df['distances'] = distances.reshape(-1, 1)
+
+        # ties in ranking are breaked based on average rating across all users
+        nearest_movies_df['avg_rating'] = self.movie_average_ratings_df['rating']
+        nearest_movies_df.sort_values(['distances', 'avg_rating'], ascending=False, inplace=True)
+
+        return nearest_movies_df.index.values[:K]
+
+    def user_full_genome_based_recommendations(self, user_id, K):
+        return None
+
+    def user_lemmatized_genome_based_recommendations(self, user_id, K):
+        return None
 
 
 # TODO create enum to allow selection between ranking algorithms
@@ -169,6 +281,7 @@ class CB_ClusteringBased_Recommender:
         return dense_cluster_recommendations
 
     def find_similar_movies_to_sparse_cluster(self, watched_movies, user_id, N_movies_diverse, clusters_series):
+        # TODO do experiment by changing R_cu to be average rating across all users rather than
         # TODO figure out better way to remove duplicate movies from recommendations
         # TODO test
         ranking_df = pd.DataFrame()
@@ -279,9 +392,9 @@ class CB_ClusteringBased_Recommender:
 
         # TODO ranking experiment4:
         ranking_df['composite_score_weighted'] = self.Rcu_weight * ranking_df['rank(R_cu)'] \
-                                                  + self.div_weight * ranking_df['rank(diversity)'] \
-                                                  + self.Su_weight * ranking_df['rank(S_u)'] \
-                                                  + self.Ci_weight * ranking_df['C_i']
+                                                 + self.div_weight * ranking_df['rank(diversity)'] \
+                                                 + self.Su_weight * ranking_df['rank(S_u)'] \
+                                                 + self.Ci_weight * ranking_df['C_i']
 
         sorted_scores_df = ranking_df.sort_values('composite_score_weighted', ascending=False)
 
@@ -411,7 +524,8 @@ class CB_ClusteringBased_Recommender:
 
         # exhaustively check silhouette scores for each cluster sizes and select the cluster size with the highest score.
         for cluster_size in range(2, n_movies - 1, 1):
-            clustering_result = AgglomerativeClustering(n_clusters=cluster_size, affinity='euclidean', linkage='ward').fit_predict(
+            clustering_result = AgglomerativeClustering(n_clusters=cluster_size, affinity='euclidean',
+                                                        linkage='ward').fit_predict(
                 user_movie_tags_df.values[:n_movies])
             score = silhouette_score(user_movie_tags_df.values[:n_movies], clustering_result)
 

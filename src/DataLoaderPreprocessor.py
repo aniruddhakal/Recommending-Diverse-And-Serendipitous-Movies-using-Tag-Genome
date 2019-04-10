@@ -22,8 +22,9 @@ class DataLoaderPreprocessor:
 
                 'movie_genre_binary_terms': 'movie_genre_binary_term_vector_df_bz2',
                 'user_int_genre_terms': 'user_int_terms_df_bz2',
-                'user_stemmed_genome_terms': 'user_lemmatized_genome_terms_df_gzip',
-                'user_unstemmed_genome_terms': 'user_full_genome_terms_df_gzip',
+                'user_genre_binary_terms': 'user_genre_binary_terms_df_bz2',
+                'user_lemmatized_genome_terms': 'user_lemmatized_genome_terms_df_gzip',
+                'user_full_genome_terms': 'user_full_genome_terms_df_gzip',
                 'movies_genome_term_vector': 'movies_lemmatized_genome_vector_df_bz2'
             },
             'serendipity2018': {
@@ -36,15 +37,6 @@ class DataLoaderPreprocessor:
 
         self.all_movie_ids = None
 
-    def init_file_names(self, dataset):
-        dataset_dir = self.init_dataset(dataset)
-
-        genome_scores = dataset_dir + self.dataset_files[dataset]['genome_scores']
-        movies = dataset_dir + self.dataset_files[dataset]['movies']
-        ratings = dataset_dir + self.dataset_files[dataset]['ratings']
-
-        return genome_scores, movies, ratings
-
     def init_dataset(self, dataset):
         dataset_dir = None
 
@@ -55,41 +47,32 @@ class DataLoaderPreprocessor:
 
         return dataset_dir
 
+    def init_file_names(self, dataset):
+        dataset_dir = self.init_dataset(dataset)
+
+        genome_scores = dataset_dir + self.dataset_files[dataset]['genome_scores']
+        movies = dataset_dir + self.dataset_files[dataset]['movies']
+        ratings = dataset_dir + self.dataset_files[dataset]['ratings']
+
+        return genome_scores, movies, ratings
+
     def init_user_data_file_names(self, dataset):
         dataset_dir = self.init_dataset(dataset)
 
         movie_genre_binary_terms = dataset_dir + self.data_output_dir + self.dataset_files[dataset][
             'movie_genre_binary_terms']
         user_int_genre_terms = dataset_dir + self.data_output_dir + self.dataset_files[dataset]['user_int_genre_terms']
-        user_stemmed_genome_terms = dataset_dir + self.data_output_dir + self.dataset_files[dataset][
-            'user_stemmed_genome_terms']
-        user_unstemmed_genome_terms = dataset_dir + self.data_output_dir + self.dataset_files[dataset][
-            'user_unstemmed_genome_terms']
+        user_genre_binary_terms = dataset_dir + self.data_output_dir + self.dataset_files[dataset][
+            'user_genre_binary_terms']
+
+        user_lemmatized_genome_terms = dataset_dir + self.data_output_dir + self.dataset_files[dataset][
+            'user_lemmatized_genome_terms']
+        user_full_genome_terms = dataset_dir + self.data_output_dir + self.dataset_files[dataset][
+            'user_full_genome_terms']
         movies_genome_term_vector = dataset_dir + self.data_output_dir + self.dataset_files[dataset][
             'movies_genome_term_vector']
 
-        return movie_genre_binary_terms, movies_genome_term_vector, user_int_genre_terms, user_stemmed_genome_terms, user_unstemmed_genome_terms
-
-    def load_and_process_user_data(self, dataset):
-        print("Loading generated data: genre, genome-lemmatized, genome-full term vectors for users and movies...")
-
-        if self.all_movie_ids is None:
-            self.load_and_preprocess_data(dataset)
-
-        movie_genre_binary_terms, movies_genome_term_vector, user_int_genre_terms, user_lemmatized_genome_terms, user_full_genome_terms \
-            = self.init_user_data_file_names(dataset)
-        # TODO load
-
-        print(
-            "Preprocessing generated data: genre, genome-lemmatized, genome-full term vectors for users and movies...")
-
-        movie_genre_binary_terms_df = pd.read_pickle(movie_genre_binary_terms, compression='bz2')
-        user_int_genre_terms_df = pd.read_pickle(user_int_genre_terms, compression='bz2')
-        user_lemmatized_genome_terms_df = pd.read_pickle(user_lemmatized_genome_terms, compression='gzip')
-        user_full_genome_terms_df = pd.read_pickle(user_full_genome_terms, compression='gzip')
-        movies_genome_term_vector_df = pd.read_pickle(movies_genome_term_vector, compression='bz2')
-
-        return movie_genre_binary_terms_df, movies_genome_term_vector_df, user_int_genre_terms_df, user_lemmatized_genome_terms_df, user_full_genome_terms_df
+        return movie_genre_binary_terms, movies_genome_term_vector, user_int_genre_terms, user_genre_binary_terms, user_lemmatized_genome_terms, user_full_genome_terms
 
     def load_and_preprocess_data(self, dataset):
         print("Loading data: movies, ratings, genome-scores...")
@@ -127,3 +110,25 @@ class DataLoaderPreprocessor:
         genome_scores_df = genome_scores_df.pivot(index='movieId', columns='tagId', values='relevance')
 
         return ratings_df, genome_scores_df, movies_df
+
+    def load_and_process_user_data(self, dataset):
+        print("Loading generated data: genre, genome-lemmatized, genome-full term vectors for users and movies...")
+
+        if self.all_movie_ids is None:
+            self.load_and_preprocess_data(dataset)
+
+        movie_genre_binary_terms, movies_genome_term_vector, user_int_genre_terms, user_genre_binary_terms, user_lemmatized_genome_terms, user_full_genome_terms \
+            = self.init_user_data_file_names(dataset)
+        # TODO load
+
+        print(
+            "Preprocessing generated data: genre, genome-lemmatized, genome-full term vectors for users and movies...")
+
+        movie_genre_binary_terms_df = pd.read_pickle(movie_genre_binary_terms, compression='bz2')
+        user_int_genre_terms_df = pd.read_pickle(user_int_genre_terms, compression='bz2')
+        user_lemmatized_genome_terms_df = pd.read_pickle(user_lemmatized_genome_terms, compression='gzip')
+        user_full_genome_terms_df = pd.read_pickle(user_full_genome_terms, compression='gzip')
+        movies_lemmatized_genome_term_vector_df = pd.read_pickle(movies_genome_term_vector, compression='bz2')
+        user_genre_binary_term_vector_df = pd.read_pickle(user_genre_binary_terms, compression='bz2')
+
+        return movie_genre_binary_terms_df, movies_lemmatized_genome_term_vector_df, user_int_genre_terms_df, user_genre_binary_term_vector_df, user_lemmatized_genome_terms_df, user_full_genome_terms_df
