@@ -2,21 +2,21 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 from time import time
-import swifter
+from DataLoaderPreprocessor import DataLoaderPreprocessor
 
 data_base_dir = '../../datasets/Movielens/'
-data_dir2 = data_base_dir + 'Movielens Latest/ml-latest/'
+target_directory = 'output/'
+
+dataset = 'ml20m'
+# dataset = 'serendipity2018'
+
 data_dir = data_base_dir + 'ml-20m/'
 
-genome_scores = data_dir2 + 'genome-scores.csv'
-genome_tags = data_dir + 'genome-tags.csv'
-movies = data_dir + 'movies.csv'
-ratings = data_dir + 'ratings.csv'
-tags = data_dir + 'tags.csv'
-genres = data_dir + 'u.genre'
+if dataset is 'serendipity2018':
+    data_dir = data_base_dir + 'serendipity-sac2018/'
 
 
-def main():
+def main(save_flag):
     stemmed = 'stemmed'
     unstemmed = 'unstemmed'
 
@@ -27,32 +27,24 @@ def main():
     else:
         target_file = 'user_unstemmed_genome_terms_df_gzip'
 
-    ratings_df = pd.read_csv(ratings, usecols=range(3),
-                             dtype={'userId': np.int32, 'movieId': np.int32, 'rating': np.float64}, low_memory=False)
-    movies_df = pd.read_csv(movies)
-    all_user_ids = ratings_df['userId'].unique()
-    all_movie_ids = movies_df[movies_df['genres'] != '(no genres listed)']['movieId'].unique()
-
-    genome_scores_df = pd.read_csv(genome_scores)
-    genome_scores_df = genome_scores_df[genome_scores_df['movieId'].isin(all_movie_ids)]
+    data_loader = DataLoaderPreprocessor(base_dir=data_base_dir, ml20m='ml-20m/', serendipity2018='serendipity-sac2018/')
+    ratings_df, genome_scores_df, movies_df = data_loader.load_and_preprocess_data(dataset)
 
     file_name = "movies_genome_vector.csv"
     if option == stemmed:
         genomes_term_vector_df = pd.read_csv(data_dir + file_name, index_col=0)
     else:
-        genomes_term_vector_df = genome_scores_df.pivot(index='movieId', columns='tagId', values='relevance')
+        genomes_term_vector_df = genome_scores_df
 
-    no_genre_movies = movies_df[movies_df['genres'] == '(no genres listed)']['movieId'].unique()
-
-    # omit movies where value is (no genres listed)
-    movies_with_genre = np.setdiff1d(ratings_df['movieId'].unique(), no_genre_movies)
-    ratings_df = ratings_df[ratings_df['movieId'].isin(movies_with_genre)]
-
+    # TODO change approach to p-mean based approach
+    #  user genome term vector aggregation
     def generate_user_genome_terms(user_id):
         user_id % 1000 == 0 and print(user_id)
         users_movies = ratings_df[ratings_df['userId'] == user_id]['movieId'].values
 
         return genomes_term_vector_df.loc[users_movies].mean()
+
+    all_user_ids = ratings_df['userId'].unique()
 
     user_genome_terms_df = pd.DataFrame(index=all_user_ids)
     user_genome_terms_df[0] = ''
@@ -63,9 +55,10 @@ def main():
     print("Total Time %s seconds" % str(finish))
 
     # save pickle file
-    user_genome_terms_df.to_pickle(data_dir + target_file, compression='gzip')
+    save_flag and user_genome_terms_df.to_pickle(data_dir + target_directory + target_file, compression='gzip')
     print(user_genome_terms_df.head())
 
 
 if __name__ == '__main__':
-    main()
+    save_flag = False
+    main(save_flag)
