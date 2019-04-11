@@ -12,11 +12,11 @@ data_dir2 = data_base_dir + 'Movielens Latest/ml-latest/'
 data_dir = data_base_dir + 'ml-20m/'
 output_dir = 'output/'
 
-genome_scores = data_dir2 + 'genome-scores.csv'
+# genome_scores = data_dir + 'genome-scores.csv'
 genome_tags = data_dir + 'genome-tags.csv'
-movies = data_dir + 'movies.csv'
-ratings = data_dir + 'ratings.csv'
-tags = data_dir + 'tags.csv'
+# movies = data_dir + 'movies.csv'
+# ratings = data_dir + 'ratings.csv'
+# tags = data_dir + 'tags.csv'
 
 lemmatizer = WordNetLemmatizer()
 
@@ -118,7 +118,7 @@ def map_similar_values_to_keys(stemming_dict, genome_tags_df):
 
 def generate_genome_term_vector(final_stemming_dict, genome_tags_df, genome_scores_df):
     new_keys = list(final_stemming_dict.keys())
-    stemmed_tag_relevance_df = pd.DataFrame(index=genome_scores_df.index, columns=sorted(new_keys))
+    lemmatized_tag_relevance_df = pd.DataFrame(index=genome_scores_df.index, columns=sorted(new_keys))
 
     start_time = time()
 
@@ -130,16 +130,16 @@ def generate_genome_term_vector(final_stemming_dict, genome_tags_df, genome_scor
         # calculate the target sum for underlying tags
         return genome_scores_df.loc[movie_ids, mapped_tag_ids].sum(axis=1)
 
-    stemmed_tag_relevance_df = stemmed_tag_relevance_df.apply(lambda x: process(x.index, x.name))
+    lemmatized_tag_relevance_df = lemmatized_tag_relevance_df.apply(lambda x: process(x.index, x.name))
 
     # alternative for huge data, using swifter, to utilize multi-cores
-    # stemmed_tag_relevance_df = stemmed_tag_relevance_df.swifter.apply(lambda x: process(x.index, x.name))
+    # lemmatized_tag_relevance_df = lemmatized_tag_relevance_df.swifter.apply(lambda x: process(x.index, x.name))
 
     finish = time() - start_time
 
     print("Total time taken %f" % finish + " seconds")
 
-    return stemmed_tag_relevance_df
+    return lemmatized_tag_relevance_df
 
 
 def save_csv(filename, dataframe):

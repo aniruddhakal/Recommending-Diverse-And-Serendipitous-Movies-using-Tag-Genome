@@ -133,26 +133,27 @@ class ContentBased_Baseline_Recommender:
                                                                                                                 K)
         }
 
-        return recommend_k_similar_movies[vector_type]
+        return recommend_k_similar_movies[vector_type].tolist()
 
     def user_binary_genre_based_recommendations(self, user_id, K):
-        return self.genre_based_term_vec_recommendations(user_id, K, self.user_genre_binary_term_vector_df,
-                                                         self.movies_genre_binary_term_vector_df)
+        return self.term_vec_based_recommendations(user_id, K, self.user_genre_binary_term_vector_df,
+                                                   self.movies_genre_binary_term_vector_df)
 
     def user_integer_genre_based_recommendations(self, user_id, K):
-        return self.genre_based_term_vec_recommendations(user_id, K, self.user_int_genre_terms_df,
-                                                         self.movies_genre_binary_term_vector_df)
+        return self.term_vec_based_recommendations(user_id, K, self.user_int_genre_terms_df,
+                                                   self.movies_genre_binary_term_vector_df)
 
     def user_full_genome_based_recommendations(self, user_id, K):
-        return self.genre_based_term_vec_recommendations(user_id, K, self.user_full_genome_terms_df,
-                                                         self.movies_full_genome_vector_df)
+        return self.term_vec_based_recommendations(user_id, K, self.user_full_genome_terms_df,
+                                                   self.movies_full_genome_vector_df)
 
     def user_lemmatized_genome_based_recommendations(self, user_id, K):
-        return self.genre_based_term_vec_recommendations(user_id, K, self.user_lemmatized_genome_terms_df,
-                                                         self.movies_lemmatized_genome_vector_df)
+        return self.term_vec_based_recommendations(user_id, K, self.user_lemmatized_genome_terms_df,
+                                                   self.movies_lemmatized_genome_vector_df)
 
-    def genre_based_term_vec_recommendations(self, user_id, K, user_term_vector_df, movies_term_vector_df):
+    def term_vec_based_recommendations(self, user_id, K, user_term_vector_df, movies_term_vector_df):
         user_term_vector = user_term_vector_df.loc[user_id, :].values.reshape(1, -1)
+        movies_term_vector_df.dropna(inplace=True)
 
         distances = pairwise_distances(user_term_vector, movies_term_vector_df.values,
                                        metric='cosine')
@@ -203,6 +204,10 @@ class CB_ClusteringBased_Recommender:
         self.Su_weight = 0.20
         self.div_weight = 0.15
         self.Ci_weight = 0.15
+        # self.Rcu_weight = 0.1
+        # self.Su_weight = 0.3
+        # self.div_weight = 0.5
+        # self.Ci_weight = 0.1
 
         # TODO do all the necessary preprocessing under this method
         self.preprocess_data()
@@ -242,7 +247,14 @@ class CB_ClusteringBased_Recommender:
         N_movies_similar = int(self.K * self.relevant_movies_threshold)
         # TODO fix this, when K=8, this is being 0 for user ID 1 on ml20m dataset,
         #  failing only for full-genome df, not for lemmatized, check why not failing for lemmatized
-        N_movies_per_dense_cluster = int(N_movies_similar / above_mean_cluster_index.size)
+        #   divide by zero error in some cases, unknown cases though
+        above_mean_cluster_index_size = above_mean_cluster_index.size
+        if above_mean_cluster_index.size is 0:
+            print(">>>zero above mean clusters for user: ", user_id)
+            # TODO should it be zero in this case?, why there isn't any above mean cluster?
+            above_mean_cluster_index_size = 1
+
+        N_movies_per_dense_cluster = int(N_movies_similar / above_mean_cluster_index_size)
 
         # existing greedy re-ranking approach for movies in sparse clusters
         N_movies_diverse = self.K - N_movies_similar
