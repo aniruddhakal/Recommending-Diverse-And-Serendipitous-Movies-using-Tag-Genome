@@ -145,7 +145,6 @@ def generate_genome_term_vector(final_stemming_dict, genome_tags_df, genome_scor
 def save_csv(filename, dataframe):
     dataframe.to_csv(filename)
 
-
 def main():
     # preparing tag_genomes mapping
     genome_tags_df = pd.read_csv(genome_tags)
@@ -156,32 +155,32 @@ def main():
     # stemming_phrases = ['ies', 's', 'ed', 'ion']
 
     # perform lemmatization
-    stemming_dict = apply_lemmatization_mapping(genome_tags_df)
+    lemmatization_dict = apply_lemmatization_mapping(genome_tags_df)
 
-    remove_redundant_keys(stemming_dict)
+    remove_redundant_keys(lemmatization_dict)
 
     # apply similar value mapping for remaining values
-    new_stemming_dict = map_similar_values_to_keys(stemming_dict, genome_tags_df)
+    new_lemmatization_dict = map_similar_values_to_keys(lemmatization_dict, genome_tags_df)
 
-    final_stemming_dict = {**stemming_dict, **new_stemming_dict}
-    print("Final Stemming Dictionary: " + str(final_stemming_dict))
-    print(len(final_stemming_dict.values()))
-    print_dict_value_count(final_stemming_dict)
+    final_lemmatization_dict = {**lemmatization_dict, **new_lemmatization_dict}
+    print("Final Stemming Dictionary: " + str(final_lemmatization_dict))
+    print(len(final_lemmatization_dict.values()))
+    print_dict_value_count(final_lemmatization_dict)
 
     dataset = 'ml20m'
     data_loader = DataLoaderPreprocessor(base_dir=data_base_dir, ml20m='ml-20m/',
                                          serendipity2018='serendipity-sac2018/')
     ratings_df, genome_scores_df, movies_df = data_loader.load_and_preprocess_data(dataset)
 
-    final_genome_vector_df = generate_genome_term_vector(final_stemming_dict, genome_tags_df, genome_scores_df)
+    final_genome_vector_df = generate_genome_term_vector(final_lemmatization_dict, genome_tags_df, genome_scores_df)
     print(final_genome_vector_df.head())
 
     # TODO enable to save csv file
     save_csv_flag = True
 
     if save_csv_flag:
-        file_name = "movies_genome_vector_df_gzip"
-        final_genome_vector_df.to_pickle(data_dir + output_dir + file_name, compression='gzip')
+        file_name = "movies_lemmatized_genome_vector_df_bz2"
+        final_genome_vector_df.to_pickle(data_dir + output_dir + file_name, compression='bz2')
         # save_csv(data_dir + output_dir + file_name, final_genome_vector_df)
 
 

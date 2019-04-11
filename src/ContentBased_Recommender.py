@@ -84,7 +84,7 @@ class ContentBased_Baseline_Recommender:
         self.ratings_df, self.movies_full_genome_vector_df, self.movies_df \
             = data_loader.load_and_preprocess_data(self.dataset)
 
-        self.movie_genre_binary_terms_df, self.movies_lemmatized_genome_vector_df, self.user_int_genre_terms_df, \
+        self.movies_genre_binary_term_vector_df, self.movies_lemmatized_genome_vector_df, self.user_int_genre_terms_df, \
         self.user_genre_binary_term_vector_df, self.user_lemmatized_genome_terms_df, self.user_full_genome_terms_df \
             = data_loader.load_and_process_user_data(self.dataset)
 
@@ -119,8 +119,10 @@ class ContentBased_Baseline_Recommender:
          with possible values for enum being {GENRE_BINARY, GENRE_INTEGER, GENOME_LEMMATIZED, GENOME_FULL}
         :return:
         """
+        if self.ratings_df is None:
+            self.load_all_data()
 
-        if type(vector_type is str):
+        if type(vector_type) is str:
             vector_type = self.get_vector_type_mapping(vector_type)
 
         recommend_k_similar_movies = {
@@ -134,16 +136,28 @@ class ContentBased_Baseline_Recommender:
         return recommend_k_similar_movies[vector_type]
 
     def user_binary_genre_based_recommendations(self, user_id, K):
-
-        return None
+        return self.genre_based_term_vec_recommendations(user_id, K, self.user_genre_binary_term_vector_df,
+                                                         self.movies_genre_binary_term_vector_df)
 
     def user_integer_genre_based_recommendations(self, user_id, K):
-        user_term_vector = self.user_int_genre_terms_df.loc[user_id, :].values.reshape(1, -1)
+        return self.genre_based_term_vec_recommendations(user_id, K, self.user_int_genre_terms_df,
+                                                         self.movies_genre_binary_term_vector_df)
 
-        distances = pairwise_distances(user_term_vector, self.movies_genre_binary_term_vector_df.values,
+    def user_full_genome_based_recommendations(self, user_id, K):
+        return self.genre_based_term_vec_recommendations(user_id, K, self.user_full_genome_terms_df,
+                                                         self.movies_full_genome_vector_df)
+
+    def user_lemmatized_genome_based_recommendations(self, user_id, K):
+        return self.genre_based_term_vec_recommendations(user_id, K, self.user_lemmatized_genome_terms_df,
+                                                         self.movies_lemmatized_genome_vector_df)
+
+    def genre_based_term_vec_recommendations(self, user_id, K, user_term_vector_df, movies_term_vector_df):
+        user_term_vector = user_term_vector_df.loc[user_id, :].values.reshape(1, -1)
+
+        distances = pairwise_distances(user_term_vector, movies_term_vector_df.values,
                                        metric='cosine')
 
-        nearest_movies_df = pd.DataFrame(index=self.movie_genre_binary_terms_df.index.values)
+        nearest_movies_df = pd.DataFrame(index=movies_term_vector_df.index.values)
         nearest_movies_df['distances'] = distances.reshape(-1, 1)
 
         # ties in ranking are breaked based on average rating across all users
@@ -151,12 +165,6 @@ class ContentBased_Baseline_Recommender:
         nearest_movies_df.sort_values(['distances', 'avg_rating'], ascending=False, inplace=True)
 
         return nearest_movies_df.index.values[:K]
-
-    def user_full_genome_based_recommendations(self, user_id, K):
-        return None
-
-    def user_lemmatized_genome_based_recommendations(self, user_id, K):
-        return None
 
 
 # TODO create enum to allow selection between ranking algorithms
@@ -170,7 +178,7 @@ class CB_ClusteringBased_Recommender:
     # TODO p-median problem to infer user's taste based on tag-genomes.
 
     def __init__(self, ratings_df, genome_scores_df, user_term_vector_df, item_item_similarities_df, K=20,
-                 n_neighbours=20, n_clusters=8, relevant_movies_threshold=0.2, random_state=171450):
+                 n_neighbours=50, n_clusters=8, relevant_movies_threshold=0.2, random_state=171450):
         """
 
         :param ratings_df: Ratings df, original as read from Movielens dataset
@@ -213,6 +221,8 @@ class CB_ClusteringBased_Recommender:
     def recommend_movies(self, user_id, K=None):
         # TODO choose movies only above threshold_rating
         # TODO omit movies without genres (no genres listed) - to compare with genre based approach
+        if K is not None:
+            self.K = K
 
         # extract list of movies watched by this user
         user_movies_d = self.get_users_watched_movies(user_id)
@@ -230,6 +240,8 @@ class CB_ClusteringBased_Recommender:
 
         # decide ratio of movies selected from similar clusters to movies selected from sparse clusters
         N_movies_similar = int(self.K * self.relevant_movies_threshold)
+        # TODO fix this, when K=8, this is being 0 for user ID 1 on ml20m dataset,
+        #  failing only for full-genome df, not for lemmatized, check why not failing for lemmatized
         N_movies_per_dense_cluster = int(N_movies_similar / above_mean_cluster_index.size)
 
         # existing greedy re-ranking approach for movies in sparse clusters
