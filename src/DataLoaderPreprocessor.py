@@ -117,6 +117,8 @@ class DataLoaderPreprocessor:
         self.genome_scores_df = self.genome_scores_df.loc[self.all_movie_ids, :]
         self.movies_df = self.movies_df[self.movies_df['movieId'].isin(self.all_movie_ids)]
 
+        # TODO choose movies only above threshold_rating
+
         return self.ratings_df, self.genome_scores_df, self.movies_df
 
     def load_and_process_user_data(self, dataset):

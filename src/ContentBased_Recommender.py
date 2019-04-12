@@ -200,17 +200,20 @@ class CB_ClusteringBased_Recommender:
 
         # Weighted ranking
         # TODO - remove hardcoding
-        self.Rcu_weight = 0.40
-        self.Su_weight = 0.20
-        self.div_weight = 0.15
-        self.Ci_weight = 0.15
+        # self.Rcu_weight = 0.40
+        # self.Su_weight = 0.20
+        # self.div_weight = 0.15
+        # self.Ci_weight = 0.15
+
         # self.Rcu_weight = 0.1
         # self.Su_weight = 0.3
         # self.div_weight = 0.5
         # self.Ci_weight = 0.1
 
-        # TODO do all the necessary preprocessing under this method
-        self.preprocess_data()
+        self.Rcu_weight = 0.05
+        self.Su_weight = 0.1
+        self.div_weight = 0.8
+        self.Ci_weight = 0.05
 
     def set_ranking_weights(self, Rcu_weight, Su_weight, div_weight, Ci_weight):
         self.Rcu_weight = Rcu_weight
@@ -218,14 +221,71 @@ class CB_ClusteringBased_Recommender:
         self.div_weight = div_weight
         self.Ci_weight = Ci_weight
 
-    def preprocess_data(self):
-        # TODO choose movies only above threshold_rating
-        # TODO omit movies without genres (no genres listed) - to compare with genre based approach
-        pass
+    def recommend_movies2(self, user_id, K=None):
+        if K is not None:
+            self.K = K
+
+        # extract list of movies watched by this user m_u
+        user_movies_d = self.get_users_watched_movies(user_id)
+
+        # extract tag-genomes for movies watched by user
+        user_movie_tags_df = self.genome_scores_df[self.genome_scores_df.index.isin(user_movies_d[user_id])]
+
+        # create clusters_series for movies watched by user
+        clusters_series = self.form_clusters(user_id, user_movies_d, user_movie_tags_df)
+
+        target_clusters, cluster_ranks, above_mean_cluster_index, below_mean_cluster_index \
+            = self.choose_appropriate_clusters_for_diversification(clusters_series)
+
+        N_movies_similar = int(self.K * self.relevant_movies_threshold)
+        N_movies_diverse = self.K - N_movies_similar
+
+        sparse_cluster_recommendations = list()
+
+        # get all watched movies from clusters below mean
+        watched_movies = list()
+        for cluster in below_mean_cluster_index:
+            watched_movies.extend(clusters_series[cluster])
+
+        # initially all movies similar to sparse clusters are chosen
+        if len(watched_movies) > 0:
+            sparse_cluster_recommendations.extend(
+                self.find_similar_movies_to_sparse_cluster(watched_movies, user_id, clusters_series))
+
+        if len(sparse_cluster_recommendations) < N_movies_diverse:
+            N_movies_similar += (N_movies_diverse - len(sparse_cluster_recommendations))
+
+        # now choose N similar movies
+        N_movies_per_dense_cluster = int(N_movies_similar / above_mean_cluster_index.size)
+        # RL1 - Recommendation List from Dense clusters
+        dense_cluster_recommendations = list()
+
+        # fetch n_neighbors for each movie in target_clusters
+        previous_recommendations_count = N_movies_per_dense_cluster  # denotes number of movies recommended from previous cluster
+        for cluster in above_mean_cluster_index:
+            # find best K movies for each movie in a cluster
+            # TODO rank according to highest diversity or decide best approach to re-rank these movies
+
+            # movies from this cluster
+            watched_movies = clusters_series[cluster]
+            # if less movies are recommended from previous cluster(s), automatically recommend N extra movies
+            N_movies = N_movies_per_dense_cluster + max(0, N_movies_per_dense_cluster - previous_recommendations_count)
+
+            recommended_movies = self.find_similar_movies_to_dense_cluster(watched_movies, user_id, N_movies)
+            dense_cluster_recommendations.extend(recommended_movies.tolist())
+
+            # actual number of movies recommended from this cluster
+            # difference indicates N movies yet to be recommended
+            previous_recommendations_count = recommended_movies.size
+
+        similar_movies_count = len(dense_cluster_recommendations)
+        N_movies_diverse = (self.K - similar_movies_count)
+        dense_cluster_recommendations.extend(sparse_cluster_recommendations[: N_movies_diverse])
+
+        return dense_cluster_recommendations
 
     def recommend_movies(self, user_id, K=None):
         # TODO choose movies only above threshold_rating
-        # TODO omit movies without genres (no genres listed) - to compare with genre based approach
         if K is not None:
             self.K = K
 
@@ -239,7 +299,7 @@ class CB_ClusteringBased_Recommender:
         clusters_series = self.form_clusters(user_id, user_movies_d, user_movie_tags_df)
 
         # select right clusters_series to target:
-        # TODO udpate optimal cluster selection technique
+        # udpated optimal cluster selection technique
         target_clusters, cluster_ranks, above_mean_cluster_index, below_mean_cluster_index \
             = self.choose_appropriate_clusters_for_diversification(clusters_series)
 
@@ -295,8 +355,9 @@ class CB_ClusteringBased_Recommender:
         for cluster in below_mean_cluster_index:
             watched_movies.extend(clusters_series[cluster])
 
-        sparse_cluster_recommendations.extend(
-            self.find_similar_movies_to_sparse_cluster(watched_movies, user_id, N_movies_diverse, clusters_series))
+        if len(watched_movies) > 0:
+            sparse_cluster_recommendations.extend(
+                self.find_similar_movies_to_sparse_cluster(watched_movies, user_id, N_movies_diverse, clusters_series))
 
         # rank similar movies for each cluster, and select top-N from each cluster
         # duplicate processing, keep one with the top cluster rank
@@ -304,7 +365,7 @@ class CB_ClusteringBased_Recommender:
 
         return dense_cluster_recommendations
 
-    def find_similar_movies_to_sparse_cluster(self, watched_movies, user_id, N_movies_diverse, clusters_series):
+    def find_similar_movies_to_sparse_cluster(self, watched_movies, user_id, clusters_series):
         # TODO do experiment by changing R_cu to be average rating across all users rather than
         # TODO figure out better way to remove duplicate movies from recommendations
         # TODO test
@@ -343,6 +404,8 @@ class CB_ClusteringBased_Recommender:
         movie_ratings_dict = candidate_movie_ratings_df['rating'].to_dict()
 
         def assign_rating(x):
+            # TODO rather than user's own rating, assign average rating across all users,
+            #  and watch the impact
             x['R_cu'] = movie_ratings_dict[x['watched_movie_id']]
 
             return x
@@ -429,7 +492,7 @@ class CB_ClusteringBased_Recommender:
         sorted_scores_df.drop_duplicates('m_id', inplace=True)
         sorted_scores_df.drop(columns='m_id', inplace=True)
 
-        return sorted_scores_df.index.values[:N_movies_diverse].reshape(1, -1)[0]
+        return sorted_scores_df.index.values.reshape(1, -1)[0]
 
     @staticmethod
     def get_movie_cluster_score(movieId, clusters_series, cluster_size_df):
@@ -528,7 +591,7 @@ class CB_ClusteringBased_Recommender:
 
         # choose clusters with only up to median sizes
         # choosing all clusters
-        below_mean_clusters_df = cluster_size_df[cluster_size_df['size'] <= cluster_size_df['size'].mean()]
+        below_mean_clusters_df = cluster_size_df[cluster_size_df['size'] < cluster_size_df['size'].mean()]
         below_mean_cluster_index = below_mean_clusters_df.index.values
 
         above_mean_cluster_index = np.setdiff1d(cluster_size_df.index.values, below_mean_cluster_index)

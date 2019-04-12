@@ -158,20 +158,19 @@ def update_recommendation_results_dict(recommendation_results_dict, recommendati
 
 
 def plot_graph(evaluation_results_df, save_flag=False, save_path=None):
-    combined_result_df = evaluation_results_df.groupby(['userId', 'model']).mean()
-    combined_result_df.groupby('model').mean().plot(kind='bar')
-
-    # TODO show or save the graph
+    plt.clf()
+    evaluation_results_df.plot(kind='bar')
     plt.tight_layout()
     plt.legend(framealpha=0.2)
 
+    # show or save the graph
     if save_flag:
         plt.savefig(save_path, dpi=300)
     else:
         plt.show()
 
 
-def main(dataset, K, user_list, save_flag, save_path):
+def main(dataset, K, relevant_movies_threshold, user_list, save_flag, save_path):
     recommendation_results_dict = {
         'main_model_lemmatized': list(),
         'main_model_full': list(),
@@ -212,9 +211,9 @@ def main(dataset, K, user_list, save_flag, save_path):
 
         recommender_lemmatized = CB_ClusteringBased_Recommender(ratings_df, movies_lemmatized_genome_term_vector_df,
                                                                 user_lemmatized_genome_terms_df,
-                                                                item_item_similarity_df)
+                                                                item_item_similarity_df, relevant_movies_threshold=relevant_movies_threshold)
 
-        recommended_movies = recommender_lemmatized.recommend_movies(user_id, K=K)
+        recommended_movies = recommender_lemmatized.recommend_movies2(user_id, K=K)
 
         # update recommendations for this user
         update_recommendation_results_dict(recommendation_results_dict, recommended_movies,
@@ -229,9 +228,9 @@ def main(dataset, K, user_list, save_flag, save_path):
 
         recommender_full = CB_ClusteringBased_Recommender(ratings_df, genome_scores_df,
                                                           user_full_genome_terms_df,
-                                                          item_item_similarity_df)
+                                                          item_item_similarity_df, relevant_movies_threshold=relevant_movies_threshold)
 
-        recommended_movies = recommender_full.recommend_movies(user_id, K=K)
+        recommended_movies = recommender_full.recommend_movies2(user_id, K=K)
 
         # update recommendations for this user
         update_recommendation_results_dict(recommendation_results_dict, recommended_movies,
@@ -265,7 +264,21 @@ def main(dataset, K, user_list, save_flag, save_path):
 
     # evaluate all models and produce results
     evaluation_results_df = experiments.evaluate_all_models(experimental_users_list, recommendation_results_dict, K)
-    plot_graph(evaluation_results_df, save_flag, save_path)
+
+    # mean plot
+    combined_result_df = evaluation_results_df.groupby(['userId', 'model']).mean()
+    combined_result_df = combined_result_df.groupby('model').mean()
+    plot_graph(combined_result_df, save_flag, save_path + '_mean_plot')
+
+    # median plot
+    combined_result_df = evaluation_results_df.groupby(['userId', 'model']).median()
+    combined_result_df = combined_result_df.groupby('model').median()
+    plot_graph(combined_result_df, save_flag, save_path + '_median_plot')
+
+    # # mode plot
+    # combined_result_df = evaluation_results_df.groupby(['userId', 'model']).mode()
+    # combined_result_df = combined_result_df.groupby('model').mode()
+    # plot_graph(combined_result_df, save_flag, save_path + '_mode_plot')
 
 
 if __name__ == '__main__':
@@ -274,8 +287,9 @@ if __name__ == '__main__':
 
     experimental_users_list = range(1, 20)
     # experimental_users_list = [9, 10, 11, 12, 13, 14]
-    # experimental_users_list = [14]
+    # experimental_users_list = [6]
     save_flag = True
-    save_path = ml20m + 'output/across_20_users_all_same_weights.png'
+    save_path = ml20m + 'output/for_20_users_relevantMoviesThreshold0_05_highDiv0_8'
+    relevant_movies_threshold = 0.05
 
-    main(dataset, K, experimental_users_list, save_flag, save_path)
+    main(dataset, K, relevant_movies_threshold, experimental_users_list, save_flag, save_path)
