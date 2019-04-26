@@ -38,7 +38,9 @@ def map_lemmatized_word(x, lemmatized_word):
 
         # if str(lemmatizer.lemmatize(w1, pos='v')) == lemmatized_word:
         #     return True
-        if a == lemmatized_word or r == lemmatized_word or n == lemmatized_word or v == lemmatized_word or s == lemmatized_word:
+        if a == lemmatized_word or r == lemmatized_word \
+                or n == lemmatized_word or v == lemmatized_word \
+                or s == lemmatized_word:
             return True
 
     return False
@@ -51,7 +53,8 @@ def apply_lemmatization_mapping(genome_tags_df):
 
     for w in candidate_words:
         lemma = lemmatizer.lemmatize(w, pos='v')
-        match_condition = genome_tags_df.apply(lambda x: map_lemmatized_word(x['tag'], lemma), axis=1)
+        match_condition = genome_tags_df.apply(lambda x: map_lemmatized_word(x['tag'], lemma),
+                                               axis=1)
         mapped_list = genome_tags_df[match_condition]['tag'].values.tolist()
 
         if len(mapped_list) > 0:
@@ -107,7 +110,8 @@ def map_similar_values_to_keys(stemming_dict, genome_tags_df):
     new_stemming_dict = {}
 
     for stemmed_word in remaining_tags:
-        match_condition = genome_tags_df.apply(lambda x: map_lemmatized_word(x['tag'], stemmed_word), axis=1)
+        match_condition = genome_tags_df.apply(
+            lambda x: map_lemmatized_word(x['tag'], stemmed_word), axis=1)
         mapped_list = genome_tags_df[match_condition]['tag'].values.tolist()
 
         if len(mapped_list) > 0:
@@ -118,7 +122,8 @@ def map_similar_values_to_keys(stemming_dict, genome_tags_df):
 
 def generate_genome_term_vector(final_stemming_dict, genome_tags_df, genome_scores_df):
     new_keys = list(final_stemming_dict.keys())
-    lemmatized_tag_relevance_df = pd.DataFrame(index=genome_scores_df.index, columns=sorted(new_keys))
+    lemmatized_tag_relevance_df = pd.DataFrame(index=genome_scores_df.index,
+                                               columns=sorted(new_keys))
 
     start_time = time()
 
@@ -130,7 +135,8 @@ def generate_genome_term_vector(final_stemming_dict, genome_tags_df, genome_scor
         # calculate the target sum for underlying tags
         return genome_scores_df.loc[movie_ids, mapped_tag_ids].sum(axis=1)
 
-    lemmatized_tag_relevance_df = lemmatized_tag_relevance_df.apply(lambda x: process(x.index, x.name))
+    lemmatized_tag_relevance_df = lemmatized_tag_relevance_df.apply(
+        lambda x: process(x.index, x.name))
 
     # alternative for huge data, using swifter, to utilize multi-cores
     # lemmatized_tag_relevance_df = lemmatized_tag_relevance_df.swifter.apply(lambda x: process(x.index, x.name))
@@ -145,7 +151,8 @@ def generate_genome_term_vector(final_stemming_dict, genome_tags_df, genome_scor
 def save_csv(filename, dataframe):
     dataframe.to_csv(filename)
 
-def main():
+
+def main(file_name, load_explicitly_as_df, compression='bz2'):
     # preparing tag_genomes mapping
     genome_tags_df = pd.read_csv(genome_tags)
     genome_tags_df.set_index(genome_tags_df['tagId'].values, drop=True, inplace=True)
@@ -167,22 +174,35 @@ def main():
     print(len(final_lemmatization_dict.values()))
     print_dict_value_count(final_lemmatization_dict)
 
-    dataset = 'ml20m'
-    data_loader = DataLoaderPreprocessor(base_dir=data_base_dir, ml20m='ml-20m/',
-                                         serendipity2018='serendipity-sac2018/')
-    ratings_df, genome_scores_df, movies_df = data_loader.load_and_preprocess_data(dataset)
+    if not load_explicitly_as_df:
+        dataset = 'ml20m'
+        data_loader = DataLoaderPreprocessor(base_dir=data_base_dir, ml20m='ml-20m/',
+                                             serendipity2018='serendipity-sac2018/')
+        genome_scores_df = data_loader.load_and_preprocess_data(dataset, ['genomes'])[0]
+    else:
+        genome_scores_df = pd.read_pickle(data_dir + output_dir + file_name, compression=compression)
 
-    final_genome_vector_df = generate_genome_term_vector(final_lemmatization_dict, genome_tags_df, genome_scores_df)
+    final_genome_vector_df = generate_genome_term_vector(final_lemmatization_dict, genome_tags_df,
+                                                         genome_scores_df)
     print(final_genome_vector_df.head())
 
     # TODO enable to save csv file
     save_csv_flag = True
 
     if save_csv_flag:
-        file_name = "movies_lemmatized_genome_vector_df_bz2"
-        final_genome_vector_df.to_pickle(data_dir + output_dir + file_name, compression='bz2')
+        final_genome_vector_df.to_pickle(data_dir + output_dir + 'movies_lemmatized_' + file_name,
+                                         compression='bz2')
         # save_csv(data_dir + output_dir + file_name, final_genome_vector_df)
 
 
 if __name__ == '__main__':
-    main()
+    # file_name = "movies_lemmatized_genome_vector_df_bz2"
+    file_name = "threshold_0.4_float_movie_genomes_bz2"
+    compression = 'bz2'
+    load_explicitly_as_df = True
+
+    start_time = time()
+    main(file_name, load_explicitly_as_df, compression)
+    finish_time = time() - start_time
+
+    print("Total time taken %f seconds" % finish_time)

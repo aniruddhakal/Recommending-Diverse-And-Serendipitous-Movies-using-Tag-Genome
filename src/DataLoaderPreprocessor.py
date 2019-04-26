@@ -85,7 +85,12 @@ class DataLoaderPreprocessor:
 
         return movie_genre_binary_terms, movies_genome_term_vector, user_int_genre_terms, user_genre_binary_terms, user_lemmatized_genome_terms, user_full_genome_terms
 
-    def load_and_preprocess_data(self, dataset):
+    def load_and_preprocess_data(self, dataset, load_list=['ratings', 'genomes', 'movies']):
+        loader_check_list = ['movies', 'ratings', 'genomes']
+        difference_list = list(set(loader_check_list).difference(set(load_list)))
+
+        output_list = []
+
         print("\nLoading data: movies, ratings, genome-scores...")
         genome_scores, movies, ratings = self.init_file_names(dataset)
 
@@ -101,6 +106,9 @@ class DataLoaderPreprocessor:
         self.ratings_df = pd.read_csv(ratings)
 
         print("Preprocessing data: movies, ratings, genome-scores...")
+
+        # this check is temporary work-around, all items in load_list have to be unique and
+        # correct with this check
 
         # filter movies only under tag-genome df
         movies_with_tag_genome = self.genome_scores_df.index.values
@@ -119,7 +127,23 @@ class DataLoaderPreprocessor:
 
         # TODO choose movies only above threshold_rating
 
-        return self.ratings_df, self.genome_scores_df, self.movies_df
+        load_map = {
+            'movies': self.movies_df,
+            'ratings': self.ratings_df,
+            'genomes': self.genome_scores_df
+        }
+
+        # append all items from load list to output list in same sequence
+        for item in load_list:
+            output_list.append(load_map[item])
+
+        # TODO - this is not actually deleting the original referenced object, just deleting the
+        #  value of mapped item in the load_map
+        # delete all unused items
+        for item in difference_list:
+            del load_map[item]
+
+        return tuple(output_list)
 
     def load_and_process_user_data(self, dataset):
         print("\nLoading generated data: genre, genome-lemmatized, genome-full term vectors for users and movies...")

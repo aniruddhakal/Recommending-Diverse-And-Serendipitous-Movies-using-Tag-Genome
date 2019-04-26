@@ -1,4 +1,3 @@
-# class Serendipity
 import numpy as np
 from enum import Enum
 import pandas as pd
@@ -157,7 +156,7 @@ def update_recommendation_results_dict(recommendation_results_dict, recommendati
     recommendation_results_dict[key.name] = previous_recommendations_list
 
 
-def plot_graph(evaluation_results_df, save_flag=False, save_path=None):
+def plot_graph(evaluation_results_df: pd.DataFrame, save_flag=False, save_path=None):
     plt.clf()
     evaluation_results_df.plot(kind='bar')
     plt.tight_layout()
@@ -180,6 +179,7 @@ def main(dataset, K, relevant_movies_threshold, user_list, save_flag, save_path)
         'baseline_genome_full': list()
     }
 
+    # load all data - unfortunately inefficient for now
     data_loader = DataLoaderPreprocessor(base_dir=base_dir, ml20m='ml-20m/',
                                          serendipity2018='serendipity-sac2018/')
     ratings_df, genome_scores_df, movies_df = data_loader.load_and_preprocess_data(dataset)
