@@ -66,8 +66,10 @@ if __name__ == '__main__':
     compression = 'bz2'
 
     # quantile_threshold = 0.70
+    # thresholds = [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.6, 0.7]
+    thresholds = [0.25, 0.4, 0.6, 0.7]
 
-    for quantile_threshold in [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.6, 0.7]:
+    for quantile_threshold in thresholds:
         target_genome_float_pickle = output_dir + 'threshold_' + str(quantile_threshold) + \
                                      '_float_movie_genomes_' + compression
         target_genome_binary_pickle = output_dir + 'threshold_' + str(quantile_threshold) + \
