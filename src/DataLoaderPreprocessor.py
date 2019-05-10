@@ -34,15 +34,22 @@ class DataLoaderPreprocessor:
                 'movie_genre_binary_terms': 'movie_genre_binary_term_vector_df_bz2',
                 'user_int_genre_terms': 'user_int_terms_df_bz2',
                 'user_genre_binary_terms': 'user_genre_binary_terms_df_bz2',
-                'user_lemmatized_genome_terms': 'user_lemmatized_genome_terms_df_gzip',
-                'user_full_genome_terms': 'user_full_genome_terms_df_gzip',
+                'user_lemmatized_genome_terms': 'user_lemmatized_genome_terms_df_bz2',
+                'user_full_genome_terms': 'user_full_genome_terms_df_bz2',
                 'movies_genome_term_vector': 'movies_lemmatized_genome_vector_df_bz2'
             },
             'serendipity2018': {
                 'genome_scores': 'tag_genome.csv',
                 'movies': 'movies.csv',
                 'ratings': 'training.csv',
-                'answers': 'answers.csv'
+                'answers': 'answers.csv',
+
+                'movie_genre_binary_terms': 'movie_genre_binary_term_vector_df_bz2',
+                'user_int_genre_terms': 'user_int_terms_df_bz2',
+                'user_genre_binary_terms': 'user_genre_binary_terms_df_bz2',
+                'user_lemmatized_genome_terms': 'user_lemmatized_genome_terms_df_bz2',
+                'user_full_genome_terms': 'user_full_genome_terms_df_bz2',
+                'movies_genome_term_vector': 'movies_lemmatized_genome_vector_df_bz2'
             }
         }
 
@@ -126,7 +133,8 @@ class DataLoaderPreprocessor:
         self.movies_df = self.movies_df[self.movies_df['movieId'].isin(self.all_movie_ids)]
 
         # TODO choose movies only above threshold_rating
-
+        #  not necessary as below like threshold movies will be moved at the bottom by the reranking
+        #  algorithm
         load_map = {
             'movies': self.movies_df,
             'ratings': self.ratings_df,
@@ -160,15 +168,16 @@ class DataLoaderPreprocessor:
 
         self.movie_genre_binary_terms_df = pd.read_pickle(movie_genre_binary_terms, compression='bz2')
         self.user_int_genre_terms_df = pd.read_pickle(user_int_genre_terms, compression='bz2')
-        self.user_lemmatized_genome_terms_df = pd.read_pickle(user_lemmatized_genome_terms, compression='gzip')
-        self.user_full_genome_terms_df = pd.read_pickle(user_full_genome_terms, compression='gzip')
+        self.user_lemmatized_genome_terms_df = pd.read_pickle(user_lemmatized_genome_terms,
+                                                              compression='bz2')
+        self.user_full_genome_terms_df = pd.read_pickle(user_full_genome_terms, compression='bz2')
         self.movies_lemmatized_genome_term_vector_df = pd.read_pickle(movies_genome_term_vector, compression='bz2')
         self.user_genre_binary_term_vector_df = pd.read_pickle(user_genre_binary_terms, compression='bz2')
 
         # filter movies
         self.movies_lemmatized_genome_term_vector_df = self.movies_lemmatized_genome_term_vector_df.loc[
                                                        self.all_movie_ids, :]
-        self.user_full_genome_terms_df = self.user_full_genome_terms_df.loc[self.all_movie_ids, :]
+        # self.user_full_genome_terms_df = self.user_full_genome_terms_df.loc[self.all_movie_ids, :]
         self.movie_genre_binary_terms_df = self.movie_genre_binary_terms_df.loc[self.all_movie_ids, :]
 
         return self.movie_genre_binary_terms_df, self.movies_lemmatized_genome_term_vector_df, self.user_int_genre_terms_df, self.user_genre_binary_term_vector_df, self.user_lemmatized_genome_terms_df, self.user_full_genome_terms_df

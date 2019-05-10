@@ -51,8 +51,10 @@ class ContentBased_Baseline_Recommender:
     def __init__(self, dataset='ml20m', movie_genre_binary_terms_df=None, movies_lemmatized_genome_term_vector_df=None,
                  user_int_genre_terms_df=None, user_genre_binary_term_vector_df=None,
                  user_lemmatized_genome_terms_df=None, user_full_genome_terms_df=None, ratings_df=None,
-                 genome_scores_df=None, movies_df=None):
+                 genome_scores_df=None, movies_df=None, similarity_metric='cosine'):
         self.dataset = dataset
+
+        self.similarity_metric = similarity_metric
 
         self.movies_genre_binary_term_vector_df = movie_genre_binary_terms_df
         self.movies_lemmatized_genome_vector_df = movies_lemmatized_genome_term_vector_df
@@ -156,7 +158,7 @@ class ContentBased_Baseline_Recommender:
         movies_term_vector_df.dropna(inplace=True)
 
         distances = pairwise_distances(user_term_vector, movies_term_vector_df.values,
-                                       metric='cosine')
+                                       metric=self.similarity_metric)
 
         nearest_movies_df = pd.DataFrame(index=movies_term_vector_df.index.values)
         nearest_movies_df['distances'] = distances.reshape(-1, 1)
@@ -538,7 +540,7 @@ class CB_ClusteringBased_Recommender:
         # sort as per highest diversity offered
         # TODO rethink on how to rerank these movies, whether by max diversity, or by similarity to watched_movie or similarity to user profile
         #   or whether multiple columns should be considered while ranking these movies
-        ranking_df.sort_values('diversity', ascending=False, inplace=True)
+        ranking_df.sort_values('S_u', ascending=False, inplace=True)
 
         # TODO replace this approach with better way of dropping duplicates
         ranking_df.set_index(ranking_df['movieId'].values, drop=True, inplace=True)
@@ -614,7 +616,8 @@ class CB_ClusteringBased_Recommender:
             clustering_result = AgglomerativeClustering(n_clusters=cluster_size, affinity='euclidean',
                                                         linkage='ward').fit_predict(
                 user_movie_tags_df.values[:n_movies])
-            score = silhouette_score(user_movie_tags_df.values[:n_movies], clustering_result)
+            score = silhouette_score(user_movie_tags_df.values[:n_movies], clustering_result,
+                                     metric='cosine')
 
             if highest_score < score:
                 best_clustering_result = clustering_result
@@ -689,10 +692,12 @@ def main():
     for user_id in range(1, 6):
         print(user_id)
         recommended_movies = recommender.recommend_movies(user_id)
+
         print(recommended_movies)
     finish_time = time() - start_time
 
     print("Total Time Taken: %f seconds" % finish_time)
+
 
     # load df from answers
     # answers_df = pd.read_csv(answers)

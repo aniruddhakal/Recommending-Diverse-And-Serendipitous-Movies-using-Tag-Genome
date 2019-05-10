@@ -55,17 +55,23 @@ def main(dataset, quantile_threshold, target_genome_float_pickle,
 
 if __name__ == '__main__':
     # to use this class from here, or else pass below arguments from different program
-    dataset = 'ml20m'
-    output_dir = ml20m + data_output_dir
+    # dataset = 'ml20m'
+    dataset = 'serendipity2018'
 
-    quantile_threshold = 0.35
+    if dataset is 'ml20m':
+        output_dir = ml20m + data_output_dir
+    else:
+        output_dir = serendipity2018 + data_output_dir
 
     compression = 'bz2'
 
-    target_genome_float_pickle = output_dir + 'threshold_' + str(quantile_threshold) + \
-                                 '_float_movie_genomes_' + compression
-    target_genome_binary_pickle = output_dir + 'threshold_' + str(quantile_threshold) + \
-                                  '_binary_movie_genomes_' + compression
+    # quantile_threshold = 0.70
 
-    main(dataset, quantile_threshold, target_genome_float_pickle, target_genome_binary_pickle,
-         compression)
+    for quantile_threshold in [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.6, 0.7]:
+        target_genome_float_pickle = output_dir + 'threshold_' + str(quantile_threshold) + \
+                                     '_float_movie_genomes_' + compression
+        target_genome_binary_pickle = output_dir + 'threshold_' + str(quantile_threshold) + \
+                                      '_binary_movie_genomes_' + compression
+
+        main(dataset, quantile_threshold, target_genome_float_pickle, target_genome_binary_pickle,
+             compression)
