@@ -229,8 +229,7 @@ def non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df):
 
     compression = 'bz2'
     load_explicitly_as_df = True
-    dataset = 'serendipity2018'
-    # dataset = 'ml20m'
+
 
     start_time = time()
     # aggregate movie genome scores as per lemmatized tags mapping
@@ -241,6 +240,9 @@ def non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df):
     print("Total time taken %f seconds" % finish_time)
 
 if __name__ == '__main__':
+    # dataset = 'serendipity2018'
+    dataset = 'ml20m'
+
     final_lemmatization_dict, genome_tags_df = produce_lemmatization_dict()
 
     non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df)
