@@ -8,8 +8,8 @@ from nltk.stem import WordNetLemmatizer
 from DataLoaderPreprocessor import DataLoaderPreprocessor
 
 data_base_dir = '../../datasets/Movielens/'
-data_dir = data_base_dir + 'serendipity-sac2018/'
-data_dir2 = data_base_dir + 'ml-20m/'
+data_dir2 = data_base_dir + 'serendipity-sac2018/'
+data_dir = data_base_dir + 'ml-20m/'
 output_dir = 'output/'
 
 # genome_scores = data_dir + 'genome-scores.csv'
@@ -205,6 +205,7 @@ def lemmatize_dataframes(file_name, load_explicitly_as_df, final_lemmatization_d
 
 def thresholded_lemmatization(final_lemmatization_dict, genome_tags_df):
     threshold_values = [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.6, 0.7]
+    threshold_values = [0.25, 0.4, 0.7]
 
     for threshold_value in threshold_values:
         # file_name = "genome_vector_df_bz2"
@@ -228,7 +229,7 @@ def non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df):
     file_name = "genome_vector_df_bz2"
 
     compression = 'bz2'
-    load_explicitly_as_df = True
+    load_explicitly_as_df = False
 
 
     start_time = time()
