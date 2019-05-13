@@ -357,11 +357,11 @@ def main():
     ug = sys.argv[1]
     user_group = user_group_1
 
-    if ug is 'ug2':
+    if ug == 'ug2':
         user_group = user_group_2
-    elif ug is 'ug3':
+    elif ug == 'ug3':
         user_group = user_group_3
-    elif ug is 'ug4':
+    elif ug == 'ug4':
         user_group = user_group_4
 
     end_range = len(user_group)
