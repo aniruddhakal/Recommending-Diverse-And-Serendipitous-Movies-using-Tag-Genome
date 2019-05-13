@@ -330,7 +330,7 @@ class RunPredictions:
 
 
 def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_range):
-    with ProcessPoolExecutor(max_workers=8) as executor:
+    with ProcessPoolExecutor(max_workers=4) as executor:
         #p_list = list()
         for index, K in enumerate(K_ranges):
             rp = RunPredictions()
