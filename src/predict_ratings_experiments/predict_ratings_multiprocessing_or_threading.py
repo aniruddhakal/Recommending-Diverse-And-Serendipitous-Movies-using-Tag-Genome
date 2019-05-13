@@ -348,7 +348,7 @@ def main():
     K_ranges = [5, 10, 15, 25, 50, 60, 70]
 
     start_range = int(sys.argv[2])
-    end_range = len(all_answers_user_ids)
+
     #end_range = int(sys.argv[3])
 
     n_k_ranges = int(sys.argv[4])
@@ -363,6 +363,8 @@ def main():
         user_group = user_group_3
     elif ug is 'ug4':
         user_group = user_group_4
+
+    end_range = len(user_group)
 
     run_parallel_for_users_range(ug, user_group, K_ranges[:n_k_ranges], start_range, end_range)
 
