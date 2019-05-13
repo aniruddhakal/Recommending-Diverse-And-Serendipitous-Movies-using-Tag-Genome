@@ -314,7 +314,7 @@ class RunPredictions:
         mae_df.median().plot(kind='barh',
                              title='K=' + str(K) + ', median MAE, ' + ug, figsize=(20, 5))
         #figname = output_dir + 'K=' + str(K) + ', median MAE, ' + ug
-        figname = './first_100/' + 'K=' + str(K) + ', median MAE, ' + ug
+        figname = './' + 'K=' + str(K) + ', median MAE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
 
@@ -323,7 +323,7 @@ class RunPredictions:
                              title='K=' + str(K) + ', median MSE, ' + ug, figsize=(20, 5))
 
         #figname = output_dir + 'K=' + str(K) + ', median MSE, ' + ug
-        figname = './first_100/' + 'K=' + str(K) + ', median MSE, ' + ug
+        figname = './' + 'K=' + str(K) + ', median MSE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
         print("")
@@ -345,11 +345,11 @@ def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_r
 
 def main():
     print("executing main method...")
-    K_ranges = [5, 10, 15, 25, 50]
+    K_ranges = [5, 10, 15, 25, 50, 60, 70]
 
     start_range = int(sys.argv[2])
-    # end_range = len(all_answers_user_ids)
-    end_range = int(sys.argv[3])
+
+    #end_range = int(sys.argv[3])
 
     n_k_ranges = int(sys.argv[4])
 
@@ -363,6 +363,8 @@ def main():
         user_group = user_group_3
     elif ug is 'ug4':
         user_group = user_group_4
+
+    end_range = len(user_group)
 
     run_parallel_for_users_range(ug, user_group, K_ranges[:n_k_ranges], start_range, end_range)
 
