@@ -345,11 +345,11 @@ def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_r
 
 def main():
     print("executing main method...")
-    K_ranges = [5, 10, 15, 25, 50]
+    K_ranges = [5, 10, 15, 25, 50, 60, 70]
 
     start_range = int(sys.argv[2])
-    # end_range = len(all_answers_user_ids)
-    end_range = int(sys.argv[3])
+    end_range = len(all_answers_user_ids)
+    #end_range = int(sys.argv[3])
 
     n_k_ranges = int(sys.argv[4])
 
