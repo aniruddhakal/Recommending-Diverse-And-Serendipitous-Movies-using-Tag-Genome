@@ -7,16 +7,16 @@ from nltk.stem import WordNetLemmatizer
 
 from DataLoaderPreprocessor import DataLoaderPreprocessor
 
-data_base_dir = '../../datasets/Movielens/'
-data_dir = data_base_dir + 'serendipity-sac2018/'
-data_dir2 = data_base_dir + 'ml-20m/'
-output_dir = 'output/'
+base_dir = '../../datasets/Movielens/'
 
-# genome_scores = data_dir + 'genome-scores.csv'
-genome_tags = data_dir + 'genome-tags.csv'
-# movies = data_dir + 'movies.csv'
-# ratings = data_dir + 'ratings.csv'
-# tags = data_dir + 'tags.csv'
+ml20m = base_dir + 'ml-20m/'
+serendipity2018 = base_dir + 'serendipity-sac2018/'
+
+data_output_dir = 'output2/'
+
+genome_tags = ml20m + 'genome-tags.csv'
+# genome_tags = serendipity2018 + 'genome-tags.csv'
+
 
 lemmatizer = WordNetLemmatizer()
 
@@ -183,11 +183,11 @@ def produce_lemmatization_dict():
 def lemmatize_dataframes(file_name, load_explicitly_as_df, final_lemmatization_dict,
                          genome_tags_df, compression='bz2'):
     if not load_explicitly_as_df:
-        data_loader = DataLoaderPreprocessor(base_dir=data_base_dir, ml20m='ml-20m/',
+        data_loader = DataLoaderPreprocessor(base_dir=base_dir, ml20m='ml-20m/',
                                              serendipity2018='serendipity-sac2018/')
         genome_scores_df = data_loader.load_and_preprocess_data(dataset, ['genomes'])[0]
     else:
-        genome_scores_df = pd.read_pickle(data_dir + output_dir + file_name,
+        genome_scores_df = pd.read_pickle(output_dir + file_name,
                                           compression=compression)
 
     final_genome_vector_df = generate_genome_term_vector(final_lemmatization_dict, genome_tags_df,
@@ -198,13 +198,14 @@ def lemmatize_dataframes(file_name, load_explicitly_as_df, final_lemmatization_d
     save_csv_flag = True
 
     if save_csv_flag:
-        final_genome_vector_df.to_pickle(data_dir + output_dir + 'movies_lemmatized_' + file_name,
+        final_genome_vector_df.to_pickle(output_dir + 'movies_lemmatized_' + file_name,
                                          compression='bz2')
         # save_csv(data_dir + output_dir + file_name, final_genome_vector_df)
 
 
 def thresholded_lemmatization(final_lemmatization_dict, genome_tags_df):
     threshold_values = [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.6, 0.7]
+    threshold_values = [0.25, 0.4, 0.7]
 
     for threshold_value in threshold_values:
         # file_name = "genome_vector_df_bz2"
@@ -228,9 +229,8 @@ def non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df):
     file_name = "genome_vector_df_bz2"
 
     compression = 'bz2'
-    load_explicitly_as_df = True
-    dataset = 'serendipity2018'
-    # dataset = 'ml20m'
+    load_explicitly_as_df = False
+
 
     start_time = time()
     # aggregate movie genome scores as per lemmatized tags mapping
@@ -240,7 +240,16 @@ def non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df):
 
     print("Total time taken %f seconds" % finish_time)
 
+
 if __name__ == '__main__':
+    # dataset = 'serendipity2018'
+    dataset = 'ml20m'
+
+    if dataset is 'ml20m':
+        output_dir = ml20m + data_output_dir
+    else:
+        output_dir = serendipity2018 + data_output_dir
+
     final_lemmatization_dict, genome_tags_df = produce_lemmatization_dict()
 
     non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df)

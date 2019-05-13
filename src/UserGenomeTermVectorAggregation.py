@@ -5,16 +5,8 @@ from time import time
 from DataLoaderPreprocessor import DataLoaderPreprocessor
 
 data_base_dir = '../../datasets/Movielens/'
-
-# dataset = 'ml20m'
-dataset = 'serendipity2018'
-
 data_dir = data_base_dir + 'ml-20m/'
-
-if dataset is 'serendipity2018':
-    data_dir = data_base_dir + 'serendipity-sac2018/'
-
-target_directory = data_dir + 'output/'
+target_directory = data_dir + 'output2/'
 
 
 def main(save_flag, ratings_df, genome_scores_df, full_terms_target_file_name,
@@ -104,7 +96,8 @@ def non_threshold_based_genome_aggregation():
 
 
 def threshold_based_genome_aggregation():
-    threshold_values = [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.6, 0.7]
+    # threshold_values = [0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.6, 0.7]
+    threshold_values = [0.25, 0.4, 0.7]
 
     for threshold_value in threshold_values:
         # lemmatized_terms_target_file_name = 'user_lemmatized_genome_terms_df_gzip'
@@ -118,11 +111,11 @@ def threshold_based_genome_aggregation():
         full_terms_target_file_name = 'threshold_' + str(
             threshold_value) + '_user_full_genome_terms_df_bz2'
 
-        lemmatized_movies_term_vector_pickle = 'movies_lemmatized_' + 'threshold_' + str(
-            threshold_value) + '_float_movie_genomes_bz2'
+        lemmatized_movies_term_vector_pickle = 'user_lemmatized_' + 'threshold_' + str(
+            threshold_value) + '_float_genome_terms_df_bz2'
 
         full_movies_term_vector_pickle = 'threshold_' + str(
-            threshold_value) + '_float_movie_genomes_bz2'
+            threshold_value) + '_float_user_genome_terms_df_bz2'
 
         main(save_flag, ratings_df, genome_scores_df, full_movies_term_vector_pickle,
              lemmatized_terms_target_file_name,
@@ -135,6 +128,12 @@ def threshold_based_genome_aggregation():
 
 
 if __name__ == '__main__':
+    dataset = 'ml20m'
+    # dataset = 'serendipity2018'
+
+    if dataset is 'serendipity2018':
+        data_dir = data_base_dir + 'serendipity-sac2018/'
+
     save_flag = True
     compression = 'bz2'
 
@@ -142,5 +141,5 @@ if __name__ == '__main__':
                                          serendipity2018='serendipity-sac2018/')
     ratings_df, genome_scores_df, movies_df = data_loader.load_and_preprocess_data(dataset)
 
-    # non_threshold_based_genome_aggregation()
+    non_threshold_based_genome_aggregation()
     threshold_based_genome_aggregation()
