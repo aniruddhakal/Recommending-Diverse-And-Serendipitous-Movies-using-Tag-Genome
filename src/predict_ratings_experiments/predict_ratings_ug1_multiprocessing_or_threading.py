@@ -314,7 +314,7 @@ class RunPredictions:
         mae_df.median().plot(kind='barh',
                              title='K=' + str(K) + ', median MAE, ' + ug, figsize=(20, 5))
         #figname = output_dir + 'K=' + str(K) + ', median MAE, ' + ug
-        figname = './' + 'K=' + str(K) + ', median MAE, ' + ug
+        figname = './first_100/' + 'K=' + str(K) + ', median MAE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
 
@@ -323,7 +323,7 @@ class RunPredictions:
                              title='K=' + str(K) + ', median MSE, ' + ug, figsize=(20, 5))
 
         #figname = output_dir + 'K=' + str(K) + ', median MSE, ' + ug
-        figname = './' + 'K=' + str(K) + ', median MSE, ' + ug
+        figname = './first_100/' + 'K=' + str(K) + ', median MSE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
         print("")
