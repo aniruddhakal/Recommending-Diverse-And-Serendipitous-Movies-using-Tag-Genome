@@ -358,10 +358,13 @@ def main():
     user_group = user_group_1
 
     if ug == 'ug2':
+        print(ug)
         user_group = user_group_2
     elif ug == 'ug3':
+        print(ug)
         user_group = user_group_3
     elif ug == 'ug4':
+        print(ug)
         user_group = user_group_4
 
     end_range = len(user_group)
