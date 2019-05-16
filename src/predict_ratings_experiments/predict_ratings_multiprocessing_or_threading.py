@@ -71,7 +71,7 @@ class ContentBased_Recommender:
         self.term_vector_df.fillna(0, inplace=True)
         self.movie_movie_distances = term_vector_df
 
-    def get_mae_mse(self, user_id, candidate_movie_id, user_movies, K):
+    def get_predicted_actual(self, user_id, candidate_movie_id, user_movies, K):
         # movies watched by user
         #         if user_movies is None:
         #             user_movies = ratings_df[ratings_df['userId'] == user_id]['movieId'].values
@@ -89,13 +89,13 @@ class ContentBased_Recommender:
         users_all_ratings_df['sim_candidate_movie'] = self.movie_movie_distances.loc[
             candidate_movie_id, users_all_ratings_df['movieId']].values
 
-        mae, mse = self.predict_ratings_and_get_mae_mse(user_id, candidate_movie_id,
-                                                        users_all_ratings_df, K)
+        predicted, actual = self.predict_ratings_and_get_predicted_actual(user_id, candidate_movie_id,
+                                                                          users_all_ratings_df, K)
 
-        return mae, mse
+        return predicted, actual
 
-    def predict_ratings_and_get_mae_mse(self, user_id, candidate_movie_id, users_all_ratings_df,
-                                        K):
+    def predict_ratings_and_get_predicted_actual(self, user_id, candidate_movie_id, users_all_ratings_df,
+                                                 K):
         user_ratings = users_all_ratings_df['rating'].values[:K]
         similarities = users_all_ratings_df['sim_candidate_movie'].values[:K]
 
@@ -114,25 +114,30 @@ class ContentBased_Recommender:
             #             predicted_rating = 0
             predicted_rating = actual_rating
 
-        mae = mean_absolute_error([actual_rating], [predicted_rating])
-        mse = mean_squared_error([actual_rating], [predicted_rating])
+        # mae = mean_absolute_error([actual_rating], [predicted_rating])
+        # mse = mean_squared_error([actual_rating], [predicted_rating])
 
-        return mae, mse
+        return predicted_rating, actual_rating
 
-    def get_average_mae_mse(self, user_id, user_movies, K):
+    def get_mae_mse(self, user_id, user_movies, K):
         # movies watched by user
         #         if user_movies is None:
         #             user_movies = ratings_df[ratings_df['userId'] == user_id]['movieId'].values
-        mae_list = list()
-        mse_list = list()
+        predicted_rating_list = list()
+        actual_rating_list = list()
 
         for candidate_movie_id in user_movies:
-            mae, mse = self.get_mae_mse(user_id, candidate_movie_id, user_movies, K)
+            predicted, actual = self.get_predicted_actual(user_id, candidate_movie_id, user_movies, K)
 
-            mae_list.append(mae)
-            mse_list.append(mse)
+            predicted_rating_list.append(predicted)
+            actual_rating_list.append(actual)
 
-        return np.median(np.array(mae_list)), np.median(np.array(mse_list))
+        # calculate MSE, MAE here
+        mae = np.sum(np.absolute(np.array(predicted_rating_list) - np.array(actual_rating_list))) / len(
+            predicted_rating_list)
+        mse = np.square(mae)
+
+        return mae, mse
 
 
 l1 = 'movies_lemmatized_threshold_'
@@ -261,24 +266,24 @@ class RunPredictions:
             if len(user_movies) <= 1:
                 continue
 
-            mae, mse = genre_recommender.get_average_mae_mse(user_id, user_movies, K)
+            mae, mse = genre_recommender.get_mae_mse(user_id, user_movies, K)
             genre_mae_list.append(mae)
             genre_mse_list.append(mse)
 
-            mae, mse = genome_full_recommender.get_average_mae_mse(user_id, user_movies, K)
+            mae, mse = genome_full_recommender.get_mae_mse(user_id, user_movies, K)
             genome_full_mae_list.append(mae)
             genome_full_mse_list.append(mse)
 
-            mae, mse = genome_lemmatized_recommender.get_average_mae_mse(user_id, user_movies, K)
+            mae, mse = genome_lemmatized_recommender.get_mae_mse(user_id, user_movies, K)
             genome_lemmatized_mae_list.append(mae)
             genome_lemmatized_mse_list.append(mse)
 
             for i, t in enumerate(thresholds):
-                mae, mse = full_recommenders[i].get_average_mae_mse(user_id, user_movies, K)
+                mae, mse = full_recommenders[i].get_mae_mse(user_id, user_movies, K)
                 full_mae_list.append(mae)
                 full_mse_list.append(mse)
 
-                mae, mse = lemmatized_recommenders[i].get_average_mae_mse(user_id, user_movies, K)
+                mae, mse = lemmatized_recommenders[i].get_mae_mse(user_id, user_movies, K)
                 lemmatized_mae_list.append(mae)
                 lemmatized_mse_list.append(mse)
 
