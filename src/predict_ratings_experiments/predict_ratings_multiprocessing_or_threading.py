@@ -191,21 +191,12 @@ count_df = ratings_df.groupby('userId').count()
 # count_df.describe()
 
 # # divide user groups into 4 based on the number of movies watched by them
-threshold1 = count_df['movieId'] <= 34
-threshold2 = count_df['movieId'] <= 67
-threshold3 = count_df['movieId'] <= 154
-threshold4 = count_df['movieId'] > 154
-
-user_group_1 = count_df[threshold1].index.values
-user_group_2 = count_df[threshold2].index.values
-user_group_3 = count_df[threshold3].index.values
-user_group_4 = count_df[threshold4].index.values
+user_group_1 = count_df[count_df['movieId'] <= 34].index.values
+user_group_2 = count_df[(count_df['movieId'] <= 67) & (count_df['movieId'] > 34)].index.values
+user_group_3 = count_df[(count_df['movieId'] <= 154) & (count_df['movieId'] > 67)].index.values
+user_group_4 = count_df[count_df['movieId'] > 154].index.values
 
 del count_df
-
-user_group_2 = np.setdiff1d(user_group_2, user_group_1)
-user_group_3 = np.setdiff1d(user_group_3, user_group_2)
-user_group_4 = np.setdiff1d(user_group_4, user_group_3)
 
 print(user_group_1.size)
 print(user_group_2.size)
@@ -314,7 +305,7 @@ class RunPredictions:
         mae_df.median().plot(kind='barh',
                              title='K=' + str(K) + ', median MAE, ' + ug, figsize=(20, 5))
         #figname = output_dir + 'K=' + str(K) + ', median MAE, ' + ug
-        figname = './' + 'K=' + str(K) + ', median MAE, ' + ug
+        figname = './first100/' + 'K=' + str(K) + ', median MAE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
 
@@ -323,7 +314,7 @@ class RunPredictions:
                              title='K=' + str(K) + ', median MSE, ' + ug, figsize=(20, 5))
 
         #figname = output_dir + 'K=' + str(K) + ', median MSE, ' + ug
-        figname = './' + 'K=' + str(K) + ', median MSE, ' + ug
+        figname = './first100/' + 'K=' + str(K) + ', median MSE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
         print("")
@@ -345,7 +336,7 @@ def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_r
 
 def main():
     print("executing main method...")
-    K_ranges = [5, 10, 15, 25, 50, 60, 70, 90, 130, 160, 200, 300]
+    K_ranges = [10, 25]
 
     start_range = int(sys.argv[2])
 
