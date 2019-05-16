@@ -313,7 +313,7 @@ class RunPredictions:
         mae_df.median().plot(kind='barh',
                              title='K=' + str(K) + ', median MAE, ' + ug, figsize=(20, 5))
         # figname = output_dir + 'K=' + str(K) + ', median MAE, ' + ug
-        figname = './first100/' + 'K=' + str(K) + ', median MAE, ' + ug
+        figname = './first10/' + 'K=' + str(K) + ', median MAE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
         mae_df.to_pickle(figname + '_df')
@@ -323,7 +323,7 @@ class RunPredictions:
                              title='K=' + str(K) + ', median MSE, ' + ug, figsize=(20, 5))
 
         # figname = output_dir + 'K=' + str(K) + ', median MSE, ' + ug
-        figname = './first100/' + 'K=' + str(K) + ', median MSE, ' + ug
+        figname = './first1000/' + 'K=' + str(K) + ', median MSE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
 
@@ -352,7 +352,7 @@ def main():
 
     start_range = int(sys.argv[2])
 
-    # end_range = int(sys.argv[3])
+    end_range = int(sys.argv[3])
 
     n_k_ranges = int(sys.argv[4])
 
@@ -370,7 +370,7 @@ def main():
         print(ug)
         user_group = user_group_4
 
-    end_range = len(user_group)
+    #end_range = len(user_group)
 
     run_parallel_for_users_range(ug, user_group, K_ranges[:n_k_ranges], start_range, end_range)
 
