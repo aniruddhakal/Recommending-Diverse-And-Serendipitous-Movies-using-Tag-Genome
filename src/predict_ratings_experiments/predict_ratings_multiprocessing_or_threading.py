@@ -316,6 +316,7 @@ class RunPredictions:
         figname = './first100/' + 'K=' + str(K) + ', median MAE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
+        mae_df.to_pickle(figname + '_df')
 
         # plt.clf()
         mse_df.median().plot(kind='barh',
@@ -325,7 +326,10 @@ class RunPredictions:
         figname = './first100/' + 'K=' + str(K) + ', median MSE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
+
+        mse_df.to_pickle(figname + '_df')
         print("")
+
 
 
 def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_range):
