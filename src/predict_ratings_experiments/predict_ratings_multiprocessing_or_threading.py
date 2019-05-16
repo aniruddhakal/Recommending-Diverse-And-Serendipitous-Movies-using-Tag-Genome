@@ -136,9 +136,11 @@ class ContentBased_Recommender:
             actual_rating_list.append(actual)
 
         # calculate MSE, MAE here
-        absolute = np.absolute(np.array(predicted_rating_list) - np.array(actual_rating_list))
+        absolute = np.absolute(np.array(predicted_rating_list) - np.array(
+            actual_rating_list))
+
         mae = np.sum(absolute) / len(predicted_rating_list)
-        mse = np.square(mae)
+        mse = np.sum(np.square(absolute)) / len(predicted_rating_list)
 
         return mae, mse
 
@@ -331,7 +333,6 @@ class RunPredictions:
         print("")
 
 
-
 def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_range):
     with ProcessPoolExecutor(max_workers=4) as executor:
         # p_list = list()
@@ -370,7 +371,7 @@ def main():
         print(ug)
         user_group = user_group_4
 
-    #end_range = len(user_group)
+    # end_range = len(user_group)
 
     run_parallel_for_users_range(ug, user_group, K_ranges[:n_k_ranges], start_range, end_range)
 
