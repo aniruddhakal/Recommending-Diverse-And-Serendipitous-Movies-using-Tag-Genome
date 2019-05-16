@@ -11,7 +11,7 @@ from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor
 import threading
 import matplotlib as mpl
 
-#mpl.interactive(False)
+# mpl.interactive(False)
 plt.ioff()
 
 print("total arguments: ", len(sys.argv))
@@ -89,12 +89,14 @@ class ContentBased_Recommender:
         users_all_ratings_df['sim_candidate_movie'] = self.movie_movie_distances.loc[
             candidate_movie_id, users_all_ratings_df['movieId']].values
 
-        predicted, actual = self.predict_ratings_and_get_predicted_actual(user_id, candidate_movie_id,
+        predicted, actual = self.predict_ratings_and_get_predicted_actual(user_id,
+                                                                          candidate_movie_id,
                                                                           users_all_ratings_df, K)
 
         return predicted, actual
 
-    def predict_ratings_and_get_predicted_actual(self, user_id, candidate_movie_id, users_all_ratings_df,
+    def predict_ratings_and_get_predicted_actual(self, user_id, candidate_movie_id,
+                                                 users_all_ratings_df,
                                                  K):
         user_ratings = users_all_ratings_df['rating'].values[:K]
         similarities = users_all_ratings_df['sim_candidate_movie'].values[:K]
@@ -127,14 +129,15 @@ class ContentBased_Recommender:
         actual_rating_list = list()
 
         for candidate_movie_id in user_movies:
-            predicted, actual = self.get_predicted_actual(user_id, candidate_movie_id, user_movies, K)
+            predicted, actual = self.get_predicted_actual(user_id, candidate_movie_id, user_movies,
+                                                          K)
 
             predicted_rating_list.append(predicted)
             actual_rating_list.append(actual)
 
         # calculate MSE, MAE here
-        mae = np.sum(np.absolute(np.array(predicted_rating_list) - np.array(actual_rating_list))) / len(
-            predicted_rating_list)
+        absolute = np.absolute(np.array(predicted_rating_list) - np.array(actual_rating_list))
+        mae = np.sum(absolute) / len(predicted_rating_list)
         mse = np.square(mae)
 
         return mae, mse
@@ -309,16 +312,16 @@ class RunPredictions:
 
         mae_df.median().plot(kind='barh',
                              title='K=' + str(K) + ', median MAE, ' + ug, figsize=(20, 5))
-        #figname = output_dir + 'K=' + str(K) + ', median MAE, ' + ug
+        # figname = output_dir + 'K=' + str(K) + ', median MAE, ' + ug
         figname = './first100/' + 'K=' + str(K) + ', median MAE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
 
-        #plt.clf()
+        # plt.clf()
         mse_df.median().plot(kind='barh',
                              title='K=' + str(K) + ', median MSE, ' + ug, figsize=(20, 5))
 
-        #figname = output_dir + 'K=' + str(K) + ', median MSE, ' + ug
+        # figname = output_dir + 'K=' + str(K) + ', median MSE, ' + ug
         figname = './first100/' + 'K=' + str(K) + ', median MSE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
@@ -327,14 +330,14 @@ class RunPredictions:
 
 def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_range):
     with ProcessPoolExecutor(max_workers=4) as executor:
-        #p_list = list()
+        # p_list = list()
         for index, K in enumerate(K_ranges):
             rp = RunPredictions()
             executor.submit(rp.run, K, ug, users_ndarray, start_range, end_range)
-      #      p_list.append(e)
+    #      p_list.append(e)
 
-      #  for e in p_list:
-      #      e.join()
+    #  for e in p_list:
+    #      e.join()
 
     print("main thread")
 
@@ -345,7 +348,7 @@ def main():
 
     start_range = int(sys.argv[2])
 
-    #end_range = int(sys.argv[3])
+    # end_range = int(sys.argv[3])
 
     n_k_ranges = int(sys.argv[4])
 
