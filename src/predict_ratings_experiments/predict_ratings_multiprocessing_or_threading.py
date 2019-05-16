@@ -315,7 +315,7 @@ class RunPredictions:
         mae_df.median().plot(kind='barh',
                              title='K=' + str(K) + ', median MAE, ' + ug, figsize=(20, 5))
         # figname = output_dir + 'K=' + str(K) + ', median MAE, ' + ug
-        figname = './first10/' + 'K=' + str(K) + ', median MAE, ' + ug
+        figname = './first1000/' + 'K=' + str(K) + ', median MAE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
         mae_df.to_pickle(figname + '_df')
