@@ -7,7 +7,7 @@ base_dir = '../../datasets/Movielens/'
 ml20m = base_dir + 'ml-20m/'
 serendipity2018 = base_dir + 'serendipity-sac2018/'
 
-data_output_dir = 'output2/'
+data_output_dir = 'output3/'
 
 
 class ThresholdTransform:
@@ -55,8 +55,8 @@ def main(dataset, quantile_threshold, target_genome_float_pickle,
 
 if __name__ == '__main__':
     # to use this class from here, or else pass below arguments from different program
-    dataset = 'ml20m'
-    # dataset = 'serendipity2018'
+    # dataset = 'ml20m'
+    dataset = 'serendipity2018'
 
     if dataset is 'ml20m':
         output_dir = ml20m + data_output_dir

@@ -9,6 +9,9 @@ from ContentBased_Recommender import CB_ClusteringBased_Recommender, \
 from DataLoaderPreprocessor import DataLoaderPreprocessor
 from sklearn.metrics import pairwise_distances
 from time import time
+import warnings
+
+warnings.filterwarnings('ignore')
 
 base_dir = '../../datasets/Movielens/'
 
@@ -17,8 +20,11 @@ serendipity2018 = base_dir + 'serendipity-sac2018/'
 
 data_dir2 = serendipity2018
 answers = serendipity2018 + 'answers.csv'
+tag_genomes = serendipity2018 + 'tag_genome.csv'
+recommendations = serendipity2018 + 'recommendations.csv'
+ratings = serendipity2018 + 'training.csv'
 
-data_output_dir = base_dir + 'output/'
+data_output_dir = serendipity2018 + 'output3/'
 
 
 class Model(Enum):
@@ -177,9 +183,14 @@ def store_recommendation_results_df(recommendations_df_dict, user_id, recommenda
     user_rec_series = pd.Series(recommendation_list)
     user_rec_series.name = user_id
 
-    recommendations_df = recommendations_df_dict[key.name]
+    if type(key) is str:
+        target = key
+    else:
+        target = key.name
+
+    recommendations_df = recommendations_df_dict[target]
     recommendations_df = recommendations_df.append(user_rec_series)
-    recommendations_df_dict[key.name] = recommendations_df
+    recommendations_df_dict[target] = recommendations_df
 
 
 def plot_graph(evaluation_results_df: pd.DataFrame, save_flag=False, save_path=None):
@@ -325,6 +336,123 @@ def main(dataset, K, relevant_movies_threshold, user_list, save_flag, save_path)
     # plot_graph(combined_result_df, save_flag, save_path + '_mode_plot')
 
 
+def store_thresholded_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_flag=True,
+                                      save_path=''):
+    recommendations_df_dict = {
+        'full_thresholded_0.25': pd.DataFrame(),
+        'lemmatized_thresholded_0.25': pd.DataFrame(),
+        'full_thresholded_0.4': pd.DataFrame(),
+        'lemmatized_thresholded_0.4': pd.DataFrame(),
+        'full_thresholded_0.7': pd.DataFrame(),
+        'lemmatized_thresholded_0.7': pd.DataFrame(),
+    }
+
+    data_loader = DataLoaderPreprocessor(base_dir=base_dir, ml20m='ml-20m/',
+                                         serendipity2018='serendipity-sac2018/')
+    ratings_df, genome_scores_df, movies_df = data_loader.load_and_preprocess_data(dataset)
+
+    l1 = 'movies_lemmatized_threshold_'
+    l2 = '_float_movie_genomes_bz2'
+
+    # threshold_0.2_float_movie_genomes_bz2
+    l3 = 'threshold_'
+    l4 = '_float_movie_genomes_bz2'
+
+    t_lbl = 'threshold_'
+    l5 = '_user_lemmatized_genome_terms_df_bz2'
+    l6 = '_user_full_genome_terms_df_bz2'
+
+    thresholds = [0.25, 0.4, 0.7]
+    #remove single threshold and keep above 3
+    # thresholds = [0.25]
+
+    movies_lemmatized_labels = [(l1 + str(x) + l2) for x in thresholds]
+    movies_full_labels = [(l3 + str(x) + l4) for x in thresholds]
+
+    users_lemmatized_labels = [(t_lbl + str(x) + l5) for x in thresholds]
+    users_full_labels = [(t_lbl + str(x) + l6) for x in thresholds]
+
+    lemmatized_thresholded_dfs = list()
+    full_thresholded_dfs = list()
+
+    # initialize recommenders and append to the list
+    lemmatized_recommenders = list()
+    full_recommenders = list()
+
+    # load thresholded dataframes
+    metric = 'cosine'
+    for i, t in enumerate(thresholds):
+        lemmatized_genome_terms_df = pd.read_pickle(data_output_dir + movies_lemmatized_labels[
+            i], compression='bz2')
+        lemmatized_genome_terms_df.fillna(0, inplace=True)
+        distances_df = pd.DataFrame(pairwise_distances(lemmatized_genome_terms_df, metric=metric),
+                                    index=lemmatized_genome_terms_df.index,
+                                    columns=lemmatized_genome_terms_df.index)
+
+        distances_df.fillna(0, inplace=True)
+
+        user_lemmatized_df = pd.read_pickle(data_output_dir + users_lemmatized_labels[i],
+                                            compression='bz2')
+        user_lemmatized_df.fillna(0, inplace=True)
+
+        lemmatized_recommender = CB_ClusteringBased_Recommender(ratings_df,
+                                                                lemmatized_genome_terms_df,
+                                                                user_lemmatized_df,
+                                                                distances_df,
+                                                                relevant_movies_threshold=relevant_movies_threshold)
+
+        lemmatized_recommenders.append(lemmatized_recommender)
+        # del target_df
+
+        # lemmatized_thresholded_dfs.append(distances_df)
+
+        full_genome_terms_df = pd.read_pickle(data_output_dir + movies_full_labels[i],
+                                              compression='bz2')
+        full_genome_terms_df.fillna(0, inplace=True)
+        distances_df = pd.DataFrame(pairwise_distances(full_genome_terms_df, metric=metric),
+                                    index=full_genome_terms_df.index,
+                                    columns=full_genome_terms_df.index)
+
+        distances_df.fillna(0, inplace=True)
+
+        user_full_df = pd.read_pickle(data_output_dir + users_full_labels[i],
+                                      compression='bz2')
+        user_full_df.fillna(0, inplace=True)
+
+        full_recommender = CB_ClusteringBased_Recommender(ratings_df,
+                                                          full_genome_terms_df,
+                                                          user_full_df,
+                                                          distances_df,
+                                                          relevant_movies_threshold=relevant_movies_threshold)
+        full_recommenders.append(full_recommender)
+
+    for user_id in user_list:
+        print("user under test: ", user_id)
+
+        # for each recommender in the list, get recommendations
+        for i, threshold in enumerate(thresholds):
+            recommender = lemmatized_recommenders[i]
+            recommended_movies = recommender.recommend_movies2(user_id, K=K)
+
+            # update recommendations for this user
+            store_recommendation_results_df(recommendations_df_dict, user_id, recommended_movies,
+                                            key='lemmatized_thresholded_' + str(threshold))
+
+            recommender = full_recommenders[i]
+            recommended_movies = recommender.recommend_movies2(user_id, K=K)
+
+            # store them in appropriate way as done in store_recommendations method.
+            # update recommendations for this user
+            store_recommendation_results_df(recommendations_df_dict, user_id, recommended_movies,
+                                            key='full_thresholded_' + str(threshold))
+
+        # export recommendations using save_flag and export_recommendations_to_csv method
+        if save_flag:
+            for key in recommendations_df_dict.keys():
+                export_recommendations_to_csv(recommendations_df_dict[key], save_path, K,
+                                              relevant_movies_threshold, key)
+
+
 def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_flag=False,
                           save_path=''):
     recommendations_df_dict = {
@@ -366,6 +494,7 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
                                            index=movies_lemmatized_genome_term_vector_df.index,
                                            columns=movies_lemmatized_genome_term_vector_df.index)
 
+    genome_scores_df.fillna(0, inplace=True)
     item_terms = genome_scores_df.values
     item_item_distances = pairwise_distances(item_terms, metric='cosine')
     item_item_similarity_df = pd.DataFrame(item_item_distances, index=genome_scores_df.index,
@@ -377,6 +506,7 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
                                                       relevant_movies_threshold=relevant_movies_threshold)
 
     for user_id in experimental_users_list:
+        print("user under test: ", user_id)
         recommender_lemmatized = CB_ClusteringBased_Recommender(ratings_df,
                                                                 movies_lemmatized_genome_term_vector_df,
                                                                 user_lemmatized_genome_terms_df,
@@ -439,73 +569,31 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
                                               relevant_movies_threshold, key)
 
 
-def generate_cb_recommendations(experimental_users_list):
-    recommendations_df_dict = {
-        'main_model_lemmatized': pd.DataFrame()
-        # 'main_model_full': pd.DataFrame(),
-        # 'baseline_genre_binary': pd.DataFrame(),
-        # 'baseline_genre_int': pd.DataFrame(),
-        # 'baseline_genome_lemmatized': pd.DataFrame(),
-        # 'baseline_genome_full': pd.DataFrame()
-    }
+def generate_non_thresholded_recommendations(experimental_users_list):
+    for relevant_movies_threshold in [0, 0.2, 0.4, 0.6, 0.8, 1]:
+        store_recommendations(experimental_users_list, K=K,
+                              relevant_movies_threshold=relevant_movies_threshold,
+                              save_flag=save_flag,
+                              save_path=save_path)
 
-    # recommendations_df_dict = dict()
 
-    # load all data - unfortunately inefficient for now
-    data_loader = DataLoaderPreprocessor(base_dir=base_dir, ml20m='ml-20m/',
-                                         serendipity2018='serendipity-sac2018/')
-    ratings_df, genome_scores_df, movies_df = data_loader.load_and_preprocess_data(dataset)
-    all_user_ids = ratings_df['userId'].unique()
-
-    movie_genre_binary_terms_df, movies_lemmatized_genome_term_vector_df, \
-    user_int_genre_terms_df, user_genre_binary_term_vector_df, user_lemmatized_genome_terms_df, user_full_genome_terms_df \
-        = data_loader.load_and_process_user_data(dataset)
-
-    experiments = RunExperiments(ratings_df, genome_scores_df, movies_df,
-                                 movie_genre_binary_terms_df,
-                                 movies_lemmatized_genome_term_vector_df, user_int_genre_terms_df,
-                                 user_genre_binary_term_vector_df,
-                                 user_lemmatized_genome_terms_df, user_full_genome_terms_df)
-
-    item_terms = movies_lemmatized_genome_term_vector_df.values
-    item_item_distances = pairwise_distances(item_terms, metric='cosine')
-    item_item_similarity_df = pd.DataFrame(item_item_distances,
-                                           index=movies_lemmatized_genome_term_vector_df.index,
-                                           columns=movies_lemmatized_genome_term_vector_df.index)
-
-    if experimental_users_list is 'all':
-        experimental_users_list = all_user_ids
-    for user_id in experimental_users_list:
-        recommender_lemmatized = CB_ClusteringBased_Recommender(ratings_df,
-                                                                movies_lemmatized_genome_term_vector_df,
-                                                                user_lemmatized_genome_terms_df,
-                                                                item_item_similarity_df,
-                                                                relevant_movies_threshold=relevant_movies_threshold)
-
-        start = time()
-        recommended_movies = recommender_lemmatized.recommend_movies2(user_id, K=K)
-        finish = time() - start
-        print('User: ', user_id, 'Recommendations: ', recommended_movies, 'Time: ', finish)
-
-        # update recommendations for this user
-        store_recommendation_results_df(recommendations_df_dict, user_id, recommended_movies,
-                                        key=Model.main_model_lemmatized)
-
-    if save_flag:
-        for key in recommendations_df_dict.keys():
-            export_recommendations_to_csv(recommendations_df_dict[key], save_path, K,
-                                          relevant_movies_threshold, key)
+def generate_thresholded_recommendations(experimental_users_list):
+    for relevant_movies_threshold in [0, 0.2, 0.4, 0.6, 0.8, 1]:
+        store_thresholded_recommendations(experimental_users_list, K=K,
+                                          relevant_movies_threshold=relevant_movies_threshold,
+                                          save_flag=save_flag,
+                                          save_path=save_path)
 
 
 def export_recommendations_to_csv(df_object: pd.DataFrame, save_path, K,
                                   relevant_movies_threshold, df_name):
-    target_file_name = save_path + df_name + '_simMov_serendipity2018_' + str(
+    target_file_name = save_path + df_name + '_simMov_serendipity2018_relevantThreshold_' + str(
         relevant_movies_threshold) + \
                        '_K' + str(K) + '.csv'
     df_object.to_csv(target_file_name)
 
 
-def get_serendipity2018_users(n_users='all'):
+def get_serendipity2018_answers_users(n_users='all'):
     answers_df = pd.read_csv(answers)
     count_df = answers_df.groupby('userId').count()
     all_user_ids = count_df[count_df['movieId'] == 5].index.values
@@ -515,24 +603,54 @@ def get_serendipity2018_users(n_users='all'):
     else:
         return all_user_ids
 
+
+def get_serendipity2018_recommendations_users(n_users='all'):
+    # experimental_users_list = [108657, 121459, 143149, 144189]
+    genome_scores_df = pd.read_csv(tag_genomes).pivot(index='movieId', columns='tagId',
+                                                      values='relevance')
+    tag_genome_movies = genome_scores_df.index.values
+
+    recommendations_df = pd.read_csv(recommendations)
+    all_user_ids = recommendations_df['userId'].unique()
+
+    ratings_df = pd.read_csv(ratings)
+
+    # filter ratings for movies watched only by these users
+    ratings_df = ratings_df[ratings_df['userId'].isin(all_user_ids)]
+
+    # filter ratings for movies only having tag-genome scores
+    ratings_df = ratings_df[ratings_df['movieId'].isin(tag_genome_movies)]
+    count_df = ratings_df.groupby('userId').count()
+
+    # choose users who have watched 2 or more movies
+    all_user_ids = count_df[count_df['movieId'] >= 2].index.values
+
+    if n_users is not 'all' and type(n_users) is int:
+        return np.random.choice(all_user_ids, n_users)
+    else:
+        return all_user_ids
+
+
 if __name__ == '__main__':
     np.random.seed(171450)
 
     # dataset = 'ml20m'
     dataset = 'serendipity2018'
-    K = 5
+    K = 8
 
     # serendipity2018-----------------
-    experimental_users_list = get_serendipity2018_users(5)
+    # experimental_users_list = get_serendipity2018_answers_users(5)
+    experimental_users_list = get_serendipity2018_recommendations_users('all')
     # serendipity2018-----------------
 
     # experimental_users_list = range(1, 20)
     # experimental_users_list = [9, 10, 11, 12, 13, 14]
-    # experimental_users_list = [1000]
+    # experimental_users_list = [148369]
 
     save_flag = True
     # save_path = ml20m + 'output/for_20_users_relevantMoviesThreshold0_05_highDiv0_8'
-    save_path = ml20m + 'output/recommendations/'
+    # save_path = ml20m + 'output/recommendations/'
+    save_path = serendipity2018 + 'output3/recommendations/'
     relevant_movies_threshold = 0.2
 
     # store_recommendations(experimental_users_list, K, relevant_movies_threshold, save_flag,
@@ -544,4 +662,7 @@ if __name__ == '__main__':
     #     'serendipity2018')
 
     # generate_cb_recommendations(experimental_users_list)
-    main(dataset, K, relevant_movies_threshold, experimental_users_list, save_flag, save_path)
+    # main(dataset, K, relevant_movies_threshold, experimental_users_list, save_flag, save_path)
+
+    # generate_non_thresholded_recommendations(experimental_users_list)
+    generate_thresholded_recommendations(experimental_users_list)

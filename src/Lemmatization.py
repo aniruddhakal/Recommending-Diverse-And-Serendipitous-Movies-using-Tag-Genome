@@ -12,7 +12,7 @@ base_dir = '../../datasets/Movielens/'
 ml20m = base_dir + 'ml-20m/'
 serendipity2018 = base_dir + 'serendipity-sac2018/'
 
-data_output_dir = 'output2/'
+data_output_dir = 'output3/'
 
 genome_tags = ml20m + 'genome-tags.csv'
 # genome_tags = serendipity2018 + 'genome-tags.csv'
@@ -242,8 +242,8 @@ def non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df):
 
 
 if __name__ == '__main__':
-    # dataset = 'serendipity2018'
-    dataset = 'ml20m'
+    dataset = 'serendipity2018'
+    # dataset = 'ml20m'
 
     if dataset is 'ml20m':
         output_dir = ml20m + data_output_dir
@@ -253,5 +253,5 @@ if __name__ == '__main__':
     final_lemmatization_dict, genome_tags_df = produce_lemmatization_dict()
 
     non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df)
-    thresholded_lemmatization(final_lemmatization_dict, genome_tags_df)
+    # thresholded_lemmatization(final_lemmatization_dict, genome_tags_df)
 

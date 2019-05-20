@@ -48,9 +48,11 @@ class ContentBased_Baseline_Recommender:
     # TODO recommend using tag-genome term vector
     # TODO recommend using lemmatized tag-genome term vector
 
-    def __init__(self, dataset='ml20m', movie_genre_binary_terms_df=None, movies_lemmatized_genome_term_vector_df=None,
+    def __init__(self, dataset='ml20m', movie_genre_binary_terms_df=None,
+                 movies_lemmatized_genome_term_vector_df=None,
                  user_int_genre_terms_df=None, user_genre_binary_term_vector_df=None,
-                 user_lemmatized_genome_terms_df=None, user_full_genome_terms_df=None, ratings_df=None,
+                 user_lemmatized_genome_terms_df=None, user_full_genome_terms_df=None,
+                 ratings_df=None,
                  genome_scores_df=None, movies_df=None, similarity_metric='cosine'):
         self.dataset = dataset
 
@@ -71,7 +73,8 @@ class ContentBased_Baseline_Recommender:
         self.movie_average_ratings_df = None
 
         if self.ratings_df is not None:
-            self.movie_average_ratings_df = self.ratings_df.loc[:, ['movieId', 'rating']].groupby('movieId').mean()
+            self.movie_average_ratings_df = self.ratings_df.loc[:, ['movieId', 'rating']].groupby(
+                'movieId').mean()
 
         # ml-20m setup
         # load all movies in df,
@@ -90,7 +93,8 @@ class ContentBased_Baseline_Recommender:
         self.user_genre_binary_term_vector_df, self.user_lemmatized_genome_terms_df, self.user_full_genome_terms_df \
             = data_loader.load_and_process_user_data(self.dataset)
 
-        self.movie_average_ratings_df = self.ratings_df.loc[:, ['movieId', 'rating']].groupby('movieId').mean()
+        self.movie_average_ratings_df = self.ratings_df.loc[:, ['movieId', 'rating']].groupby(
+            'movieId').mean()
 
     def get_vector_type_mapping(self, string_vector_type):
         """
@@ -109,11 +113,13 @@ class ContentBased_Baseline_Recommender:
         vector_type = vector_types_dict[string_vector_type]
 
         if vector_type is None:
-            raise ValueError("%s is invalid argument, please read documentation for right choice of arguments")
+            raise ValueError(
+                "%s is invalid argument, please read documentation for right choice of arguments")
 
         return vector_types_dict[vector_type]
 
-    def recommend_k_most_similar_movies(self, user_id, K, vector_type=BaselineRecommender_VectorType.GENRE_BINARY):
+    def recommend_k_most_similar_movies(self, user_id, K,
+                                        vector_type=BaselineRecommender_VectorType.GENRE_BINARY):
         """
 
         :param K: Number of best similar movies to recommend
@@ -128,17 +134,22 @@ class ContentBased_Baseline_Recommender:
             vector_type = self.get_vector_type_mapping(vector_type)
 
         recommend_k_similar_movies = {
-            BaselineRecommender_VectorType.GENRE_BINARY: self.user_binary_genre_based_recommendations(user_id, K),
-            BaselineRecommender_VectorType.GENRE_INTEGER: self.user_integer_genre_based_recommendations(user_id, K),
-            BaselineRecommender_VectorType.GENOME_FULL: self.user_full_genome_based_recommendations(user_id, K),
-            BaselineRecommender_VectorType.GENOME_LEMMATIZED: self.user_lemmatized_genome_based_recommendations(user_id,
-                                                                                                                K)
+            BaselineRecommender_VectorType.GENRE_BINARY: self.user_binary_genre_based_recommendations(
+                user_id, K),
+            BaselineRecommender_VectorType.GENRE_INTEGER: self.user_integer_genre_based_recommendations(
+                user_id, K),
+            BaselineRecommender_VectorType.GENOME_FULL: self.user_full_genome_based_recommendations(
+                user_id, K),
+            BaselineRecommender_VectorType.GENOME_LEMMATIZED: self.user_lemmatized_genome_based_recommendations(
+                user_id,
+                K)
         }
 
         return recommend_k_similar_movies[vector_type].tolist()
 
     def user_binary_genre_based_recommendations(self, user_id, K):
-        return self.term_vec_based_recommendations(user_id, K, self.user_genre_binary_term_vector_df,
+        return self.term_vec_based_recommendations(user_id, K,
+                                                   self.user_genre_binary_term_vector_df,
                                                    self.movies_genre_binary_term_vector_df)
 
     def user_integer_genre_based_recommendations(self, user_id, K):
@@ -153,7 +164,8 @@ class ContentBased_Baseline_Recommender:
         return self.term_vec_based_recommendations(user_id, K, self.user_lemmatized_genome_terms_df,
                                                    self.movies_lemmatized_genome_vector_df)
 
-    def term_vec_based_recommendations(self, user_id, K, user_term_vector_df, movies_term_vector_df):
+    def term_vec_based_recommendations(self, user_id, K, user_term_vector_df,
+                                       movies_term_vector_df):
         user_term_vector = user_term_vector_df.loc[user_id, :].values.reshape(1, -1)
         movies_term_vector_df.dropna(inplace=True)
 
@@ -180,7 +192,8 @@ class CB_ClusteringBased_Recommender:
     #   and compare results with non-normalized one
     # TODO p-median problem to infer user's taste based on tag-genomes.
 
-    def __init__(self, ratings_df, genome_scores_df, user_term_vector_df, item_item_similarities_df, K=20,
+    def __init__(self, ratings_df, genome_scores_df, user_term_vector_df, item_item_similarities_df,
+                 K=20,
                  n_neighbours=50, n_clusters=8, relevant_movies_threshold=0.2, random_state=171450):
         """
 
@@ -217,6 +230,9 @@ class CB_ClusteringBased_Recommender:
         self.div_weight = 0.8
         self.Ci_weight = 0.05
 
+    def set_relevant_movies_threshold(self, relevant_movies_threshold):
+        self.relevant_movies_threshold = relevant_movies_threshold
+
     def set_ranking_weights(self, Rcu_weight, Su_weight, div_weight, Ci_weight):
         self.Rcu_weight = Rcu_weight
         self.Su_weight = Su_weight
@@ -231,7 +247,8 @@ class CB_ClusteringBased_Recommender:
         user_movies_d = self.get_users_watched_movies(user_id)
 
         # extract tag-genomes for movies watched by user
-        user_movie_tags_df = self.genome_scores_df[self.genome_scores_df.index.isin(user_movies_d[user_id])]
+        user_movie_tags_df = self.genome_scores_df[
+            self.genome_scores_df.index.isin(user_movies_d[user_id])]
 
         # create clusters_series for movies watched by user
         clusters_series = self.form_clusters(user_id, user_movies_d, user_movie_tags_df)
@@ -252,7 +269,8 @@ class CB_ClusteringBased_Recommender:
         # initially all movies similar to sparse clusters are chosen
         if len(watched_movies) > 0:
             sparse_cluster_recommendations.extend(
-                self.find_similar_movies_to_sparse_cluster(watched_movies, user_id, clusters_series))
+                self.find_similar_movies_to_sparse_cluster(watched_movies, user_id,
+                                                           clusters_series))
 
         if len(sparse_cluster_recommendations) < N_movies_diverse:
             N_movies_similar += (N_movies_diverse - len(sparse_cluster_recommendations))
@@ -271,9 +289,11 @@ class CB_ClusteringBased_Recommender:
             # movies from this cluster
             watched_movies = clusters_series[cluster]
             # if less movies are recommended from previous cluster(s), automatically recommend N extra movies
-            N_movies = N_movies_per_dense_cluster + max(0, N_movies_per_dense_cluster - previous_recommendations_count)
+            N_movies = N_movies_per_dense_cluster + max(0,
+                                                        N_movies_per_dense_cluster - previous_recommendations_count)
 
-            recommended_movies = self.find_similar_movies_to_dense_cluster(watched_movies, user_id, N_movies)
+            recommended_movies = self.find_similar_movies_to_dense_cluster(watched_movies, user_id,
+                                                                           N_movies)
             dense_cluster_recommendations.extend(recommended_movies.tolist())
 
             # actual number of movies recommended from this cluster
@@ -295,7 +315,8 @@ class CB_ClusteringBased_Recommender:
         user_movies_d = self.get_users_watched_movies(user_id)
 
         # extract tag-genomes for movies watched by user
-        user_movie_tags_df = self.genome_scores_df[self.genome_scores_df.index.isin(user_movies_d[user_id])]
+        user_movie_tags_df = self.genome_scores_df[
+            self.genome_scores_df.index.isin(user_movies_d[user_id])]
 
         # create clusters_series for movies watched by user
         clusters_series = self.form_clusters(user_id, user_movies_d, user_movie_tags_df)
@@ -335,9 +356,11 @@ class CB_ClusteringBased_Recommender:
             # movies from this cluster
             watched_movies = clusters_series[cluster]
             # if less movies are recommended from previous cluster(s), automatically recommend N extra movies
-            N_movies = N_movies_per_dense_cluster + max(0, N_movies_per_dense_cluster - previous_recommendations_count)
+            N_movies = N_movies_per_dense_cluster + max(0,
+                                                        N_movies_per_dense_cluster - previous_recommendations_count)
 
-            recommended_movies = self.find_similar_movies_to_dense_cluster(watched_movies, user_id, N_movies)
+            recommended_movies = self.find_similar_movies_to_dense_cluster(watched_movies, user_id,
+                                                                           N_movies)
             dense_cluster_recommendations.extend(recommended_movies.tolist())
 
             # actual number of movies recommended from this cluster
@@ -359,7 +382,8 @@ class CB_ClusteringBased_Recommender:
 
         if len(watched_movies) > 0:
             sparse_cluster_recommendations.extend(
-                self.find_similar_movies_to_sparse_cluster(watched_movies, user_id, N_movies_diverse, clusters_series))
+                self.find_similar_movies_to_sparse_cluster(watched_movies, user_id,
+                                                           N_movies_diverse, clusters_series))
 
         # rank similar movies for each cluster, and select top-N from each cluster
         # duplicate processing, keep one with the top cluster rank
@@ -374,7 +398,8 @@ class CB_ClusteringBased_Recommender:
         ranking_df = pd.DataFrame()
 
         for watched_movie_id in watched_movies:
-            similar_movies = self.item_item_similarities_df[watched_movie_id].sort_values(ascending=False)[
+            similar_movies = self.item_item_similarities_df[watched_movie_id].sort_values(
+                ascending=False)[
                              :self.n_neighbours]
 
             similar_movies_df = pd.DataFrame(similar_movies)
@@ -389,19 +414,22 @@ class CB_ClusteringBased_Recommender:
         movie_ids = ranking_df['movieId'].values
 
         # extract genome scores for movie_ids
-        genome_scores_vector = self.user_term_vector_df.loc[movie_ids, :].values
+        genome_scores_vector = self.genome_scores_df.loc[movie_ids, :].values
 
         # extract user_term vector
         user_vector = self.user_term_vector_df.loc[user_id, :]
 
-        distances_with_user = pairwise_distances(genome_scores_vector, [user_vector], metric='cosine')
+        distances_with_user = pairwise_distances(genome_scores_vector, [user_vector],
+                                                 metric='cosine')
 
         ranking_df['S_u'] = distances_with_user
         ranking_df['diversity'] = 1 - ranking_df['S_u']
 
-        users_ratings = self.ratings_df[self.ratings_df['userId'] == user_id].loc[:, ['movieId', 'rating']]
+        users_ratings = self.ratings_df[self.ratings_df['userId'] == user_id].loc[:,
+                        ['movieId', 'rating']]
         candidate_movie_ratings_df = users_ratings[users_ratings['movieId'].isin(watched_movies)]
-        candidate_movie_ratings_df.set_index(candidate_movie_ratings_df['movieId'].values, drop=True, inplace=True)
+        candidate_movie_ratings_df.set_index(candidate_movie_ratings_df['movieId'].values,
+                                             drop=True, inplace=True)
 
         movie_ratings_dict = candidate_movie_ratings_df['rating'].to_dict()
 
@@ -431,10 +459,12 @@ class CB_ClusteringBased_Recommender:
         cluster_size_df = cluster_size_df.apply(lambda x: process(x), axis=1)
 
         # smaller the cluster size, higher the score
-        cluster_size_df['C_i'] = cluster_size_df.rank(method='dense', ascending=False).astype(np.int)
+        cluster_size_df['C_i'] = cluster_size_df.rank(method='dense', ascending=False).astype(
+            np.int)
 
         def assign_cluster_score(x):
-            x['C_i'] = self.get_movie_cluster_score(x['watched_movie_id'], clusters_series, cluster_size_df)
+            x['C_i'] = self.get_movie_cluster_score(x['watched_movie_id'], clusters_series,
+                                                    cluster_size_df)
             return x
 
         ranking_df['C_i'] = None
@@ -504,14 +534,16 @@ class CB_ClusteringBased_Recommender:
 
         return 0
 
-    def find_similar_movies_to_dense_cluster(self, watched_movies, user_id, N_movies_per_dense_cluster):
+    def find_similar_movies_to_dense_cluster(self, watched_movies, user_id,
+                                             N_movies_per_dense_cluster):
         # TODO figure out better way to remove duplicate movies from recommendations
         # TODO test
         ranking_df = pd.DataFrame()
 
         for watched_movie_id in watched_movies:
             # sort by most similar movies on top
-            similar_movies = self.item_item_similarities_df[watched_movie_id].sort_values(ascending=False)[:self.K]
+            similar_movies = self.item_item_similarities_df[watched_movie_id].sort_values(
+                ascending=False)[:self.K]
 
             similar_movies_df = pd.DataFrame(similar_movies)
             similar_movies_df['movieId'] = similar_movies_df.index
@@ -529,7 +561,8 @@ class CB_ClusteringBased_Recommender:
         # extract user_term vector
         user_vector = self.user_term_vector_df.loc[user_id, :]
 
-        distances_with_user = pairwise_distances(genome_scores_vector, [user_vector], metric='cosine')
+        distances_with_user = pairwise_distances(genome_scores_vector, [user_vector],
+                                                 metric='cosine')
 
         # similarity to user profile
         ranking_df['S_u'] = distances_with_user
@@ -569,7 +602,8 @@ class CB_ClusteringBased_Recommender:
         :param candidate_movie_id:
         :return: Pandas Series with movieId as Index and relevance score to candidate movie as values
         """
-        return self.item_item_similarities_df[candidate_movie_id].sort_values(ascending=False)[:self.n_neighbours]
+        return self.item_item_similarities_df[candidate_movie_id].sort_values(ascending=False)[
+               :self.n_neighbours]
 
     def choose_appropriate_clusters_for_diversification(self, clusters):
         """
@@ -593,10 +627,12 @@ class CB_ClusteringBased_Recommender:
 
         # choose clusters with only up to median sizes
         # choosing all clusters
-        below_mean_clusters_df = cluster_size_df[cluster_size_df['size'] < cluster_size_df['size'].mean()]
+        below_mean_clusters_df = cluster_size_df[
+            cluster_size_df['size'] < cluster_size_df['size'].mean()]
         below_mean_cluster_index = below_mean_clusters_df.index.values
 
-        above_mean_cluster_index = np.setdiff1d(cluster_size_df.index.values, below_mean_cluster_index)
+        above_mean_cluster_index = np.setdiff1d(cluster_size_df.index.values,
+                                                below_mean_cluster_index)
 
         # rank clusters
         cluster_size_df['rank'] = cluster_size_df.rank(method='dense')
@@ -607,21 +643,28 @@ class CB_ClusteringBased_Recommender:
     def form_clusters(self, user_id, user_movies_d, user_movie_tags_df):
         # TODO filter movies only above certain rating threshold
         n_movies = user_movie_tags_df.index.size
-        highest_score = 0
+        highest_score = -99
 
         best_clustering_result = None
 
-        # exhaustively check silhouette scores for each cluster sizes and select the cluster size with the highest score.
-        for cluster_size in range(2, n_movies - 1, 1):
-            clustering_result = AgglomerativeClustering(n_clusters=cluster_size, affinity='euclidean',
-                                                        linkage='ward').fit_predict(
+        if n_movies <= 3:
+            best_clustering_result = AgglomerativeClustering(n_clusters=2,
+                                                             affinity='euclidean',
+                                                             linkage='ward').fit_predict(
                 user_movie_tags_df.values[:n_movies])
-            score = silhouette_score(user_movie_tags_df.values[:n_movies], clustering_result,
-                                     metric='cosine')
+        else:
+            # exhaustively check silhouette scores for each cluster sizes and select the cluster size with the highest score.
+            for cluster_size in range(2, n_movies - 1, 1):
+                clustering_result = AgglomerativeClustering(n_clusters=cluster_size,
+                                                            affinity='euclidean',
+                                                            linkage='ward').fit_predict(
+                    user_movie_tags_df.values[:n_movies])
+                score = silhouette_score(user_movie_tags_df.values[:n_movies], clustering_result,
+                                         metric='cosine')
 
-            if highest_score < score:
-                best_clustering_result = clustering_result
-                highest_score = score
+                if highest_score < score:
+                    best_clustering_result = clustering_result
+                    highest_score = score
 
         new_df = pd.DataFrame(best_clustering_result, columns=['cluster'])
 
@@ -633,7 +676,8 @@ class CB_ClusteringBased_Recommender:
     def get_users_watched_movies(self, user_id):
         user_movies_d = {}
 
-        user_movies_d[user_id] = self.ratings_df[self.ratings_df['userId'] == user_id]['movieId'].values.tolist()
+        user_movies_d[user_id] = self.ratings_df[self.ratings_df['userId'] == user_id][
+            'movieId'].values.tolist()
 
         return user_movies_d
 
@@ -671,7 +715,8 @@ def main():
     genome_score_movies = genome_scores_df.index.unique().values
 
     ratings_df = pd.read_csv(ratings, usecols=range(3),
-                             dtype={'userId': np.int64, 'movieId': np.int64, 'rating': np.float64}, low_memory=False)
+                             dtype={'userId': np.int64, 'movieId': np.int64, 'rating': np.float64},
+                             low_memory=False)
     # only keep ratings for which the genome scores exists
     ratings_df = ratings_df[ratings_df['movieId'].isin(genome_score_movies)]
 
@@ -685,7 +730,8 @@ def main():
     print(item_item_distances)
 
     # recommender = ContentBased_Baseline_Recommender()
-    recommender = CB_ClusteringBased_Recommender(ratings_df, genome_scores_df, user_genome_vector_df,
+    recommender = CB_ClusteringBased_Recommender(ratings_df, genome_scores_df,
+                                                 user_genome_vector_df,
                                                  item_item_similarity_df, n_neighbours=8)
     # predict ratings for all users in serendipity dataset
     start_time = time()
@@ -697,7 +743,6 @@ def main():
     finish_time = time() - start_time
 
     print("Total Time Taken: %f seconds" % finish_time)
-
 
     # load df from answers
     # answers_df = pd.read_csv(answers)
