@@ -17,7 +17,7 @@ plt.ioff()
 data_base_dir = '../../../datasets/Movielens/'
 data_dir = data_base_dir + 'serendipity-sac2018/'
 data_dir2 = data_base_dir + 'ml-20m/'
-output_dir = data_dir + 'output/'
+output_dir = data_dir + 'output3/'
 
 # genome_scores = data_dir + 'genome-scores.csv'
 # genome_scores = data_dir + 'tag_genome.csv'
