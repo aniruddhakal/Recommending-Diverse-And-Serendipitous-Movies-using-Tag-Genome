@@ -20,7 +20,9 @@ data_dir2 = data_base_dir + 'ml-20m/'
 output_dir = data_dir + 'output/'
 
 # genome_scores = data_dir + 'genome-scores.csv'
-genome_scores = data_dir + 'tag_genome.csv'
+# genome_scores = data_dir + 'tag_genome.csv'
+genome_scores = data_dir + 'mlLatestgenome-scores.csv'
+
 genome_tags = data_dir + 'genome-tags.csv'
 movies = data_dir + 'movies.csv'
 # ratings = data_dir + 'ratings.csv'
@@ -312,20 +314,20 @@ class RunPredictions:
             mae_df[lemmatized_labels[i] + '_MAE'] = lemmatized_mae_list[i]
             mse_df[lemmatized_labels[i] + '_MSE'] = lemmatized_mse_list[i]
 
-        mae_df.median().plot(kind='barh',
-                             title='K=' + str(K) + ', median MAE, ' + ug, figsize=(20, 5))
+        mae_df.mean().plot(kind='barh',
+                             title='K=' + str(K) + ', mean MAE, ' + ug, figsize=(20, 5))
         # figname = output_dir + 'K=' + str(K) + ', median MAE, ' + ug
-        figname = './serendipity_all_users/' + 'K=' + str(K) + ', median MAE, ' + ug
+        figname = './serendipity_new_genomes/' + 'K=' + str(K) + ', mean MAE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
         mae_df.to_pickle(figname + '_df')
 
         # plt.clf()
-        mse_df.median().plot(kind='barh',
-                             title='K=' + str(K) + ', median MSE, ' + ug, figsize=(20, 5))
+        mse_df.mean().plot(kind='barh',
+                             title='K=' + str(K) + ', mean MSE, ' + ug, figsize=(20, 5))
 
         # figname = output_dir + 'K=' + str(K) + ', median MSE, ' + ug
-        figname = './serendipity_all_users/' + 'K=' + str(K) + ', median MSE, ' + ug
+        figname = './serendipity_new_genomes/' + 'K=' + str(K) + ', mean MSE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
 
@@ -349,7 +351,7 @@ def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_r
 
 def main():
     print("executing main method...")
-    K_ranges = [10, 25]
+    K_ranges = [10, 25, 50, 70]
 
     start_range = 0
 

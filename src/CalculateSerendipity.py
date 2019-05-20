@@ -12,7 +12,9 @@ output_dir = data_dir + 'output3/'
 answers = data_dir + 'answers.csv'
 recommendations = data_dir + 'recommendations.csv'
 
-genome_scores = data_dir + 'tag_genome.csv'
+# genome_scores = data_dir + 'tag_genome.csv'
+genome_scores = data_dir + 'mlLatestgenome-scores.csv'
+
 genome_tags = data_dir + 'genome-tags.csv'
 movies = data_dir + 'movies.csv'
 training = data_dir + 'training.csv'
@@ -164,6 +166,88 @@ class SerendipityCalculator:
         return serendipity
 
 
+def calculate_for_models():
+    recommendations_dir = '../generated_data/final_recommendations/'
+    baseline = recommendations_dir + 'Baseline Recommendations/'
+    CB_recommendations_dir = recommendations_dir + 'CB_Recommendations_Rcu05_Su10_div80_ci05/'
+    thresholded_dir = CB_recommendations_dir + 'thresholded'
+
+    K_Neighbours = 8
+    model = 'main_model_'
+    label = '_simMov_serendipity2018_relevantThreshold_'
+    finish_label = '_K' + str(K_Neighbours) + '.csv'
+
+    relevant_movies_thresholds = [0, 0.2, 0.4, 0.6, 0.8, 1]
+    relevant_movies_thresholds = [0, 0.2]
+
+    cb_recommendations_file_names = list()
+
+    models = ['main_full_mov0', 'main_full_mov0.2']
+
+    types_under_test = ['full', 'lemmatized']
+    types_under_test = ['full']
+
+    for vec_type in types_under_test:
+        for relevant_m_th in relevant_movies_thresholds:
+            file_name = model + vec_type + label + str(relevant_m_th) + finish_label
+            cb_recommendations_file_names.append(file_name)
+
+    # load all recommendations
+    cb_recommendations_dfs = list()
+
+    for recommendation_file in cb_recommendations_file_names:
+        cb_recommendations_dfs.append(
+            pd.read_csv(CB_recommendations_dir + recommendation_file, index_col=0)
+        )
+
+    unexpected_threshold = 0.001
+
+    # choose and initialize primitive recommender
+    primitive_recommender = ContentBased_Recommender(term_vector_df=genome_scores_df,
+                                                     ratings_df=ratings_df, K=50, metric='cosine',
+                                                     weighted=True)
+
+    # serendipity_calculators_list = list()
+
+    serendipity_calculator = SerendipityCalculator(ratings_df, movie_terms_df=genome_scores_df,
+                                                   primitive_recommender=primitive_recommender,
+                                                   round_decimals=6,
+                                                   unexpected_ratio=unexpected_threshold)
+
+    ## -----------------------------------
+    #   main serendipity calculation part
+    ## -----------------------------------
+
+    serendipity_calculations_df = pd.DataFrame()
+
+    for user_id in all_user_ids:
+        series = pd.Series()
+        series.name = user_id
+
+        # serendipity for ser-2018 dataset
+        recommendation_list = recommendations_df[recommendations_df['userId'] == user_id][
+            'movieId'].values
+
+        serendipity = serendipity_calculator.calculate_serendipity(user_id, recommendation_list)
+        series['serendipity-sac2018'] = serendipity
+
+        # serendipity for all main models
+        for i, model in enumerate(models):
+            rec_df = cb_recommendations_dfs[i]
+            recommendation_list = rec_df.loc[user_id].values
+
+            serendipity = serendipity_calculator.calculate_serendipity(user_id, recommendation_list)
+            series[model] = serendipity
+
+        # serendipity for all thresholded main models
+
+        # serendipity for all baseline models (optional)
+
+        serendipity_calculations_df = serendipity_calculations_df.append(series)
+
+    print(serendipity_calculations_df)
+
+
 def main():
     user1 = 100200
     recommendations1 = np.array([780.0, 47.0, 317.0, 909.0, 673.0, 158.0, 455.0, 608.0]).astype(
@@ -182,12 +266,14 @@ def main():
                                                      weighted=True)
 
     serendipity_calculator = SerendipityCalculator(ratings_df, movie_terms_df=genome_scores_df,
-                          primitive_recommender=primitive_recommender, round_decimals=6,
-                          unexpected_ratio=unexpected_threshold)
+                                                   primitive_recommender=primitive_recommender,
+                                                   round_decimals=6,
+                                                   unexpected_ratio=unexpected_threshold)
 
     serendipity = serendipity_calculator.calculate_serendipity(user1, recommendations1)
     print('serendipity', serendipity)
 
 
 if __name__ == '__main__':
-    main()
+    # main()
+    calculate_for_models()
