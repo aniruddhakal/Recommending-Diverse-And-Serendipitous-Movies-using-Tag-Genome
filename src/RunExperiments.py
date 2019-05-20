@@ -476,11 +476,11 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
     # TODO removing because only used for running baselines
     del movie_genre_binary_terms_df, user_int_genre_terms_df, user_genre_binary_term_vector_df
 
-    experiments = RunExperiments(ratings_df, genome_scores_df, movies_df,
-                                 movie_genre_binary_terms_df,
-                                 movies_lemmatized_genome_term_vector_df, user_int_genre_terms_df,
-                                 user_genre_binary_term_vector_df,
-                                 user_lemmatized_genome_terms_df, user_full_genome_terms_df)
+    # experiments = RunExperiments(ratings_df, genome_scores_df, movies_df,
+    #                              movie_genre_binary_terms_df,
+    #                              movies_lemmatized_genome_term_vector_df, user_int_genre_terms_df,
+    #                              user_genre_binary_term_vector_df,
+    #                              user_lemmatized_genome_terms_df, user_full_genome_terms_df)
 
     baseline_similarity_metrics = ['jaccard', 'cosine', 'cosine', 'cosine']
     baseline_models = [Model.baseline_genre_binary, Model.baseline_genre_int,
