@@ -81,7 +81,6 @@ class ContentBased_Recommender:
         user_movies = np.setdiff1d(user_movies, candidate_movie_id)
 
         # load user rating for watched movies other than the candidate movie
-        # user_ratings =
         users_all_ratings_df = ratings_df[ratings_df['userId'] == user_id]
         users_all_ratings_df = users_all_ratings_df[
             users_all_ratings_df['movieId'].isin(user_movies)]
