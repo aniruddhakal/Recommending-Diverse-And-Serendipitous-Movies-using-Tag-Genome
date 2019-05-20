@@ -17,7 +17,7 @@ plt.ioff()
 data_base_dir = '../../../datasets/Movielens/'
 data_dir = data_base_dir + 'serendipity-sac2018/'
 data_dir2 = data_base_dir + 'ml-20m/'
-output_dir = data_dir + 'output/'
+output_dir = data_dir + 'output3/'
 
 # genome_scores = data_dir + 'genome-scores.csv'
 # genome_scores = data_dir + 'tag_genome.csv'
@@ -27,6 +27,7 @@ genome_tags = data_dir + 'genome-tags.csv'
 movies = data_dir + 'movies.csv'
 # ratings = data_dir + 'ratings.csv'
 ratings = data_dir + 'training.csv'
+recommendations = data_dir + 'recommendations.csv'
 tags = data_dir + 'tags.csv'
 answers = data_dir + 'answers.csv'
 genre_binary_terms = output_dir + 'movie_genre_binary_term_vector_df_bz2'
@@ -55,12 +56,19 @@ ratings_df = pd.read_csv(ratings)
 ratings_df = ratings_df[ratings_df['movieId'].isin(all_movie_ids)]
 ratings_df = ratings_df.loc[:, ['userId', 'movieId', 'rating']]
 
-all_user_ids = ratings_df['userId'].unique()
-
 answers_df = pd.read_csv(answers)
 count_df = answers_df.groupby('userId').count()
 # count_df[count_df['movieId'] == 5]
 all_answers_user_ids = count_df[count_df['movieId'] == 5].index.values
+
+# read all users and filter ratings df
+recommendations_df = pd.read_csv(recommendations)
+
+all_user_ids = recommendations_df['userId'].unique().tolist()
+
+count_df = answers_df.groupby('userId').count()
+all_user_ids.extend(count_df[count_df['movieId'] == 5].index.values.tolist())
+all_user_ids = np.unique(np.array(all_user_ids))
 
 
 class ContentBased_Recommender:
@@ -355,14 +363,14 @@ def main():
 
     start_range = 0
 
-    end_range = len(all_answers_user_ids)
+    end_range = len(all_user_ids)
 
     n_k_ranges = len(K_ranges)
 
     # user group
-    ug = 'all_serendipity_answer_users'
+    ug = 'serendipity_users'
 
-    run_parallel_for_users_range(ug, all_answers_user_ids, K_ranges[:n_k_ranges], start_range, end_range)
+    run_parallel_for_users_range(ug, all_user_ids, K_ranges[:n_k_ranges], start_range, end_range)
 
 
 if __name__ == '__main__':
