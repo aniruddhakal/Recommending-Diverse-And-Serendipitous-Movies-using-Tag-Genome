@@ -215,20 +215,20 @@ class CB_ClusteringBased_Recommender:
 
         # Weighted ranking
         # TODO - remove hardcoding
-        # self.Rcu_weight = 0.40
-        # self.Su_weight = 0.20
-        # self.div_weight = 0.15
-        # self.Ci_weight = 0.15
+        self.Rcu_weight = 0.40
+        self.Su_weight = 0.20
+        self.div_weight = 0.15
+        self.Ci_weight = 0.15
 
         # self.Rcu_weight = 0.1
         # self.Su_weight = 0.3
         # self.div_weight = 0.5
         # self.Ci_weight = 0.1
 
-        self.Rcu_weight = 0.05
-        self.Su_weight = 0.1
-        self.div_weight = 0.8
-        self.Ci_weight = 0.05
+        # self.Rcu_weight = 0.05
+        # self.Su_weight = 0.1
+        # self.div_weight = 0.8
+        # self.Ci_weight = 0.05
 
     def set_relevant_movies_threshold(self, relevant_movies_threshold):
         self.relevant_movies_threshold = relevant_movies_threshold

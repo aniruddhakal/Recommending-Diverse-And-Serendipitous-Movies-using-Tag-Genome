@@ -18,7 +18,7 @@ movies = data_dir + 'movies.csv'
 tags = data_dir + 'tags.csv'
 genres = data_dir + 'u.genre'
 
-# serendipity-2018sac
+# serendipity-sac2018
 genome_scores = data_dir + 'tag_genome.csv'
 ratings = data_dir + 'training.csv'
 answers = data_dir + 'answers.csv'
