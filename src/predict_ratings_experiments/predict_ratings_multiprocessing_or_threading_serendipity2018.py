@@ -165,6 +165,7 @@ full_thresholded_dfs = list()
 
 metric = 'cosine'
 
+# load thresholded dataframes
 for i, t in enumerate(thresholds):
     target_df = pd.read_pickle(output_dir + lemmatized_labels[i], compression='bz2')
     distances_df = pd.DataFrame(pairwise_distances(target_df, metric=metric), index=target_df.index,
@@ -236,7 +237,6 @@ for i, t in enumerate(thresholds):
     lemmatized_recommenders.append(
         ContentBased_Recommender(lemmatized_thresholded_dfs[i], ratings_df,
                                  weighted=True))
-
 
 class RunPredictions:
 
