@@ -17,7 +17,7 @@ plt.ioff()
 data_base_dir = '../../../datasets/Movielens/'
 data_dir = data_base_dir + 'serendipity-sac2018/'
 data_dir2 = data_base_dir + 'ml-20m/'
-output_dir = data_dir + 'output/'
+output_dir = data_dir + 'output3/'
 
 # genome_scores = data_dir + 'genome-scores.csv'
 genome_scores = data_dir + 'tag_genome.csv'
@@ -326,7 +326,7 @@ class RunPredictions:
                              title='K=' + str(K) + ', median MSE, ' + ug, figsize=(20, 5))
 
         # figname = output_dir + 'K=' + str(K) + ', median MSE, ' + ug
-        figname = './serendipity_all_users/' + 'K=' + str(K) + ', median MSE, ' + ug
+        figname = './serendipity_all_users_run2/' + 'K=' + str(K) + ', median MSE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
 
@@ -350,7 +350,7 @@ def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_r
 
 def main():
     print("executing main method...")
-    K_ranges = [10, 25]
+    K_ranges = [10, 25, 50, 70]
 
     start_range = 0
 
