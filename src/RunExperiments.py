@@ -24,7 +24,7 @@ tag_genomes = serendipity2018 + 'tag_genome.csv'
 recommendations = serendipity2018 + 'recommendations.csv'
 ratings = serendipity2018 + 'training.csv'
 
-data_output_dir = serendipity2018 + 'output3/'
+data_output_dir = serendipity2018 + 'output4/'
 
 
 class Model(Enum):
@@ -256,7 +256,7 @@ def main(dataset, K, relevant_movies_threshold, user_list, save_flag, save_path)
                                                                 item_item_similarity_df,
                                                                 relevant_movies_threshold=relevant_movies_threshold)
 
-        recommended_movies = recommender_lemmatized.recommend_movies2(user_id, K=K)
+        recommended_movies = recommender_lemmatized.recommend_movies3(user_id, K=K)
 
         # update recommendations for this user
         update_recommendation_results_dict(recommendation_results_dict, recommended_movies,
@@ -274,7 +274,7 @@ def main(dataset, K, relevant_movies_threshold, user_list, save_flag, save_path)
                                                           item_item_similarity_df,
                                                           relevant_movies_threshold=relevant_movies_threshold)
 
-        recommended_movies = recommender_full.recommend_movies2(user_id, K=K)
+        recommended_movies = recommender_full.recommend_movies3(user_id, K=K)
 
         # update recommendations for this user
         update_recommendation_results_dict(recommendation_results_dict, recommended_movies,
@@ -432,14 +432,14 @@ def store_thresholded_recommendations(user_list, K=8, relevant_movies_threshold=
         # for each recommender in the list, get recommendations
         for i, threshold in enumerate(thresholds):
             recommender = lemmatized_recommenders[i]
-            recommended_movies = recommender.recommend_movies2(user_id, K=K)
+            recommended_movies = recommender.recommend_movies3(user_id, K=K)
 
             # update recommendations for this user
             store_recommendation_results_df(recommendations_df_dict, user_id, recommended_movies,
                                             key='lemmatized_thresholded_' + str(threshold))
 
             recommender = full_recommenders[i]
-            recommended_movies = recommender.recommend_movies2(user_id, K=K)
+            recommended_movies = recommender.recommend_movies3(user_id, K=K)
 
             # store them in appropriate way as done in store_recommendations method.
             # update recommendations for this user
@@ -571,7 +571,7 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
     for user_id in experimental_users_list:
         print("user under test: ", user_id)
 
-        recommended_movies = recommender_lemmatized.recommend_movies2(user_id, K=K)
+        recommended_movies = recommender_lemmatized.recommend_movies3(user_id, K=K)
 
         # update recommendations for this user
         store_recommendation_results_df(recommendations_df_dict, user_id, recommended_movies,
@@ -579,7 +579,7 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
         # TODO store instead update
 
         print("\nMain Model Lemmatized results:\n", recommended_movies)
-        recommended_movies = recommender_full.recommend_movies2(user_id, K=K)
+        recommended_movies = recommender_full.recommend_movies3(user_id, K=K)
 
         # update recommendations for this user
         # TODO store instead update
@@ -683,7 +683,7 @@ if __name__ == '__main__':
     save_flag = True
     # save_path = ml20m + 'output/for_20_users_relevantMoviesThreshold0_05_highDiv0_8'
     # save_path = ml20m + 'output/recommendations/'
-    save_path = serendipity2018 + 'output4/recommendations/'
+    save_path = serendipity2018 + 'output4/recommendations_algo3_all25/'
     relevant_movies_threshold = 0.2
 
     # store_recommendations(experimental_users_list, K, relevant_movies_threshold, save_flag,
@@ -699,4 +699,4 @@ if __name__ == '__main__':
 
     # generate_baseline_recommendations(experimental_users_list)
     generate_non_thresholded_recommendations(experimental_users_list)
-    # generate_thresholded_recommendations(experimental_users_list)
+    generate_thresholded_recommendations(experimental_users_list)

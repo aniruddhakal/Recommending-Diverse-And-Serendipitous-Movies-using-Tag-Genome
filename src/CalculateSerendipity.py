@@ -20,6 +20,7 @@ movies = data_dir + 'movies.csv'
 training = data_dir + 'training.csv'
 tags = data_dir + 'tags.csv'
 
+ratings_df = pd.read_csv(training)
 movies_df = pd.read_csv(movies)
 
 answers_df = pd.read_csv(answers)
@@ -37,8 +38,6 @@ genome_scores_df = pd.read_csv(genome_scores).pivot(index='movieId', columns='ta
                                                     values='relevance')
 
 tag_genome_movies = genome_scores_df.index.values
-
-ratings_df = pd.read_csv(training)
 
 # filter ratings for movies watched only by these users
 ratings_df = ratings_df[ratings_df['userId'].isin(all_user_ids)]
@@ -98,13 +97,16 @@ class ContentBased_Recommender:
 
 class SerendipityCalculator:
 
-    def __init__(this, ratings_df, movie_terms_df, primitive_recommender, round_decimals,
-                 unexpected_ratio):
+    def __init__(this, ratings_df, movie_terms_df, user_genome_terms_df, primitive_recommender,
+                 round_decimals,
+                 unexpected_ratio, K=8):
         this.ratings_df = ratings_df
         this.movie_terms_df = movie_terms_df
+        this.user_genome_terms_df = user_genome_terms_df
         this.primitive_recommender = primitive_recommender
         this.round_decimals = round_decimals
         this.unexpected_ratio = unexpected_ratio
+        this.RL_SIZE = K
 
     def calculate_unexpectedness(this, user_id, recommendation_list, round_decimals=6,
                                  users_movies=None,
@@ -164,6 +166,110 @@ class SerendipityCalculator:
                       len(recommendation_list)
 
         return serendipity
+
+    def calculate_diversity(this, user_id, recommendation_list):
+        # movie_genomes_df = movie_genome_scores_df.loc[recommendation_list, :]
+        movie_genomes_df = this.movie_terms_df.loc[recommendation_list, :]
+        user_vector_df = this.user_genome_terms_df.loc[user_id, :].values.reshape(1, -1)
+        # user_vector_df = this.
+
+        model_pairwise_scores_df = pd.DataFrame(index=recommendation_list)
+        movie_genomes_df.fillna(0, inplace=True)
+        user_vector_df.fillna(0, inplace=True)
+        model_pairwise_scores_df['similarity'] = pairwise_distances(user_vector_df,
+                                                                    movie_genomes_df.values,
+                                                                    metric='cosine').reshape(-1, 1)
+        model_pairwise_scores_df['diversity'] = 1 - model_pairwise_scores_df['similarity']
+
+        all_movies = model_pairwise_scores_df.index.values
+        movie_genomes_df = this.movie_terms_df.loc[all_movies, :]
+
+        # calculating diversity of a list (1-SIM_ij)
+        intra_list_distances_df = pd.DataFrame(
+            1 - pairwise_distances(movie_genomes_df.values, movie_genomes_df.values,
+                                   metric='cosine'), index=all_movies,
+            columns=all_movies)
+        diversity_of_list = intra_list_distances_df.sum(axis=1).sum() * (
+                1 / (this.RL_SIZE * (this.RL_SIZE - 1)))
+        similarity_of_list = 1 - diversity_of_list
+
+        # this is the similarity to user profile
+        average_user_similarity = model_pairwise_scores_df['similarity'].mean()
+
+        # diversity from the user profile
+        average_user_diversity = model_pairwise_scores_df['diversity'].mean()
+
+        return diversity_of_list, similarity_of_list, average_user_similarity, average_user_diversity
+
+
+# class SerendipityCalculator:
+#
+#     def __init__(this, ratings_df, movie_terms_df, primitive_recommender, round_decimals,
+#                  unexpected_ratio):
+#         this.ratings_df = ratings_df
+#         this.movie_terms_df = movie_terms_df
+#         this.primitive_recommender = primitive_recommender
+#         this.round_decimals = round_decimals
+#         this.unexpected_ratio = unexpected_ratio
+#
+#     def calculate_unexpectedness(this, user_id, recommendation_list, round_decimals=6,
+#                                  users_movies=None,
+#                                  unexpected_ratio=0.001):
+#         # get term vec for all movies watched by the user
+#         if users_movies is None:
+#             users_movies = this.ratings_df[this.ratings_df['userId'] == user_id]['movieId'].values
+#
+#         user_term_vec = this.movie_terms_df.loc[users_movies, :].fillna(0).values
+#
+#         # load genome tags for recommended movies
+#         recommendations_term_vec = this.movie_terms_df.loc[recommendation_list, :].fillna(0).values
+#
+#         # calculate distances of all recommended movies with all movies watched by user
+#         distance_from_user_profile = pd.DataFrame(
+#             pairwise_distances(user_term_vec, recommendations_term_vec, metric='cosine'))
+#
+#         # get minimum distance from users profile for each recommended movie
+#         min_distances = distance_from_user_profile.min().values
+#
+#         # round distances to N decimals - parameter round_decimals
+#         unexpectedness = np.around(min_distances, decimals=round_decimals)
+#
+#         unexpected_movies = recommendation_list[unexpectedness >= unexpected_ratio]
+#
+#         return unexpected_movies
+#
+#     def calculate_usefulness(this, user_id, recommendation_list, primitive_recommender=None,
+#                              like_threshold=3,
+#                              K=50):
+#         if primitive_recommender is None:
+#             primitive_recommender = this.primitive_recommender
+#
+#         users_movies = this.ratings_df[this.ratings_df['userId'] == user_id]['movieId'].values
+#
+#         predicted_ratings_list = list()
+#
+#         # get predicted rating for each movie using the primitive recommender
+#         for candidate_movie_id in recommendation_list:
+#             predicted_rating = primitive_recommender.get_predicted_rating(user_id,
+#                                                                           candidate_movie_id,
+#                                                                           users_movies, K=K)
+#             predicted_ratings_list.append(predicted_rating)
+#
+#         predicted_ratings_list = np.array(predicted_ratings_list)
+#
+#         # filter as useful if potential rating is above or equal to the like threshold
+#         useful_movies = recommendation_list[predicted_ratings_list >= like_threshold]
+#
+#         return useful_movies
+#
+#     def calculate_serendipity(this, user_id, recommendation_list):
+#         unexpected_movies = this.calculate_unexpectedness(user_id, recommendation_list)
+#         useful_movies = this.calculate_usefulness(user_id, recommendation_list)
+#
+#         serendipity = len(np.intersect1d(unexpected_movies, useful_movies)) / \
+#                       len(recommendation_list)
+#
+#         return serendipity
 
 
 def calculate_for_models():
