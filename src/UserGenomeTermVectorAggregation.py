@@ -6,7 +6,7 @@ from DataLoaderPreprocessor import DataLoaderPreprocessor
 
 data_base_dir = '../../datasets/Movielens/'
 data_dir = data_base_dir + 'ml-20m/'
-target_directory = data_dir + 'output2/'
+target_directory = data_dir + 'output4/'
 
 
 def main(save_flag, ratings_df, genome_scores_df, full_terms_target_file_name,
@@ -21,14 +21,15 @@ def main(save_flag, ratings_df, genome_scores_df, full_terms_target_file_name,
 
     main_start = time()
 
-    for option in [full, lemmatized]:
+    for option in [lemmatized, full]:
 
         if option == lemmatized:
             target_file = lemmatized_terms_target_file_name
         else:
             target_file = full_terms_target_file_name
 
-        if option == lemmatized and load_explicitly:
+        # if option == lemmatized and load_explicitly:
+        if option == lemmatized:
             file_name = lemmatized_movies_term_vector_pickle
             # genomes_term_vector_df = pd.read_csv(data_dir + file_name, index_col=0)
             genomes_term_vector_df = pd.read_pickle(target_directory + file_name,
@@ -89,9 +90,16 @@ def non_threshold_based_genome_aggregation():
     lemmatized_movies_term_vector_pickle = 'movies_lemmatized_genome_vector_df_bz2'
     full_movies_term_vector_pickle = None
 
-    main(save_flag, ratings_df, genome_scores_df, full_terms_target_file_name,
-         lemmatized_terms_target_file_name,
-         lemmatized_movies_term_vector_pickle, compression=compression,
+    # (save_flag, ratings_df, genome_scores_df, full_terms_target_file_name,
+    #  lemmatized_terms_target_file_name,
+    #  lemmatized_movies_term_vector_pickle, full_movies_term_vector_pickle=None,
+    #  compression='bz2',
+    #  load_explicitly=False)
+
+    main(save_flag=save_flag, ratings_df=ratings_df, genome_scores_df=genome_scores_df,
+         full_terms_target_file_name=full_terms_target_file_name,
+         lemmatized_terms_target_file_name=lemmatized_terms_target_file_name,
+         lemmatized_movies_term_vector_pickle=lemmatized_movies_term_vector_pickle, compression=compression,
          load_explicitly=False)
 
 
@@ -111,28 +119,35 @@ def threshold_based_genome_aggregation():
         full_terms_target_file_name = 'threshold_' + str(
             threshold_value) + '_user_full_genome_terms_df_bz2'
 
-        lemmatized_movies_term_vector_pickle = 'user_lemmatized_' + 'threshold_' + str(
-            threshold_value) + '_float_genome_terms_df_bz2'
+        # lemmatized_movies_term_vector_pickle = 'lemmatized_' + 'threshold_' + str(
+        #     threshold_value) + '_float_genome_terms_df_bz2'
+        #
+        # full_movies_term_vector_pickle = 'threshold_' + str(
+        #     threshold_value) + '_float_genome_terms_df_bz2'
+        lemmatized_movies_term_vector_pickle = 'movies_lemmatized_threshold_' + str(
+                threshold_value) + '_float_movie_genomes_bz2'
 
         full_movies_term_vector_pickle = 'threshold_' + str(
-            threshold_value) + '_float_user_genome_terms_df_bz2'
+            threshold_value) + '_float_movie_genomes_bz2'
 
-        main(save_flag, ratings_df, genome_scores_df, full_movies_term_vector_pickle,
+        main(save_flag, ratings_df, genome_scores_df, full_terms_target_file_name,
              lemmatized_terms_target_file_name,
              lemmatized_movies_term_vector_pickle, full_movies_term_vector_pickle,
              compression=compression,
              load_explicitly=True)
+
         # main(save_flag, full_terms_target_file_name, lemmatized_terms_target_file_name,
         #      lemmatized_movies_term_vector_pickle, full_movies_term_vector_pickle, compression, ratings_df, genome_scores_df,
         #      load_explicitly=True)
 
 
 if __name__ == '__main__':
-    dataset = 'ml20m'
-    # dataset = 'serendipity2018'
+    # dataset = 'ml20m'
+    dataset = 'serendipity2018'
 
     if dataset is 'serendipity2018':
         data_dir = data_base_dir + 'serendipity-sac2018/'
+        target_directory = data_dir + 'output4/'
 
     save_flag = True
     compression = 'bz2'

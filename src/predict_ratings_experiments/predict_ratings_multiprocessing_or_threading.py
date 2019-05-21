@@ -136,9 +136,11 @@ class ContentBased_Recommender:
             actual_rating_list.append(actual)
 
         # calculate MSE, MAE here
-        absolute = np.absolute(np.array(predicted_rating_list) - np.array(actual_rating_list))
+        absolute = np.absolute(np.array(predicted_rating_list) - np.array(
+            actual_rating_list))
+
         mae = np.sum(absolute) / len(predicted_rating_list)
-        mse = np.square(mae)
+        mse = np.sum(np.square(absolute)) / len(predicted_rating_list)
 
         return mae, mse
 
@@ -310,26 +312,25 @@ class RunPredictions:
             mae_df[lemmatized_labels[i] + '_MAE'] = lemmatized_mae_list[i]
             mse_df[lemmatized_labels[i] + '_MSE'] = lemmatized_mse_list[i]
 
-        mae_df.median().plot(kind='barh',
-                             title='K=' + str(K) + ', median MAE, ' + ug, figsize=(20, 5))
+        mae_df.mean().plot(kind='barh',
+                             title='K=' + str(K) + ', mean MAE, ' + ug, figsize=(20, 5))
         # figname = output_dir + 'K=' + str(K) + ', median MAE, ' + ug
-        figname = './first100/' + 'K=' + str(K) + ', median MAE, ' + ug
+        figname = './first1000_run2/' + 'K=' + str(K) + ', mean MAE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
         mae_df.to_pickle(figname + '_df')
 
         # plt.clf()
-        mse_df.median().plot(kind='barh',
-                             title='K=' + str(K) + ', median MSE, ' + ug, figsize=(20, 5))
+        mse_df.mean().plot(kind='barh',
+                             title='K=' + str(K) + ', mean MSE, ' + ug, figsize=(20, 5))
 
         # figname = output_dir + 'K=' + str(K) + ', median MSE, ' + ug
-        figname = './first100/' + 'K=' + str(K) + ', median MSE, ' + ug
+        figname = './first1000_run2/' + 'K=' + str(K) + ', mean MSE, ' + ug
         plt.tight_layout()
         plt.savefig(fname=figname, dpi=150)
 
         mse_df.to_pickle(figname + '_df')
         print("")
-
 
 
 def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_range):
@@ -348,11 +349,11 @@ def run_parallel_for_users_range(ug, users_ndarray, K_ranges, start_range, end_r
 
 def main():
     print("executing main method...")
-    K_ranges = [10, 25]
+    K_ranges = [10, 25, 50, 70]
 
     start_range = int(sys.argv[2])
 
-    # end_range = int(sys.argv[3])
+    end_range = int(sys.argv[3])
 
     n_k_ranges = int(sys.argv[4])
 
@@ -370,7 +371,7 @@ def main():
         print(ug)
         user_group = user_group_4
 
-    end_range = len(user_group)
+    # end_range = len(user_group)
 
     run_parallel_for_users_range(ug, user_group, K_ranges[:n_k_ranges], start_range, end_range)
 

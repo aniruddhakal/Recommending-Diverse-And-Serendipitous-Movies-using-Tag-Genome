@@ -7,19 +7,22 @@ data_base_dir = '../../datasets/Movielens/'
 data_dir = data_base_dir + 'serendipity-sac2018/'
 data_dir2 = data_base_dir + 'ml-20m/'
 
-outpur_dir = data_dir + 'output/'
+outpur_dir = data_dir + 'output4/'
 
 # genome_scores = data_dir + 'genome-scores.csv'
 # ratings = data_dir + 'ratings.csv'
 
 genome_tags = data_dir + 'genome-tags.csv'
+
 movies = data_dir + 'movies.csv'
 
 tags = data_dir + 'tags.csv'
 genres = data_dir + 'u.genre'
 
-# serendipity-2018sac
-genome_scores = data_dir + 'tag_genome.csv'
+# serendipity-sac2018
+# genome_scores = data_dir + 'tag_genome.csv'
+genome_scores = data_dir + 'mlLatestgenome-scores.csv'
+
 ratings = data_dir + 'training.csv'
 answers = data_dir + 'answers.csv'
 recommendations = data_dir + 'recommendations.csv'
@@ -29,7 +32,11 @@ recommendations = data_dir + 'recommendations.csv'
 
 answers_df = pd.read_csv(answers)
 count_df = answers_df.groupby('userId').count()
-all_user_ids = count_df[count_df['movieId'] == 5].index.values
+all_user_ids = count_df[count_df['movieId'] == 5].index.values.tolist()
+
+recommendations_df = pd.read_csv(recommendations)
+all_user_ids.extend(recommendations_df['userId'].unique().tolist())
+all_user_ids = np.unique(np.array(all_user_ids))
 
 genome_scores_df = pd.read_csv(genome_scores)
 movies_with_genomes = genome_scores_df['movieId'].unique()
@@ -62,6 +69,7 @@ genres_dict['IMAX'] = 19
 # select all movie ids
 # remove movies with (no genres listed)
 print(movies_df.shape)
+movies_df.dropna(subset=['genres'], inplace=True)
 all_movie_ids = movies_df[movies_df['genres'] != '(no genres listed)']['movieId'].unique()
 # %%
 # generate genre Binary term vector for each movie
@@ -71,6 +79,7 @@ target_file = open(output_file, 'w+')
 
 output_string = ''
 for movieId in all_movie_ids:
+    # print("movie under test", movieId)
     genres_list = movies_df[movies_df['movieId'] == movieId]['genres'].tolist()[0].split(',')
     genre_vector = np.zeros(20, dtype=np.int32)
 
@@ -92,7 +101,8 @@ string = string.replace(' ', ',')
 
 binary_term_vector_df = pd.read_csv(StringIO(string), header=None, dtype={})
 binary_term_vector_df.set_index(movies_df['movieId'], drop=True, inplace=True)
-# binary_term_vector_df.drop(columns=[0], inplace=True)
+binary_term_vector_df.drop(columns=[0], inplace=True)
+binary_term_vector_df.to_pickle(outpur_dir + 'movie_genre_binary_term_vector_df_bz2', compression='bz2')
 # %%
 # movies watched by user:
 # user_id = 10
