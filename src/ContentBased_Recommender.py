@@ -215,16 +215,21 @@ class CB_ClusteringBased_Recommender:
 
         # Weighted ranking
         # TODO - remove hardcoding
-        self.Rcu_weight = 0.40
-        self.Su_weight = 0.20
-        self.div_weight = 0.15
-        self.Ci_weight = 0.15
+        self.Rcu_weight = 0.25
+        self.Su_weight = 0.25
+        self.div_weight = 0.25
+        self.Ci_weight = 0.25
 
+        # self.Rcu_weight = 0.40
+        # self.Su_weight = 0.20
+        # self.div_weight = 0.15
+        # self.Ci_weight = 0.15
+        #
         # self.Rcu_weight = 0.1
         # self.Su_weight = 0.3
         # self.div_weight = 0.5
         # self.Ci_weight = 0.1
-
+        #
         # self.Rcu_weight = 0.05
         # self.Su_weight = 0.1
         # self.div_weight = 0.8
@@ -668,7 +673,8 @@ class CB_ClusteringBased_Recommender:
 
         new_df = pd.DataFrame(best_clustering_result, columns=['cluster'])
 
-        new_df['movie'] = user_movies_d[user_id]
+        # new_df['movie'] = user_movies_d[user_id]
+        new_df['movie'] = user_movie_tags_df.index.values
         resulting_clusters = new_df.groupby('cluster')['movie'].apply(list)
 
         return resulting_clusters

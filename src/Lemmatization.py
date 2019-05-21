@@ -12,7 +12,7 @@ base_dir = '../../datasets/Movielens/'
 ml20m = base_dir + 'ml-20m/'
 serendipity2018 = base_dir + 'serendipity-sac2018/'
 
-data_output_dir = 'output3/'
+data_output_dir = 'output4/'
 
 genome_tags = ml20m + 'genome-tags.csv'
 # genome_tags = serendipity2018 + 'genome-tags.csv'
@@ -133,10 +133,10 @@ def generate_genome_term_vector(final_stemming_dict, genome_tags_df, genome_scor
         mapped_tag_ids = genome_tags_df[genome_tags_df.isin(mapped_values)].dropna().index.values
 
         # calculate the target sum for underlying tags
-        if dataset is 'serendipity2018':
-            return genome_scores_df.loc[movie_ids, mapped_values].sum(axis=1)
-        else:
-            return genome_scores_df.loc[movie_ids, mapped_tag_ids].sum(axis=1)
+        # if dataset is 'serendipity2018':
+        #     return genome_scores_df.loc[movie_ids, mapped_values].sum(axis=1)
+        # else:
+        return genome_scores_df.loc[movie_ids, mapped_tag_ids].sum(axis=1)
 
     lemmatized_tag_relevance_df = lemmatized_tag_relevance_df.apply(
         lambda x: process(x.index, x.name))
@@ -231,7 +231,6 @@ def non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df):
     compression = 'bz2'
     load_explicitly_as_df = False
 
-
     start_time = time()
     # aggregate movie genome scores as per lemmatized tags mapping
     lemmatize_dataframes(file_name, load_explicitly_as_df, final_lemmatization_dict,
@@ -253,5 +252,5 @@ if __name__ == '__main__':
     final_lemmatization_dict, genome_tags_df = produce_lemmatization_dict()
 
     non_thresholded_lemmatization(final_lemmatization_dict, genome_tags_df)
-    # thresholded_lemmatization(final_lemmatization_dict, genome_tags_df)
+    thresholded_lemmatization(final_lemmatization_dict, genome_tags_df)
 

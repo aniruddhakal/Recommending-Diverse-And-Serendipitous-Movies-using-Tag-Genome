@@ -6,7 +6,7 @@ from DataLoaderPreprocessor import DataLoaderPreprocessor
 
 data_base_dir = '../../datasets/Movielens/'
 data_dir = data_base_dir + 'ml-20m/'
-target_directory = data_dir + 'output3/'
+target_directory = data_dir + 'output4/'
 
 
 def main(save_flag, ratings_df, genome_scores_df, full_terms_target_file_name,
@@ -21,7 +21,7 @@ def main(save_flag, ratings_df, genome_scores_df, full_terms_target_file_name,
 
     main_start = time()
 
-    for option in [full, lemmatized]:
+    for option in [lemmatized, full]:
 
         if option == lemmatized:
             target_file = lemmatized_terms_target_file_name
@@ -147,7 +147,7 @@ if __name__ == '__main__':
 
     if dataset is 'serendipity2018':
         data_dir = data_base_dir + 'serendipity-sac2018/'
-        target_directory = data_dir + 'output3/'
+        target_directory = data_dir + 'output4/'
 
     save_flag = True
     compression = 'bz2'
