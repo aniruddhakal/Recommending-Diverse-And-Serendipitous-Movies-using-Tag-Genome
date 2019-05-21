@@ -24,7 +24,7 @@ class DataLoaderPreprocessor:
         self.serendipity2018 = base_dir + serendipity2018
         self.answers = serendipity2018 + 'answers.csv'
 
-        self.data_output_dir = 'output3/'
+        self.data_output_dir = 'output4/'
 
         self.dataset_files = {
             'ml20m': {

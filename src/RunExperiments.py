@@ -24,7 +24,7 @@ tag_genomes = serendipity2018 + 'tag_genome.csv'
 recommendations = serendipity2018 + 'recommendations.csv'
 ratings = serendipity2018 + 'training.csv'
 
-data_output_dir = serendipity2018 + 'output3/'
+data_output_dir = serendipity2018 + 'output4/'
 
 
 class Model(Enum):
