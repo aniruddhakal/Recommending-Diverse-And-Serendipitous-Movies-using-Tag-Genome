@@ -7,19 +7,22 @@ data_base_dir = '../../datasets/Movielens/'
 data_dir = data_base_dir + 'serendipity-sac2018/'
 data_dir2 = data_base_dir + 'ml-20m/'
 
-outpur_dir = data_dir + 'output3/'
+outpur_dir = data_dir + 'output4/'
 
 # genome_scores = data_dir + 'genome-scores.csv'
 # ratings = data_dir + 'ratings.csv'
 
 genome_tags = data_dir + 'genome-tags.csv'
+
 movies = data_dir + 'movies.csv'
 
 tags = data_dir + 'tags.csv'
 genres = data_dir + 'u.genre'
 
 # serendipity-sac2018
-genome_scores = data_dir + 'tag_genome.csv'
+# genome_scores = data_dir + 'tag_genome.csv'
+genome_scores = data_dir + 'mlLatestgenome-scores.csv'
+
 ratings = data_dir + 'training.csv'
 answers = data_dir + 'answers.csv'
 recommendations = data_dir + 'recommendations.csv'
@@ -66,6 +69,7 @@ genres_dict['IMAX'] = 19
 # select all movie ids
 # remove movies with (no genres listed)
 print(movies_df.shape)
+movies_df.dropna(subset=['genres'], inplace=True)
 all_movie_ids = movies_df[movies_df['genres'] != '(no genres listed)']['movieId'].unique()
 # %%
 # generate genre Binary term vector for each movie
@@ -75,6 +79,7 @@ target_file = open(output_file, 'w+')
 
 output_string = ''
 for movieId in all_movie_ids:
+    # print("movie under test", movieId)
     genres_list = movies_df[movies_df['movieId'] == movieId]['genres'].tolist()[0].split(',')
     genre_vector = np.zeros(20, dtype=np.int32)
 

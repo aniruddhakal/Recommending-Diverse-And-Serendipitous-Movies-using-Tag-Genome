@@ -24,7 +24,7 @@ tag_genomes = serendipity2018 + 'tag_genome.csv'
 recommendations = serendipity2018 + 'recommendations.csv'
 ratings = serendipity2018 + 'training.csv'
 
-data_output_dir = serendipity2018 + 'output3/'
+data_output_dir = serendipity2018 + 'output4/'
 
 
 class Model(Enum):
@@ -256,7 +256,7 @@ def main(dataset, K, relevant_movies_threshold, user_list, save_flag, save_path)
                                                                 item_item_similarity_df,
                                                                 relevant_movies_threshold=relevant_movies_threshold)
 
-        recommended_movies = recommender_lemmatized.recommend_movies2(user_id, K=K)
+        recommended_movies = recommender_lemmatized.recommend_movies3(user_id, K=K)
 
         # update recommendations for this user
         update_recommendation_results_dict(recommendation_results_dict, recommended_movies,
@@ -274,7 +274,7 @@ def main(dataset, K, relevant_movies_threshold, user_list, save_flag, save_path)
                                                           item_item_similarity_df,
                                                           relevant_movies_threshold=relevant_movies_threshold)
 
-        recommended_movies = recommender_full.recommend_movies2(user_id, K=K)
+        recommended_movies = recommender_full.recommend_movies3(user_id, K=K)
 
         # update recommendations for this user
         update_recommendation_results_dict(recommendation_results_dict, recommended_movies,
@@ -363,7 +363,7 @@ def store_thresholded_recommendations(user_list, K=8, relevant_movies_threshold=
     l6 = '_user_full_genome_terms_df_bz2'
 
     thresholds = [0.25, 0.4, 0.7]
-    #remove single threshold and keep above 3
+    # remove single threshold and keep above 3
     # thresholds = [0.25]
 
     movies_lemmatized_labels = [(l1 + str(x) + l2) for x in thresholds]
@@ -432,14 +432,14 @@ def store_thresholded_recommendations(user_list, K=8, relevant_movies_threshold=
         # for each recommender in the list, get recommendations
         for i, threshold in enumerate(thresholds):
             recommender = lemmatized_recommenders[i]
-            recommended_movies = recommender.recommend_movies2(user_id, K=K)
+            recommended_movies = recommender.recommend_movies3(user_id, K=K)
 
             # update recommendations for this user
             store_recommendation_results_df(recommendations_df_dict, user_id, recommended_movies,
                                             key='lemmatized_thresholded_' + str(threshold))
 
             recommender = full_recommenders[i]
-            recommended_movies = recommender.recommend_movies2(user_id, K=K)
+            recommended_movies = recommender.recommend_movies3(user_id, K=K)
 
             # store them in appropriate way as done in store_recommendations method.
             # update recommendations for this user
@@ -453,15 +453,78 @@ def store_thresholded_recommendations(user_list, K=8, relevant_movies_threshold=
                                               relevant_movies_threshold, key)
 
 
+def store_baseline_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_flag=False,
+                                   save_path=''):
+    recommendations_df_dict = {
+        # 'main_model_lemmatized': pd.DataFrame(),
+        # 'main_model_full': pd.DataFrame(),
+        'baseline_genre_binary': pd.DataFrame(),
+        # 'baseline_genre_int': pd.DataFrame(),
+        'baseline_genome_lemmatized': pd.DataFrame(),
+        'baseline_genome_full': pd.DataFrame()
+    }
+
+    # load all data - unfortunately inefficient for now
+    data_loader = DataLoaderPreprocessor(base_dir=base_dir, ml20m='ml-20m/',
+                                         serendipity2018='serendipity-sac2018/')
+    ratings_df, genome_scores_df, movies_df = data_loader.load_and_preprocess_data(dataset)
+
+    movie_genre_binary_terms_df, movies_lemmatized_genome_term_vector_df, \
+    user_int_genre_terms_df, user_genre_binary_term_vector_df, user_lemmatized_genome_terms_df, user_full_genome_terms_df \
+        = data_loader.load_and_process_user_data(dataset)
+
+    experiments = RunExperiments(ratings_df, genome_scores_df, movies_df,
+                                 movie_genre_binary_terms_df,
+                                 movies_lemmatized_genome_term_vector_df, user_int_genre_terms_df,
+                                 user_genre_binary_term_vector_df,
+                                 user_lemmatized_genome_terms_df, user_full_genome_terms_df)
+
+    baseline_similarity_metrics = ['jaccard', 'cosine', 'cosine']
+    baseline_models = [Model.baseline_genre_binary,
+                       Model.baseline_genome_lemmatized,
+                       Model.baseline_genome_full]
+
+    experimental_users_list = range(1, 20)
+    experimental_users_list = [9, 10, 11, 12, 13, 14]
+    experimental_users_list = user_list
+
+    for user_id in experimental_users_list:
+        print("user under test: ", user_id)
+
+        # TODO uncomment this block for baseline recommendations
+        for index, baseline_model in enumerate(baseline_models):
+            vector_type = experiments.get_vector_type(baseline_model)
+
+            # baseline_recommender = ContentBased_Baseline_Recommender(dataset):
+            baseline_recommender = ContentBased_Baseline_Recommender(dataset,
+                                                                     movie_genre_binary_terms_df,
+                                                                     movies_lemmatized_genome_term_vector_df,
+                                                                     user_int_genre_terms_df,
+                                                                     user_genre_binary_term_vector_df,
+                                                                     user_lemmatized_genome_terms_df,
+                                                                     user_full_genome_terms_df,
+                                                                     ratings_df,
+                                                                     genome_scores_df, movies_df,
+                                                                     similarity_metric=
+                                                                     baseline_similarity_metrics[
+                                                                         index])
+            recommended_movies = baseline_recommender.recommend_k_most_similar_movies(user_id, K,
+                                                                                      vector_type=vector_type)
+            # store instead update
+            store_recommendation_results_df(recommendations_df_dict, user_id, recommended_movies,
+                                            key=baseline_model)
+
+        if save_flag:
+            for key in recommendations_df_dict.keys():
+                export_recommendations_to_csv(recommendations_df_dict[key], save_path, K,
+                                              relevant_movies_threshold, key)
+
+
 def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_flag=False,
                           save_path=''):
     recommendations_df_dict = {
         'main_model_lemmatized': pd.DataFrame(),
         'main_model_full': pd.DataFrame(),
-        # 'baseline_genre_binary': pd.DataFrame(),
-        # 'baseline_genre_int': pd.DataFrame(),
-        # 'baseline_genome_lemmatized': pd.DataFrame(),
-        # 'baseline_genome_full': pd.DataFrame()
     }
 
     # load all data - unfortunately inefficient for now
@@ -476,23 +539,14 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
     # TODO removing because only used for running baselines
     del movie_genre_binary_terms_df, user_int_genre_terms_df, user_genre_binary_term_vector_df
 
-    # experiments = RunExperiments(ratings_df, genome_scores_df, movies_df,
-    #                              movie_genre_binary_terms_df,
-    #                              movies_lemmatized_genome_term_vector_df, user_int_genre_terms_df,
-    #                              user_genre_binary_term_vector_df,
-    #                              user_lemmatized_genome_terms_df, user_full_genome_terms_df)
-
-    baseline_similarity_metrics = ['jaccard', 'cosine', 'cosine', 'cosine']
-    baseline_models = [Model.baseline_genre_binary, Model.baseline_genre_int,
-                       Model.baseline_genome_lemmatized,
-                       Model.baseline_genome_full]
-
     experimental_users_list = range(1, 20)
     experimental_users_list = [9, 10, 11, 12, 13, 14]
     experimental_users_list = user_list
 
+    movies_lemmatized_genome_term_vector_df.fillna(0, inplace=True)
     item_terms = movies_lemmatized_genome_term_vector_df.values
     item_item_distances = pairwise_distances(item_terms, metric='cosine')
+    del item_terms
     item_item_similarity_df = pd.DataFrame(item_item_distances,
                                            index=movies_lemmatized_genome_term_vector_df.index,
                                            columns=movies_lemmatized_genome_term_vector_df.index)
@@ -502,10 +556,10 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
                                                             item_item_similarity_df,
                                                             relevant_movies_threshold=relevant_movies_threshold)
 
-
     genome_scores_df.fillna(0, inplace=True)
     item_terms = genome_scores_df.values
     item_item_distances = pairwise_distances(item_terms, metric='cosine')
+    del item_terms
     item_item_similarity_df = pd.DataFrame(item_item_distances, index=genome_scores_df.index,
                                            columns=genome_scores_df.index)
 
@@ -517,56 +571,22 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
     for user_id in experimental_users_list:
         print("user under test: ", user_id)
 
-        recommended_movies = recommender_lemmatized.recommend_movies2(user_id, K=K)
+        recommended_movies = recommender_lemmatized.recommend_movies3(user_id, K=K)
 
         # update recommendations for this user
         store_recommendation_results_df(recommendations_df_dict, user_id, recommended_movies,
                                         key=Model.main_model_lemmatized)
         # TODO store instead update
-        # update_recommendation_results_dict(recommendation_results_dict, recommended_movies,
-        #                                    key=Model.main_model_lemmatized)
 
         print("\nMain Model Lemmatized results:\n", recommended_movies)
-        recommended_movies = recommender_full.recommend_movies2(user_id, K=K)
+        recommended_movies = recommender_full.recommend_movies3(user_id, K=K)
 
         # update recommendations for this user
         # TODO store instead update
         store_recommendation_results_df(recommendations_df_dict, user_id, recommended_movies,
                                         key=Model.main_model_full)
-        # update_recommendation_results_dict(recommendation_results_dict, recommended_movies,
-        #                                    key=Model.main_model_full)
 
         print("\nMain Model full-genome results:\n", recommended_movies)
-
-        # vector_type = BaselineRecommender_VectorType.GENOME_FULL
-
-        # arr = ['genre_binary:\n', 'genre_integer:\n', 'genome_lemmatized:\n', 'genome_full:\n']
-
-        #TODO uncomment this block for baseline recommendations
-        # for index, baseline_model in enumerate(baseline_models):
-        #     vector_type = experiments.get_vector_type(baseline_model)
-        #
-        #     # baseline_recommender = ContentBased_Baseline_Recommender(dataset):
-        #     baseline_recommender = ContentBased_Baseline_Recommender(dataset,
-        #                                                              movie_genre_binary_terms_df,
-        #                                                              movies_lemmatized_genome_term_vector_df,
-        #                                                              user_int_genre_terms_df,
-        #                                                              user_genre_binary_term_vector_df,
-        #                                                              user_lemmatized_genome_terms_df,
-        #                                                              user_full_genome_terms_df,
-        #                                                              ratings_df,
-        #                                                              genome_scores_df, movies_df,
-        #                                                              similarity_metric=
-        #                                                              baseline_similarity_metrics[
-        #                                                                  index])
-        #     recommended_movies = baseline_recommender.recommend_k_most_similar_movies(user_id, K,
-        #                                                                               vector_type=vector_type)
-        #     # print(arr[vector_type - 1], result)
-        #     # TODO store instead update
-        #     store_recommendation_results_df(recommendations_df_dict, user_id, recommended_movies,
-        #                                     key=baseline_model)
-            # update_recommendation_results_dict(recommendation_results_dict, recommended_movies,
-            #                                    key=baseline_model)
 
         if save_flag:
             for key in recommendations_df_dict.keys():
@@ -575,15 +595,23 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
 
 
 def generate_non_thresholded_recommendations(experimental_users_list):
-    for relevant_movies_threshold in [0, 0.2, 0.4, 0.6, 0.8, 1]:
+    for relevant_movies_threshold in [0, 0.2, 0.4]:
         store_recommendations(experimental_users_list, K=K,
                               relevant_movies_threshold=relevant_movies_threshold,
                               save_flag=save_flag,
                               save_path=save_path)
 
 
+def generate_baseline_recommendations(experimental_users_list):
+    for relevant_movies_threshold in [0, 0.2, 0.4]:
+        store_baseline_recommendations(experimental_users_list, K=K,
+                                       relevant_movies_threshold=relevant_movies_threshold,
+                                       save_flag=save_flag,
+                                       save_path=save_path)
+
+
 def generate_thresholded_recommendations(experimental_users_list):
-    for relevant_movies_threshold in [0, 0.2, 0.4, 0.6, 0.8, 1]:
+    for relevant_movies_threshold in [0, 0.2, 0.4]:
         store_thresholded_recommendations(experimental_users_list, K=K,
                                           relevant_movies_threshold=relevant_movies_threshold,
                                           save_flag=save_flag,
@@ -655,7 +683,7 @@ if __name__ == '__main__':
     save_flag = True
     # save_path = ml20m + 'output/for_20_users_relevantMoviesThreshold0_05_highDiv0_8'
     # save_path = ml20m + 'output/recommendations/'
-    save_path = serendipity2018 + 'output3/recommendations/'
+    save_path = serendipity2018 + 'output4/recommendations_algo3_all25/'
     relevant_movies_threshold = 0.2
 
     # store_recommendations(experimental_users_list, K, relevant_movies_threshold, save_flag,
@@ -669,5 +697,6 @@ if __name__ == '__main__':
     # generate_cb_recommendations(experimental_users_list)
     # main(dataset, K, relevant_movies_threshold, experimental_users_list, save_flag, save_path)
 
+    # generate_baseline_recommendations(experimental_users_list)
     generate_non_thresholded_recommendations(experimental_users_list)
     generate_thresholded_recommendations(experimental_users_list)
