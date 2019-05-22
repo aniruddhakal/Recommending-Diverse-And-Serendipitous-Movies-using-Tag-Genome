@@ -703,7 +703,16 @@ if __name__ == '__main__':
     save_flag = True
     # save_path = ml20m + 'output/for_20_users_relevantMoviesThreshold0_05_highDiv0_8'
     # save_path = ml20m + 'output/recommendations/'
-    save_path = serendipity2018 + 'output4/recommendations_algo3_all25/'
+
+
+    save_path = '../generated_data/final_recommendations/recommendations_algo3_all25/'
+    # save_path = '../generated_data/final_recommendations' \
+    #             '/recommendations_algo3_rcu40_su20_div15_ci15/'
+    # save_path = '../generated_data/final_recommendations' \
+    #             '/recommendations_algo3_rcu10_su30_div50_ci10/'
+    # save_path = '../generated_data/final_recommendations' \
+    #             '/recommendations_algo3_rcu05_su10_div80_ci05/'
+
     relevant_movies_threshold = 0.2
 
     # store_recommendations(experimental_users_list, K, relevant_movies_threshold, save_flag,
