@@ -246,6 +246,7 @@ def main(dataset, K, relevant_movies_threshold, user_list, save_flag, save_path)
     experimental_users_list = user_list
 
     for user_id in experimental_users_list:
+        update_progress(user_id, experimental_users_list)
         item_terms = movies_lemmatized_genome_term_vector_df.values
         item_item_distances = pairwise_distances(item_terms, metric='cosine')
         item_item_similarity_df = pd.DataFrame(item_item_distances,
@@ -499,7 +500,7 @@ def store_baseline_recommendations(user_list, K=8, relevant_movies_threshold=0.2
     experimental_users_list = user_list
 
     for user_id in experimental_users_list:
-        print("user under test: ", user_id)
+        update_progress(user_id, experimental_users_list)
 
         # TODO uncomment this block for baseline recommendations
         for index, baseline_model in enumerate(baseline_models):
@@ -586,7 +587,7 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
                                                       clustering_results_df=clustering_results_df)
 
     for user_id in experimental_users_list:
-        print("user under test: ", user_id)
+        update_progress(user_id, experimental_users_list)
 
         # lemmatized recommender TODO uncomment lemmatized
         recommended_movies = recommender_lemmatized.recommend_movies3(user_id, K=K)
@@ -645,6 +646,9 @@ def export_recommendations_to_csv(df_object: pd.DataFrame, save_path, K,
                        '_K' + str(K) + '.csv'
     df_object.to_csv(target_file_name)
 
+def update_progress(user_id, user_ids):
+    progress = np.where(user_ids == user_id)[0][0] / (len(user_ids) - 1)
+    print('Progress: %f%%' % progress)
 
 def get_serendipity2018_answers_users(n_users='all'):
     answers_df = pd.read_csv(answers)
