@@ -253,7 +253,7 @@ class CB_ClusteringBased_Recommender:
 
         # extract tag-genomes for movies watched by user
         user_movie_tags_df = self.genome_scores_df[
-            self.genome_scores_df.index.isin(user_movies_d[user_id])]
+            self.genome_scores_df.index.isin(user_movies_d)]
 
         # create clusters_series for movies watched by user
         clusters_series = self.form_clusters(user_id, user_movies_d, user_movie_tags_df)
@@ -320,7 +320,7 @@ class CB_ClusteringBased_Recommender:
 
         # extract tag-genomes for movies watched by user
         user_movie_tags_df = self.genome_scores_df[
-            self.genome_scores_df.index.isin(user_movies_d[user_id])]
+            self.genome_scores_df.index.isin(user_movies_d)]
 
         # create clusters_series for movies watched by user
         clusters_series = self.form_clusters(user_id, user_movies_d, user_movie_tags_df)
@@ -388,7 +388,7 @@ class CB_ClusteringBased_Recommender:
 
         # extract tag-genomes for movies watched by user
         user_movie_tags_df = self.genome_scores_df[
-            self.genome_scores_df.index.isin(user_movies_d[user_id])]
+            self.genome_scores_df.index.isin(user_movies_d)]
 
         # create clusters_series for movies watched by user
         clusters_series = self.form_clusters(user_id, user_movies_d, user_movie_tags_df)
@@ -866,7 +866,8 @@ class CB_ClusteringBased_Recommender:
                 user_movie_tags_df.values[:n_movies])
         else:
             # exhaustively check silhouette scores for each cluster sizes and select the cluster size with the highest score.
-            for cluster_size in range(2, n_movies - 1, 1):
+            max_cluster_size = min(n_movies - 1, 100)
+            for cluster_size in range(2, max_cluster_size, 2):
                 clustering_result = AgglomerativeClustering(n_clusters=cluster_size,
                                                             affinity='euclidean',
                                                             linkage='ward').fit_predict(
@@ -887,12 +888,10 @@ class CB_ClusteringBased_Recommender:
         return resulting_clusters
 
     def get_users_watched_movies(self, user_id):
-        user_movies_d = {}
+        user_movies = self.ratings_df[self.ratings_df['userId'] == user_id][
+            'movieId'].values
 
-        user_movies_d[user_id] = self.ratings_df[self.ratings_df['userId'] == user_id][
-            'movieId'].values.tolist()
-
-        return user_movies_d
+        return user_movies
 
 
 def top_K_similar_movies(user_id, K, all_movies_vector, user_genome_vector_df, genome_scores_df):
