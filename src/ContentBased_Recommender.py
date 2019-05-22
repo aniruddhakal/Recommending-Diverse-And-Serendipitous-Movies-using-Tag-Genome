@@ -10,13 +10,14 @@ from time import time
 
 data_base_dir = '../../datasets/Movielens/'
 data_dir2 = data_base_dir + 'Movielens Latest/ml-latest/'
-data_dir = data_base_dir + 'ml-20m/'
-data_dir3 = data_base_dir + 'serendipity-sac2018/'
+data_dir3 = data_base_dir + 'ml-20m/'
+data_dir = data_base_dir + 'serendipity-sac2018/'
 answers = data_dir3 + 'answers.csv'
 
-data_output_dir = data_base_dir + 'output/'
+data_output_dir = data_dir + 'output4/'
 
-genome_scores = data_dir + 'genome-scores.csv'
+# genome_scores = data_dir + 'genome-scores.csv'
+genome_scores = data_dir + 'mlLatestgenome-scores.csv'
 genome_tags = data_dir + 'genome-tags.csv'
 movies = data_dir + 'movies.csv'
 ratings = data_dir + 'ratings.csv'
@@ -194,7 +195,8 @@ class CB_ClusteringBased_Recommender:
 
     def __init__(self, ratings_df, genome_scores_df, user_term_vector_df, item_item_similarities_df,
                  K=20,
-                 n_neighbours=50, n_clusters=8, relevant_movies_threshold=0.2, random_state=171450):
+                 n_neighbours=50, n_clusters=8, relevant_movies_threshold=0.2,
+                 random_state=171450, clustering_results_df=None):
         """
 
         :param ratings_df: Ratings df, original as read from Movielens dataset
@@ -212,6 +214,7 @@ class CB_ClusteringBased_Recommender:
         self.n_neighbours = n_neighbours
         self.item_item_similarities_df = item_item_similarities_df
         self.relevant_movies_threshold = relevant_movies_threshold
+        self.clustering_results_df = clustering_results_df
 
         # Weighted ranking
         # TODO - remove hardcoding
@@ -854,30 +857,37 @@ class CB_ClusteringBased_Recommender:
 
     def form_clusters(self, user_id, user_movies_d, user_movie_tags_df):
         # TODO filter movies only above certain rating threshold
-        n_movies = user_movie_tags_df.index.size
-        highest_score = -99
 
-        best_clustering_result = None
+        if self.clustering_results_df is None or user_id not in \
+                self.clustering_results_df.index.values:
+            print('Exhaustively calculating optimal cluster size for user: ', user_id)
+            n_movies = user_movie_tags_df.index.size
+            highest_score = -99
 
-        if n_movies <= 3:
-            best_clustering_result = AgglomerativeClustering(n_clusters=2,
-                                                             affinity='euclidean',
-                                                             linkage='ward').fit_predict(
-                user_movie_tags_df.values[:n_movies])
-        else:
-            # exhaustively check silhouette scores for each cluster sizes and select the cluster size with the highest score.
-            max_cluster_size = min(n_movies - 1, 100)
-            for cluster_size in range(2, max_cluster_size, 2):
-                clustering_result = AgglomerativeClustering(n_clusters=cluster_size,
-                                                            affinity='euclidean',
-                                                            linkage='ward').fit_predict(
+            best_clustering_result = None
+
+            if n_movies <= 3:
+                best_clustering_result = AgglomerativeClustering(n_clusters=2,
+                                                                 affinity='euclidean',
+                                                                 linkage='ward').fit_predict(
                     user_movie_tags_df.values[:n_movies])
-                score = silhouette_score(user_movie_tags_df.values[:n_movies], clustering_result,
-                                         metric='cosine')
+            else:
+                # exhaustively check silhouette scores for each cluster sizes and select the cluster size with the highest score.
+                max_cluster_size = min(n_movies - 1, 100)
+                for cluster_size in range(2, max_cluster_size, 2):
+                    clustering_result = AgglomerativeClustering(n_clusters=cluster_size,
+                                                                affinity='euclidean',
+                                                                linkage='ward').fit_predict(
+                        user_movie_tags_df.values[:n_movies])
+                    score = silhouette_score(user_movie_tags_df.values[:n_movies], clustering_result,
+                                             metric='cosine')
 
-                if highest_score < score:
-                    best_clustering_result = clustering_result
-                    highest_score = score
+                    if highest_score < score:
+                        best_clustering_result = clustering_result
+                        highest_score = score
+
+        # get results here
+        best_clustering_result = self.clustering_results_df.loc[user_id, 'best_clustering_result']
 
         new_df = pd.DataFrame(best_clustering_result, columns=['cluster'])
 

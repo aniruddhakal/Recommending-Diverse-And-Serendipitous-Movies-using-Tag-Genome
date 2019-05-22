@@ -25,6 +25,8 @@ recommendations = serendipity2018 + 'recommendations.csv'
 ratings = serendipity2018 + 'training.csv'
 
 data_output_dir = serendipity2018 + 'output4/'
+clustering_results_dir = '../generated_data/serendipity2018/clustering_results/' + \
+                         'clustering_results_'
 
 
 class Model(Enum):
@@ -364,7 +366,7 @@ def store_thresholded_recommendations(user_list, K=8, relevant_movies_threshold=
 
     thresholds = [0.25, 0.4, 0.7]
     # remove single threshold and keep above 3
-    # thresholds = [0.25]
+    # thresholds = [0.4]
 
     movies_lemmatized_labels = [(l1 + str(x) + l2) for x in thresholds]
     movies_full_labels = [(l3 + str(x) + l4) for x in thresholds]
@@ -395,11 +397,15 @@ def store_thresholded_recommendations(user_list, K=8, relevant_movies_threshold=
                                             compression='bz2')
         user_lemmatized_df.fillna(0, inplace=True)
 
+        clustering_results_df = pd.read_pickle(clustering_results_dir + movies_lemmatized_labels[i],
+                                               compression='bz2')
+
         lemmatized_recommender = CB_ClusteringBased_Recommender(ratings_df,
                                                                 lemmatized_genome_terms_df,
                                                                 user_lemmatized_df,
                                                                 distances_df,
-                                                                relevant_movies_threshold=relevant_movies_threshold)
+                                                                relevant_movies_threshold=relevant_movies_threshold,
+                                                                clustering_results_df=clustering_results_df)
 
         lemmatized_recommenders.append(lemmatized_recommender)
         # del target_df
@@ -419,11 +425,15 @@ def store_thresholded_recommendations(user_list, K=8, relevant_movies_threshold=
                                       compression='bz2')
         user_full_df.fillna(0, inplace=True)
 
+        clustering_results_df = pd.read_pickle(clustering_results_dir + movies_full_labels[i],
+                                               compression='bz2')
+
         full_recommender = CB_ClusteringBased_Recommender(ratings_df,
                                                           full_genome_terms_df,
                                                           user_full_df,
                                                           distances_df,
-                                                          relevant_movies_threshold=relevant_movies_threshold)
+                                                          relevant_movies_threshold=relevant_movies_threshold,
+                                                          clustering_results_df=clustering_results_df)
         full_recommenders.append(full_recommender)
 
     for user_id in user_list:
@@ -550,11 +560,14 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
     item_item_similarity_df = pd.DataFrame(item_item_distances,
                                            index=movies_lemmatized_genome_term_vector_df.index,
                                            columns=movies_lemmatized_genome_term_vector_df.index)
+    clustring_label = clustering_results_dir + 'movies_lemmatized_genome_vector_df_bz2'
+    clustering_results_lemm_df = pd.read_pickle(clustring_label, compression='bz2')
     recommender_lemmatized = CB_ClusteringBased_Recommender(ratings_df,
                                                             movies_lemmatized_genome_term_vector_df,
                                                             user_lemmatized_genome_terms_df,
                                                             item_item_similarity_df,
-                                                            relevant_movies_threshold=relevant_movies_threshold)
+                                                            relevant_movies_threshold=relevant_movies_threshold,
+                                                            clustering_results_df=clustering_results_lemm_df)
 
     genome_scores_df.fillna(0, inplace=True)
     item_terms = genome_scores_df.values
@@ -563,14 +576,19 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
     item_item_similarity_df = pd.DataFrame(item_item_distances, index=genome_scores_df.index,
                                            columns=genome_scores_df.index)
 
+    clustring_label = clustering_results_dir + 'genome_scores_df_original_full_bz2'
+    clustering_results_df = pd.read_pickle(clustring_label, compression='bz2')
+
     recommender_full = CB_ClusteringBased_Recommender(ratings_df, genome_scores_df,
                                                       user_full_genome_terms_df,
                                                       item_item_similarity_df,
-                                                      relevant_movies_threshold=relevant_movies_threshold)
+                                                      relevant_movies_threshold=relevant_movies_threshold,
+                                                      clustering_results_df=clustering_results_df)
 
     for user_id in experimental_users_list:
         print("user under test: ", user_id)
 
+        # lemmatized recommender TODO uncomment lemmatized
         recommended_movies = recommender_lemmatized.recommend_movies3(user_id, K=K)
 
         # update recommendations for this user
@@ -578,7 +596,9 @@ def store_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_fl
                                         key=Model.main_model_lemmatized)
         # TODO store instead update
 
-        print("\nMain Model Lemmatized results:\n", recommended_movies)
+        # print("\nMain Model Lemmatized results:\n", recommended_movies)
+
+        # full recommender
         recommended_movies = recommender_full.recommend_movies3(user_id, K=K)
 
         # update recommendations for this user
