@@ -24,7 +24,7 @@ class DataLoaderPreprocessor:
         self.serendipity2018 = base_dir + serendipity2018
         self.answers = serendipity2018 + 'answers.csv'
 
-        self.data_output_dir = 'output3/'
+        self.data_output_dir = 'output4/'
 
         self.dataset_files = {
             'ml20m': {
@@ -40,7 +40,8 @@ class DataLoaderPreprocessor:
                 'movies_genome_term_vector': 'movies_lemmatized_genome_vector_df_bz2'
             },
             'serendipity2018': {
-                'genome_scores': 'tag_genome.csv',
+                # 'genome_scores': 'tag_genome.csv',
+                'genome_scores': 'mlLatestgenome-scores.csv',
                 'movies': 'movies.csv',
                 'ratings': 'training.csv',
                 'answers': 'answers.csv',
@@ -127,6 +128,7 @@ class DataLoaderPreprocessor:
         movies_with_tag_genome = self.genome_scores_df.index.values
 
         # filter-out movies with (no genres listed)
+        self.movies_df.dropna(subset=['genres'], inplace=True)
         no_genre_movies = self.movies_df[self.movies_df['genres'] == '(no genres listed)'][
             'movieId'].unique()
 

@@ -7,7 +7,7 @@ base_dir = '../../datasets/Movielens/'
 ml20m = base_dir + 'ml-20m/'
 serendipity2018 = base_dir + 'serendipity-sac2018/'
 
-data_output_dir = 'output3/'
+data_output_dir = 'output4/'
 
 
 class ThresholdTransform:
