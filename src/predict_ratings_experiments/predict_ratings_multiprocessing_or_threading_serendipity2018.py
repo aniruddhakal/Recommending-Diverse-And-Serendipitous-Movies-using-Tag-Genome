@@ -163,7 +163,7 @@ l2 = '_float_movie_genomes_bz2'
 l3 = 'threshold_'
 l4 = '_float_movie_genomes_bz2'
 
-thresholds = [0.25, 0.4, 0.7]
+thresholds = [0.4]
 # thresholds = [0.25]
 
 lemmatized_labels = [(l1 + str(x) + l2) for x in thresholds]
@@ -293,8 +293,8 @@ class RunPredictions:
             genome_full_mse_list.append(mse)
 
             mae, mse = genome_lemmatized_recommender.get_mae_mse(user_id, user_movies, K)
-            genome_lemmatized_mae_list.append(mae)
             genome_lemmatized_mse_list.append(mse)
+            genome_lemmatized_mae_list.append(mae)
 
             for i, t in enumerate(thresholds):
                 mae, mse = full_recommenders[i].get_mae_mse(user_id, user_movies, K)
