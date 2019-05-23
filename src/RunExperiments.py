@@ -342,12 +342,12 @@ def main(dataset, K, relevant_movies_threshold, user_list, save_flag, save_path)
 def store_thresholded_recommendations(user_list, K=8, relevant_movies_threshold=0.2, save_flag=True,
                                       save_path=''):
     recommendations_df_dict = {
-        'full_thresholded_0.25': pd.DataFrame(),
-        'lemmatized_thresholded_0.25': pd.DataFrame(),
+        # 'full_thresholded_0.25': pd.DataFrame(),
+        # 'lemmatized_thresholded_0.25': pd.DataFrame(),
         'full_thresholded_0.4': pd.DataFrame(),
         'lemmatized_thresholded_0.4': pd.DataFrame(),
-        'full_thresholded_0.7': pd.DataFrame(),
-        'lemmatized_thresholded_0.7': pd.DataFrame(),
+        # 'full_thresholded_0.7': pd.DataFrame(),
+        # 'lemmatized_thresholded_0.7': pd.DataFrame(),
     }
 
     data_loader = DataLoaderPreprocessor(base_dir=base_dir, ml20m='ml-20m/',
@@ -365,7 +365,7 @@ def store_thresholded_recommendations(user_list, K=8, relevant_movies_threshold=
     l5 = '_user_lemmatized_genome_terms_df_bz2'
     l6 = '_user_full_genome_terms_df_bz2'
 
-    thresholds = [0.25, 0.4, 0.7]
+    thresholds = [0.4]
     # remove single threshold and keep above 3
     # thresholds = [0.4]
 
@@ -731,5 +731,5 @@ if __name__ == '__main__':
     # main(dataset, K, relevant_movies_threshold, experimental_users_list, save_flag, save_path)
 
     # generate_baseline_recommendations(experimental_users_list)
-    generate_non_thresholded_recommendations(experimental_users_list)
+    # generate_non_thresholded_recommendations(experimental_users_list)
     generate_thresholded_recommendations(experimental_users_list)
