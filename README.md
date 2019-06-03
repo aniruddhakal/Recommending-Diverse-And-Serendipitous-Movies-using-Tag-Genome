@@ -1,5 +1,11 @@
 # README #
 
+End to end Run's aren't possible yet.
+Working on optimizing smaller parts of the code. Will add end-to-end run and the documentation soon.
+
+---------------------------------------
+TODO:
+---------------------------------------
 This README would normally document whatever steps are necessary to get your application up and running.
 
 ### What is this repository for? ###
