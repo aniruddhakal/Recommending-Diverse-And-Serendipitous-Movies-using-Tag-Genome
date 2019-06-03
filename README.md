@@ -1,7 +1,7 @@
 # README #
 
 End to end Run's aren't possible yet.
-Working on optimizing smaller parts of the code. Will add end-to-end run and the documentation soon.
+Optimizing smaller parts one by one to speed up further research. Will add end-to-end run and the documentation soon.
 
 ---------------------------------------
 TODO:
