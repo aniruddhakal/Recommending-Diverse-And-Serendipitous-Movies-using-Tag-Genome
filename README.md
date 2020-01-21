@@ -1,5 +1,9 @@
 # README #
 
+### Who do I talk to? ###
+
+* Aniruddha Kalburgi [LinkedIn](https://www.linkedin.com/in/anikalburgi/), [Twitter](https://twitter.com/AniKalburgi)
+
 End to end Run's aren't possible yet.
 Optimizing and refactoring some parts to speed up further research. Will add end-to-end run and the documentation soon.
 
@@ -9,11 +13,7 @@ Optimizing and refactoring some parts to speed up further research. Will add end
 ---------------------------------------
 TODO:
 ---------------------------------------
-This README would normally document whatever steps are necessary to get your application up and running.
 
-### Who do I talk to? ###
-
-* Aniruddha Kalburgi [LinkedIn](https://www.linkedin.com/in/anikalburgi/), [Twitter](https://twitter.com/AniKalburgi)
 
 ### What is this repository for? ###
 
@@ -35,5 +35,3 @@ This README would normally document whatever steps are necessary to get your app
 * Writing tests
 * Code review
 * Other guidelines
-
-
