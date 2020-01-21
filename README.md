@@ -3,6 +3,9 @@
 End to end Run's aren't possible yet.
 Optimizing and refactoring some parts to speed up further research. Will add end-to-end run and the documentation soon.
 
+### Recommendation Flow Diagram for each user:
+![Recommendation Flow Diagram](./resources/recommendation_flow.png)
+
 ---------------------------------------
 TODO:
 ---------------------------------------
