@@ -11,6 +11,10 @@ TODO:
 ---------------------------------------
 This README would normally document whatever steps are necessary to get your application up and running.
 
+### Who do I talk to? ###
+
+* Aniruddha Kalburgi [LinkedIn](https://www.linkedin.com/in/anikalburgi/), [Twitter](https://twitter.com/AniKalburgi)
+
 ### What is this repository for? ###
 
 * Quick summary
@@ -32,7 +36,4 @@ This README would normally document whatever steps are necessary to get your app
 * Code review
 * Other guidelines
 
-### Who do I talk to? ###
 
-* Repo owner or admin
-* Other community or team contact
