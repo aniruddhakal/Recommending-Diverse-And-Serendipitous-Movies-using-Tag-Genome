@@ -2,7 +2,7 @@
 
 ### Who do I talk to? ###
 
-* Aniruddha Kalburgi [LinkedIn](https://www.linkedin.com/in/anikalburgi/), [Twitter](https://twitter.com/AniKalburgi)
+* [Aniruddha Kalburgi](https://github.com/aniruddhakal/) [LinkedIn](https://www.linkedin.com/in/anikalburgi/), [Twitter](https://twitter.com/AniKalburgi)
 
 End to end Run's aren't possible yet.
 Optimizing and refactoring some parts to speed up further research. Will add end-to-end run and the documentation soon.
